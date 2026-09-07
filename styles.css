@@ -60,6 +60,52 @@ button { font-family: inherit; cursor: pointer; }
     var(--midnight);
 }
 
+/* Snowfall + ambient */
+.snowfall {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.85;
+}
+.glow-bg { z-index: 0; }
+.nav, main, .footer { position: relative; z-index: 2; }
+.nav-actions { display: flex; align-items: center; gap: 0.55rem; }
+.ambient-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: var(--radius);
+  padding: 0.45rem 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--graphite);
+  background: rgba(26, 21, 64, 0.55);
+  border: 1px solid var(--border-frost);
+  backdrop-filter: blur(10px);
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.ambient-toggle:hover { color: var(--frost); border-color: rgba(167, 139, 250, 0.4); }
+.ambient-toggle[aria-pressed="true"] {
+  color: var(--ice-violet);
+  border-color: rgba(167, 139, 250, 0.55);
+  box-shadow: 0 0 16px rgba(167, 139, 250, 0.2);
+}
+.music-credit {
+  margin-top: 0.85rem;
+  font-size: 0.78rem;
+  color: var(--muted-2);
+  line-height: 1.45;
+  max-width: 36rem;
+}
+.music-credit a { color: var(--graphite); text-decoration: underline; text-underline-offset: 2px; }
+.music-credit a:hover { color: var(--ice-violet); }
+@media (prefers-reduced-motion: reduce) {
+  .snowfall { display: none; }
+}
+
 /* Nav */
 .nav {
   display: flex;

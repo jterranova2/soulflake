@@ -14,6 +14,7 @@
 </head>
 <body>
   <div class="glow-bg" aria-hidden="true"></div>
+  <canvas id="snowfall" class="snowfall" aria-hidden="true"></canvas>
 
   <header class="nav">
     <div class="nav-inner">
@@ -27,9 +28,15 @@
         <span class="nav-dot" aria-hidden="true"></span>
         <a href="demo.html">Start</a>
       </nav>
-      <a class="btn btn-ghost btn-sm" href="demo.html" title="Prototype — opens demo">Try demo</a>
+      <div class="nav-actions">
+        <button type="button" class="ambient-toggle" id="ambient-toggle" aria-pressed="false" title="Play ambient music">
+          <span aria-hidden="true">✦</span> <span data-label>Sound off</span>
+        </button>
+        <a class="btn btn-ghost btn-sm" href="demo.html" title="Prototype — opens demo">Try demo</a>
+      </div>
     </div>
   </header>
+  <audio id="ambient-audio" loop preload="metadata" src="assets/audio/winter-waltz-scott-buckley.mp3"></audio>
 
   <main>
     <section class="hero wrap">
@@ -117,6 +124,10 @@
         <p class="disclaimer" style="margin-top:0.75rem;">
           Soulflake is an independent prototype by Justin Terranova. Separate from Justified Analytics. Not affiliated with the Myers-Briggs Company or the Enneagram Institute. Not a medical, clinical, or hiring tool. Demo content may be scripted.
         </p>
+        <p class="music-credit">
+          Ambient: <a href="https://www.scottbuckley.com.au/library/winter-waltz/" rel="noopener">Winter Waltz</a> by Scott Buckley — <a href="https://creativecommons.org/licenses/by/4.0/" rel="noopener">CC BY 4.0</a>.
+          Inspired by the enchanted ice-sculpture mood of <em>Edward Scissorhands</em> (original score not used).
+        </p>
       </div>
       <div>
         <a href="demo.html">Demo</a> ·
@@ -125,5 +136,6 @@
       </div>
     </div>
   </footer>
+  <script src="landing.js" defer></script>
 </body>
 </html>
