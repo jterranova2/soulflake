@@ -199,11 +199,17 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px dotted rgba(192, 132, 252, 0.25);
 }
 .mark {
-  width: min(280px, 68%);
-  filter: drop-shadow(0 0 28px rgba(168, 85, 247, 0.55));
+  width: min(300px, 72vw);
+  max-width: 300px;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 0 32px rgba(168, 85, 247, 0.55));
   animation: floaty 6s ease-in-out infinite;
   position: relative;
   z-index: 1;
+  border-radius: 18px;
 }
 @keyframes floaty {
   0%, 100% { transform: translateY(0); }
@@ -530,6 +536,16 @@ section { padding: 3.5rem 0; }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-top: 2.5rem; text-align: center; }
   .hero-sub { margin-inline: auto; }
+  .hero-visual {
+    min-height: 300px;
+    margin-inline: auto;
+    width: min(340px, 92vw);
+  }
+  .mark {
+    width: min(260px, 70vw);
+    max-width: 260px;
+  }
+  .cta-row { justify-content: center; }
   .cta-row { justify-content: center; }
   .beats { grid-template-columns: 1fr 1fr; }
   .trust-grid { grid-template-columns: 1fr; }
