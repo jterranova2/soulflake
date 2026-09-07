@@ -29,7 +29,7 @@ body {
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
 }
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; background: transparent; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
@@ -180,6 +180,11 @@ button { font-family: inherit; cursor: pointer; }
   display: grid;
   place-items: center;
   min-height: 320px;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  overflow: visible;
 }
 .crystal-ring {
   position: absolute;
@@ -199,17 +204,21 @@ button { font-family: inherit; cursor: pointer; }
   border: 1px dotted rgba(192, 132, 252, 0.25);
 }
 .mark {
-  width: min(300px, 72vw);
-  max-width: 300px;
+  background: transparent;
+  max-width: min(280px, 70vw);
+  width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: contain;
   object-position: center;
-  filter: drop-shadow(0 0 32px rgba(168, 85, 247, 0.55));
+  filter: drop-shadow(0 0 36px rgba(168, 85, 247, 0.45));
   animation: floaty 6s ease-in-out infinite;
   position: relative;
   z-index: 1;
-  border-radius: 18px;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
 }
 @keyframes floaty {
   0%, 100% { transform: translateY(0); }
@@ -542,8 +551,7 @@ section { padding: 3.5rem 0; }
     width: min(340px, 92vw);
   }
   .mark {
-    width: min(260px, 70vw);
-    max-width: 260px;
+    max-width: min(260px, 70vw);
   }
   .cta-row { justify-content: center; }
   .cta-row { justify-content: center; }
