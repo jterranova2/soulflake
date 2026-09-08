@@ -1,7 +1,5 @@
 # Soulflake
 
-MVP demo landing + taste → reveal for [soulflake.justinterranova.com](https://soulflake.justinterranova.com).
+Live: https://soulflake.justinterranova.com
 
-**Preview (GitHub Pages):** https://jterranova2.github.io/soulflake/
-
-Prototype by Justin Terranova. Not a clinical or hiring tool.
+Builder snapshot. Client-side flake + landing. Not a clinical tool.
