@@ -56,8 +56,8 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
   <span class="wordmark">Soulflake</span>
   <nav class="tabs" aria-label="Primary">
     <button type="button" data-go="welcome" id="t-welcome">Welcome</button>
-    <button type="button" data-go="me" id="t-me">Me</button>
-    <button type="button" data-go="others" id="t-others">Others</button>
+    <button type="button" data-go="me" id="t-me">My flake</button>
+    <button type="button" data-go="others" id="t-others">Together</button>
   </nav>
   <button type="button" class="quiet" id="export-btn">Export</button>
 </div></header>
@@ -77,7 +77,7 @@ var BANDS=[
   {id:"context",label:"Context",color:"#94A3B8",angle:90}
 ];
 var TASTE=["Radiohead","Talking Heads","Nina Simone","The Shins","Nirvana","Queen","White Stripes","Lynch","The Matrix","Fight Club","Arrival","Pesto","Alan Watts","Hike that becomes a debate","Ramen at midnight"];
-var L=[{v:1,l:"No"},{v:2,l:"A little"},{v:3,l:"Often"},{v:4,l:"That’s me"}];
+var L=[{v:1,l:"No"},{v:2,l:"A little"},{v:3,l:"Often"},{v:4,l:"That’s it"}];
 var TRAITS=[{id:"open",q:"Strange art and ideas feel like oxygen."},{id:"extra",q:"A room with people gives me energy more than it costs."},{id:"cons",q:"I finish the last 10% even when I’m bored of the idea."},{id:"agree",q:"I give people the benefit of the doubt."},{id:"neuro",q:"Small slights stay in my body."}];
 var BOND=[{id:"ending",q:"When someone close goes quiet, I start writing the ending."},{id:"chase",q:"After a fight I go quiet. I do not chase."},{id:"focus",q:"When I am deep in a thing, closeness can feel like an interruption."}];
 var VALS=[{id:"course",a:"My own course",b:"A stable ground"},{id:"truth",a:"The blunt truth",b:"The relationship"}];
@@ -107,10 +107,10 @@ function hi(n){return (n||0)>=3;} function lo(n){return (n||0)>0&&(n||0)<=2;}
 function flakeTitle(){
   var p=profile(), t=p.answers.traits||{};
   if(p.name) return p.name;
-  if(!Object.keys(t).length) return "Me";
+  if(!Object.keys(t).length) return "My flake";
   if(hi(t.open)&&hi(t.extra)) return "Curious, outgoing";
   if(hi(t.open)&&lo(t.cons)) return "Idea-first";
-  return "Me";
+  return "My flake";
 }
 function about(){
   var a=profile().answers, lines=[], t=a.traits||{}, bits=[];
@@ -189,7 +189,7 @@ function renderBand(id){
   var p=profile(), items=bandItems(id);
   if(qIndex<0) qIndex=0; if(qIndex>=items.length) qIndex=items.length-1;
   var item=items[qIndex], body="", n=items.length, step=(qIndex+1)+" of "+n;
-  if(item.kind==="taste"){ var on=(p.answers.taste||[]).indexOf(item.item)>=0; body="<p>"+item.q+"</p><h3 class=\"serif\">"+item.item+"</h3><div class=\"chips\">"+chip(on,"Yes, me",'data-taste="'+item.item+'"')+chip(false,"Not this",'data-skip="1"')+"</div>"; }
+  if(item.kind==="taste"){ var on=(p.answers.taste||[]).indexOf(item.item)>=0; body="<p>"+item.q+"</p><h3 class=\"serif\">"+item.item+"</h3><div class=\"chips\">"+chip(on,"Yes",'data-taste="'+item.item+'"')+chip(false,"Not this",'data-skip="1"')+"</div>"; }
   if(item.kind==="likert") body="<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(p.answers[item.bag][item.id]===o.v,o.l,'data-k="'+item.bag+'" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";
   if(item.kind==="pair") body="<p>"+item.q+'</p><div class="chips">'+chip(p.answers.values[item.id]===item.a,item.a,'data-k="values" data-id="'+item.id+'" data-v="'+item.a+'"')+chip(p.answers.values[item.id]===item.b,item.b,'data-k="values" data-id="'+item.id+'" data-v="'+item.b+'"')+"</div>";
   if(item.kind==="pick") body="<p>"+item.q+'</p><div class="chips">'+item.o.map(function(o){return chip(p.answers[item.bag][item.id]===o,o,'data-k="'+item.bag+'" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";
@@ -200,14 +200,14 @@ function renderMe(){
   var p=profile(); var right;
   if(openBand) right=renderBand(openBand);
   else if(p.born){ right='<p class="caps">'+p.id+'</p><h1 class="serif">'+flakeTitle()+'</h1>'+about().map(function(l){return "<p>"+l+"</p>";}).join("")+'<p class="muted">'+BANDS.map(function(b){return b.label+" "+word(lvl(b.id));}).join(" · ")+'</p>'; }
-  else { right='<div class="card"><p class="caps">Me</p><h2 class="serif">Press the center of yourself</h2><p class="muted">Name this flake. Six arms appear. Tap one.</p><input class="field" id="birth-name" placeholder="Your name" value="'+(p.name||"")+'" style="margin:1rem 0" /><button type="button" class="btn btn-primary" data-birth="1">Press the center</button></div>'; }
+  else { right='<div class="card"><p class="caps">My flake</p><h2 class="serif">Press the center of yourself</h2><p class="muted">Name this flake. Six arms appear. Tap one.</p><input class="field" id="birth-name" placeholder="Your name" value="'+(p.name||"")+'" style="margin:1rem 0" /><button type="button" class="btn btn-primary" data-birth="1">Press the center</button></div>'; }
   var cam='', stage='flake-stage';
   if(openBand){ var b=BANDS.filter(function(x){return x.id===openBand;})[0]; var rad=b.angle*Math.PI/180; cam=' style="--tx:'+(-Math.cos(rad)*28)+'%;--ty:'+(-Math.sin(rad)*28)+'%"'; if(!zoomingIn) stage+=' zoom'; }
-  return '<p class="caps">Me</p><div class="flake-grid"><div class="flake-cam"><div class="'+stage+'"'+cam+'>'+flakeSvg(p.born)+'</div></div>'+(p.born&&!openBand?'<p class="muted" style="text-align:center">Tap an arm. Frost, forming, or fine — no percents.</p>':'')+(openBand?'<p style="text-align:center;margin:.6rem 0 0"><button type="button" class="btn" data-zoom-out="1">Back</button></p>':'')+'<div>'+right+'</div></div>';
+  return '<p class="caps">My flake</p><div class="flake-grid"><div class="flake-cam"><div class="'+stage+'"'+cam+'>'+flakeSvg(p.born)+'</div></div>'+(p.born&&!openBand?'<p class="muted" style="text-align:center">Tap an arm. Frost, forming, or fine — no percents.</p>':'')+(openBand?'<p style="text-align:center;margin:.6rem 0 0"><button type="button" class="btn" data-zoom-out="1">Back</button></p>':'')+'<div>'+right+'</div></div>';
 }
 function renderSwitch(){
   var rows=store.profiles.map(function(p){ var on=p.id===store.activeId?" on":""; return '<button type="button" class="chip'+on+'" data-pick="'+p.id+'">'+(p.name||"Unnamed")+(p.born?"":" · not started")+'</button>'; }).join("");
-  return '<p class="caps">This phone</p><h1 class="serif">Named profiles</h1><div class="card"><div class="list">'+rows+'</div><input class="field" id="new-name" placeholder="Name for a new flake" style="margin:1rem 0 .6rem" /><button type="button" class="btn btn-primary" id="add-profile">Add profile</button><button type="button" class="btn" data-go="me" style="margin-left:.4rem">Back to Me</button></div>';
+  return '<p class="caps">This phone</p><h1 class="serif">Named profiles</h1><div class="card"><div class="list">'+rows+'</div><input class="field" id="new-name" placeholder="Name for a new flake" style="margin:1rem 0 .6rem" /><button type="button" class="btn btn-primary" id="add-profile">Add profile</button><button type="button" class="btn" data-go="me" style="margin-left:.4rem">Back to My flake</button></div>';
 }
 function show(v){
   view=v;
@@ -223,7 +223,7 @@ function show(v){
     else zoomingIn=false;
   }
   else if(v==="switch") page.innerHTML=renderSwitch();
-  else page.innerHTML='<p class="caps">Others</p><h1 class="serif">People you already know</h1><div class="card"><p class="muted">Compare later. No compatibility percentage.</p><button type="button" class="btn btn-primary" id="import-btn" style="margin-top:1rem">Import</button><input id="import-file" type="file" accept=".json,application/json" hidden /><p class="muted" id="import-note" style="margin-top:.7rem"></p></div>';
+  else page.innerHTML='<p class="caps">Together</p><h1 class="serif">People you already know</h1><div class="card"><p class="muted">Compare later. No compatibility percentage.</p><button type="button" class="btn btn-primary" id="import-btn" style="margin-top:1rem">Import</button><input id="import-file" type="file" accept=".json,application/json" hidden /><p class="muted" id="import-note" style="margin-top:.7rem"></p></div>';
 }
 document.body.addEventListener("click",function(e){
   var t=e.target.closest("[data-go],[data-birth],[data-arm],[data-taste],[data-k],[data-close-band],[data-zoom-out],[data-pick],[data-skip],#add-profile");
