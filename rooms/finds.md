@@ -1,6 +1,7 @@
 # Room: Finds
 
-**Status:** Later. Not in current nav.
+**Live:** `Soulflake.html` tab Finds
+**Status:** Shell. “Not yet. Later, and only from thick arms.”
 
 Copy that already existed: Nights, rooms, people — later, and only from thick arms. Not a shop. Not a feed.
 

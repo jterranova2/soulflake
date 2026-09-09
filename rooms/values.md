@@ -1,11 +1,16 @@
 # Room: Values
 
-**Live page:** `Soulflake.html#values`
-**Lead:** When it counts, what do you protect?
+**Live page:** `Soulflake.html` arm `values`
+**Lead:** When it counts, what do you protect? One pair at a time.
+
+## Live pairs
 
 - course: My own course / A stable ground
-- fair: Fairness / Leverage
 - truth: The blunt truth / The relationship
+
+## Missing from live, keep
+
+- fair: Fairness / Leverage
 - free: Freedom to leave / Belonging
 
-`fair` and `free` were in the day’s snapshot and missing from the late rewrite. Keep them.
+Same story as Bond `want`: in the day’s snapshot, written into this room, thinned again in Me. Restore both pairs.
