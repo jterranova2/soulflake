@@ -1,96 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Soulflake — Welcome</title>
-  <meta name="theme-color" content="#070B14" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-  <style>
-    :root { --midnight:#070B14; --violet:#A78BFA; --frost:#F8FAFC; --graphite:#94A3B8; }
-    * { box-sizing: border-box; }
-    html, body { margin:0; min-height:100%; background:var(--midnight); color:var(--frost); font-family:Inter,system-ui,sans-serif; }
-    button { font-family:inherit; cursor:pointer; }
-    a { color:inherit; text-decoration:none; }
-    .glow { position:fixed; inset:0; pointer-events:none; z-index:0;
-      background: radial-gradient(ellipse 55% 40% at 72% 18%, rgba(167,139,250,.16), transparent 58%),
-                  radial-gradient(ellipse 45% 35% at 18% 78%, rgba(26,21,64,.55), transparent 55%), var(--midnight); }
-    #snow { position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:1; }
-    .wrap { position:relative; z-index:2; width:min(1120px, calc(100% - 2rem)); margin:0 auto; }
-    header { position:sticky; top:0; z-index:20; border-bottom:1px solid rgba(248,250,252,.12); background:rgba(7,11,20,.78); backdrop-filter:blur(14px); }
-    .nav { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.1rem 0; }
-    .logo { font-weight:700; font-size:1.15rem; }
-    .logo span { color:var(--violet); }
-    .btn { display:inline-flex; align-items:center; justify-content:center; min-height:44px; border-radius:999px; padding:.7rem 1.25rem; font-weight:600; border:1px solid transparent; }
-    .btn-primary { background:var(--violet); color:var(--midnight); box-shadow:0 0 22px rgba(167,139,250,.35); }
-    .ambient { min-height:44px; border-radius:999px; padding:.45rem .85rem; font-size:.8rem; color:rgba(148,163,184,.55); background:rgba(26,21,64,.28); border:1px solid rgba(248,250,252,.10); opacity:.72; transition: color .4s, background .4s, box-shadow .4s, border-color .4s, opacity .4s; }
-    .ambient.on { color:#F8FAFC; background:rgba(167,139,250,.22); border-color:rgba(167,139,250,.7); opacity:1; box-shadow:0 0 16px rgba(167,139,250,.55), 0 0 2px rgba(103,232,249,.4); }
-    .hero { display:grid; grid-template-columns:1fr; justify-items:center; text-align:center; gap:1.5rem; padding:2.5rem 0 3.5rem; }
-    @media (min-width:900px){ .hero{grid-template-columns:1.1fr .9fr; text-align:left; align-items:center; min-height:calc(100svh - 4.75rem); padding:3rem 0 4rem;} .cta{justify-content:flex-start;} }
-    .eyebrow { font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--violet); margin-bottom:1rem; }
-    h1 { font-size:clamp(2.2rem,6vw,3.6rem); line-height:1.08; letter-spacing:-.03em; margin:0 0 1rem; }
-    h1 em { color:var(--violet); font-style:normal; }
-    .sub { font-size:1.1rem; color:var(--graphite); max-width:34rem; margin:0 auto 1.5rem; }
-    @media (min-width:900px){ .sub{margin-left:0;} }
-    .cta { display:flex; flex-wrap:wrap; gap:.75rem; margin-bottom:.85rem; justify-content:center; }
-    .micro { font-size:.82rem; color:rgba(148,163,184,.75); }
-    .hero-visual { display:grid; place-items:center; width:100%; }
-    .mark { width:min(220px,58vw); height:auto; aspect-ratio:1/1; object-fit:contain; object-position:center; display:block; filter:drop-shadow(0 0 36px rgba(167,139,250,.4)); animation:floaty 6s ease-in-out infinite; }
-    @keyframes floaty { 50% { transform:translateY(-8px); } }
-    footer { position:relative; z-index:2; padding:2rem 0 3rem; border-top:1px solid rgba(248,250,252,.12); color:rgba(148,163,184,.75); font-size:.85rem; }
-    footer a { text-decoration:underline; text-underline-offset:2px; }
-    @media (prefers-reduced-motion:reduce){ #snow,.mark{animation:none;} #snow{display:none;} }
-  </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Soulflake</title>
+<meta name="theme-color" content="#070B14" />
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+:root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 40% at 72% 18%,rgba(167,139,250,.16),transparent 58%),radial-gradient(ellipse 45% 35% at 18% 78%,rgba(26,21,64,.55),transparent 55%),var(--midnight)}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
+.top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
+.wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em}
+.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72;transition:color .4s,background .4s,box-shadow .4s,border-color .4s,opacity .4s}
+.ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7);opacity:1;box-shadow:0 0 16px rgba(167,139,250,.55)}
+.hero{text-align:center;padding:2.4rem 0 2.2rem}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem;line-height:1.06}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
+.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;transition:opacity .7s}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:700;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
+.mark{width:min(240px,62vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;filter:drop-shadow(0 0 36px rgba(167,139,250,.4))}
+.pitch{padding:.4rem 0 2.4rem}
+.block{margin:2.6rem 0;max-width:36rem}
+.block img{width:100%;height:auto;border-radius:1rem;margin:0 0 1rem;display:block;aspect-ratio:3/2;object-fit:cover}
+.block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.18rem}
+.cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
+.bottom{text-align:center;padding:0 0 4.2rem}
+@media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}}
+</style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
 <audio id="ambient" autoplay loop playsinline preload="auto" src="assets/audio/frost-waltz-kevin-macleod.mp3"></audio>
-<header>
-  <div class="wrap nav">
-    <a class="logo" href="#">Soul<span>flake</span></a>
-    <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
-  </div>
-</header>
-<main class="wrap hero">
-  <div>
-    <div class="eyebrow">Welcome</div>
-    <h1>Meet your <em>Soulflake</em></h1>
-    <p class="sub">A profile so precise it feels invasive — and clear enough to act on.</p>
-    <div class="cta">
-      <button type="button" class="btn btn-primary" id="build">Build your Flake</button>
+<div class="wrap top">
+  <span class="wordmark">Soulflake</span>
+  <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
+</div>
+<main class="wrap">
+  <section class="hero">
+    <img class="mark" src="assets/Soulflake-Welcome-Crystal.jpg" width="400" height="400" alt="" onerror="this.onerror=null;this.src='assets/soulflake-mark-v6.png'" />
+    <h1>Meet your Soulflake</h1>
+    <p class="rotate" id="line">Know yourself. Then be known.</p>
+    <button type="button" class="btn" id="build">Get started</button>
+  </section>
+  <section class="pitch">
+    <div class="block">
+      <img src="GrokBot-Handoff/style-frames/80-welcome-hole.jpg" alt="" />
+      <h2>The hole</h2>
+      <p>You walk in blurry.</p>
+      <p>Most people are guessing. Guessing who they are. Guessing why the room went cold. Guessing what to do next.</p>
     </div>
-    <p class="micro">Prototype · not a clinical assessment</p>
-  </div>
-  <div class="hero-visual">
-    <img class="mark" src="assets/Soulflake-Welcome-Crystal.jpg" width="400" height="400" alt="Soulflake crystal" onerror="this.onerror=null;this.src='assets/soulflake-mark-v6.png'" />
+    <div class="block">
+      <img src="GrokBot-Handoff/style-frames/81-welcome-sixcuts.jpg" alt="" />
+      <h2>Six cuts, not a type</h2>
+      <p>Not another letter.</p>
+      <p>Traits. Taste. Bond. Values. Conflict. Context. Each arm is its own picture. Empty stays quiet. Filled gets sharp.</p>
+    </div>
+    <div class="block">
+      <img src="GrokBot-Handoff/style-frames/82-welcome-grows.jpg" alt="" />
+      <h2>It grows when you tell it</h2>
+      <p>The more you say, the more it can say back.</p>
+      <p>Skip what you want. The flake goes lopsided on purpose. That’s honesty, not a broken quiz.</p>
+    </div>
+    <div class="block">
+      <img src="GrokBot-Handoff/style-frames/83-welcome-together.jpg" alt="" />
+      <h2>Built to be used</h2>
+      <p>Know yourself. Then be known.</p>
+      <p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p>
+    </div>
+  </section>
+  <p class="cue">Start with one arm.</p>
+  <div class="bottom">
+    <button type="button" class="btn" id="build-2">Get started</button>
   </div>
 </main>
-<footer>
-  <div class="wrap">
-    <p>Soulflake is an independent prototype by Justin Terranova. Not a medical, clinical, or hiring tool.</p>
-    <p>Ambient: <a href="https://incompetech.com/music/royalty-free/index.html?isrc=USUAN1100516">Frost Waltz</a> by Kevin MacLeod — CC BY 3.0.</p>
-  </div>
-</footer>
 <script>
 (function(){
-  document.getElementById("build").onclick=function(){ location.href="Soulflake.html"; };
+  var LINES=[
+    "Know yourself. Then be known.",
+    "See yourself clearly enough to be met.",
+    "The closer you get to you, the closer you can get to anyone.",
+    "First an honest picture. Then a real room.",
+    "You can’t be found if you can’t be named.",
+    "Depth with yourself. Then depth with someone else."
+  ];
+  var el=document.getElementById("line"), i=0;
+  setInterval(function(){
+    i=(i+1)%LINES.length;
+    el.style.opacity="0";
+    setTimeout(function(){ el.textContent=LINES[i]; el.style.opacity="1"; }, 700);
+  }, 6000);
+
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
   var muted=localStorage.getItem(SOUND_KEY)==="off";
-  var playing=false, fadeTimer=null, LEVEL=0.07, FADE=3, actx=null, gain=null;
+  var playing=false, LEVEL=0.18, FADE=2, actx=null, gain=null;
   function setBtn(on){
-    btn.textContent = on ? "Sound on" : "Sound off";
-    btn.classList.toggle("on", on);
-    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.textContent=on?"Sound on":"Sound off";
+    btn.classList.toggle("on",on);
+    btn.setAttribute("aria-pressed",on?"true":"false");
   }
-  function fadeVol(from, to, done){
+  function fadeVol(from,to,done){
     var t0=performance.now();
     function tick(now){
       var t=Math.min(1,(now-t0)/(FADE*1000));
-      try{ audio.volume = from + (to-from)*t; }catch(e){}
+      try{ audio.volume=from+(to-from)*t; }catch(e){}
       if(t<1) requestAnimationFrame(tick);
       else if(done) done();
     }
@@ -106,57 +126,45 @@
         gain=actx.createGain();
         gain.gain.value=0;
         src.connect(gain).connect(actx.destination);
-        var now=actx.currentTime;
-        gain.gain.linearRampToValueAtTime(LEVEL, now+FADE);
+        gain.gain.linearRampToValueAtTime(LEVEL, actx.currentTime+FADE);
       };
-      if(actx.state==="running") hook();
-      else actx.resume().then(hook);
+      if(actx.state==="running") hook(); else actx.resume().then(hook);
     }catch(e){}
   }
   function fadeIn(){
     if(muted) return;
-    clearTimeout(fadeTimer);
     setBtn(true);
     audio.muted=false;
-    try{ audio.volume = 0; }catch(e){}
+    try{ audio.volume=0; }catch(e){}
     var start=function(){
       var p=audio.play();
-      var ok=function(){
-        playing=true;
-        localStorage.setItem(SOUND_KEY,"on");
-        fadeVol(0, LEVEL);
-        quietNode();
-      };
-      if(p&&p.then) p.then(ok).catch(function(){ playing=false; });
-      else ok();
+      var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); fadeVol(0,LEVEL); quietNode(); };
+      if(p&&p.then) p.then(ok).catch(function(){ playing=false; }); else ok();
     };
-    if(audio.readyState>=3) start();
-    else audio.addEventListener("canplay", start, {once:true});
+    if(audio.readyState>=2) start(); else audio.addEventListener("canplay",start,{once:true});
   }
   function fadeOut(){
-    playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off");
-    clearTimeout(fadeTimer); setBtn(false);
-    if(gain&&actx){ var now=actx.currentTime; gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value, now); gain.gain.linearRampToValueAtTime(0, now+FADE); }
-    fadeVol(audio.volume||LEVEL, 0, function(){ if(muted) audio.pause(); });
+    playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off"); setBtn(false);
+    if(gain&&actx){ var now=actx.currentTime; gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value,now); gain.gain.linearRampToValueAtTime(0,now+FADE); }
+    fadeVol(audio.volume||LEVEL,0,function(){ if(muted) audio.pause(); });
   }
-  btn.onclick=function(e){ e.stopPropagation(); if(playing && !audio.paused) fadeOut(); else { muted=false; fadeIn(); } };
+  btn.onclick=function(e){ e.stopPropagation(); if(playing&&!audio.paused) fadeOut(); else { muted=false; fadeIn(); } };
   if(muted) setBtn(false);
   else {
     setBtn(true);
     fadeIn();
-    ["pointerdown","touchstart","click","keydown","scroll"].forEach(function(ev){
-      window.addEventListener(ev, function(){ if(!muted){ if(audio.paused || !playing) fadeIn(); else quietNode(); } }, {passive:true});
-    });
-    document.addEventListener("visibilitychange", function(){ if(!document.hidden && !muted && (audio.paused || !playing)) fadeIn(); });
-    window.addEventListener("pageshow", function(){ if(!muted) fadeIn(); });
+    window.addEventListener("pointerdown", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); }, {passive:true});
+    window.addEventListener("touchstart", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); }, {passive:true});
+    window.addEventListener("keydown", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); });
   }
+
   var c=document.getElementById("snow"), g=c.getContext("2d");
-  if(!g || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
   function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.15+Math.random()*.55,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
   function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}); }
   function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
-  resize(); frame(); addEventListener("resize", resize);
+  resize(); frame(); addEventListener("resize",resize);
 })();
 </script>
 </body>
