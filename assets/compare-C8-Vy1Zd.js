@@ -1,0 +1,1 @@
+import{n as e,o as t}from"./index-DK3LitiP.js";var n=t(),r=()=>(0,n.jsx)(e,{to:`/others`});export{r as component};
