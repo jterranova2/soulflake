@@ -1,30 +1,25 @@
 # Soulflake-Build-v0
 
-Live file. Caught up 2026-09-09 after Welcome export/import, named profiles, and sound work.
+Live file. 2026-09-09 Welcome chrome.
 
-## What shipped
+## What changed
 
-Welcome (`index.html`) is the signed-out door.
+Welcome (`index.html`) is mood, not a file desk.
 
-- Build your Flake opens Me.
-- Export / Import carry a flake. Sign in is gone.
-- Sound on by default, quiet, 3s fade, glowing button.
-- Custom domain: soulflake.justinterranova.com
+- Wordmark, Sound, WELCOME, Meet your Soulflake, tagline, one button **Build your Flake**, crystal image.
+- Removed Export, Import, name/password dock, and the carry-a-flake line.
+- Crystal src: `assets/Soulflake-Welcome-Crystal.jpg`, falls back to `assets/soulflake-mark-v6.png` until Design drops the jpg into the repo.
+- Sound: first visit is ON. Autoplay fail does not eat the first tap. Last choice persists (`soulflake.sound`). Off stays off.
 
-`Soulflake.html` is **Me**.
+Me (`Soulflake.html`)
 
-- Name this profile → press the center → six arms.
-- Tap an arm or its title → one question at a time → Climb out.
-- Nav: **Navigation** + **Me · Insights · Finds · Others**. Last three are shells. No shop copy. No compatibility %.
-- Named profiles live in `localStorage` key `soulflake.profiles.v1`. Old `soulflake.v1` migrates. `sf-justin` ids are rewritten.
-- No “Load Justin sample.” No Strategic Guardian. No type table.
-- Justin exists only as a passworded export asset for Import tests.
+- Export lives here. Name + optional password only in a popup. House-v1 still wraps the file.
+- No Import on Me.
 
-## Not built
+Others
 
-Insights / Finds / Others interiors. Report page. Restored arm banks (see `rooms/README.md`). Accounts.
+- Import only. No Export. Still no compare %.
 
 ## Open URL
 
 https://jterranova2.github.io/soulflake/
-https://soulflake.justinterranova.com/
