@@ -80,7 +80,7 @@
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
   var muted=localStorage.getItem(SOUND_KEY)==="off";
-  var playing=false, fadeTimer=null, LEVEL=0.18, FADE=3;
+  var playing=false, fadeTimer=null, LEVEL=0.07, FADE=3, actx=null, gain=null;
   function setBtn(on){
     btn.textContent = on ? "Sound on" : "Sound off";
     btn.classList.toggle("on", on);
@@ -96,6 +96,23 @@
     }
     requestAnimationFrame(tick);
   }
+  function quietNode(){
+    if(gain) return;
+    try{
+      actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+      var hook=function(){
+        if(!actx||actx.state!=="running"||gain) return;
+        var src=actx.createMediaElementSource(audio);
+        gain=actx.createGain();
+        gain.gain.value=0;
+        src.connect(gain).connect(actx.destination);
+        var now=actx.currentTime;
+        gain.gain.linearRampToValueAtTime(LEVEL, now+FADE);
+      };
+      if(actx.state==="running") hook();
+      else actx.resume().then(hook);
+    }catch(e){}
+  }
   function fadeIn(){
     if(muted) return;
     clearTimeout(fadeTimer);
@@ -108,6 +125,7 @@
         playing=true;
         localStorage.setItem(SOUND_KEY,"on");
         fadeVol(0, LEVEL);
+        quietNode();
       };
       if(p&&p.then) p.then(ok).catch(function(){ playing=false; });
       else ok();
@@ -118,6 +136,7 @@
   function fadeOut(){
     playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off");
     clearTimeout(fadeTimer); setBtn(false);
+    if(gain&&actx){ var now=actx.currentTime; gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value, now); gain.gain.linearRampToValueAtTime(0, now+FADE); }
     fadeVol(audio.volume||LEVEL, 0, function(){ if(muted) audio.pause(); });
   }
   btn.onclick=function(e){ e.stopPropagation(); if(playing && !audio.paused) fadeOut(); else { muted=false; fadeIn(); } };
@@ -126,7 +145,7 @@
     setBtn(true);
     fadeIn();
     ["pointerdown","touchstart","click","keydown","scroll"].forEach(function(ev){
-      window.addEventListener(ev, function(){ if(!muted && (audio.paused || !playing)) fadeIn(); }, {passive:true});
+      window.addEventListener(ev, function(){ if(!muted){ if(audio.paused || !playing) fadeIn(); else quietNode(); } }, {passive:true});
     });
     document.addEventListener("visibilitychange", function(){ if(!document.hidden && !muted && (audio.paused || !playing)) fadeIn(); });
     window.addEventListener("pageshow", function(){ if(!muted) fadeIn(); });
