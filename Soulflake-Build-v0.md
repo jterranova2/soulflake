@@ -2,15 +2,20 @@
 
 Live file. 2026-09-09 nav Me · Others.
 
-## What changed
+## What changed on the page
 
-Insights and Finds are off the site. No tabs, no shell pages.
+Unchanged this pass. Soulflake.html was not edited.
 
-App chrome is Me · Others only.
+## Assets this pass
 
-Welcome stays the first-visit page at `/` (`index.html`) — snowfall, Sound, Build your Flake. It is not a nav item on Me.
+`GrokBot-Handoff/style-frames/`
+- 70-arm-frost.jpg — same Taste arm, dashed
+- 71-arm-forming.jpg — solid medium
+- 72-arm-fine.jpg — thick + tick
+- 73-zoom-out.jpg — whole flake small
+- 74-zoom-in.jpg — camera into Taste
 
-Arm zoom still: tap arm, camera eases in, frost / forming / fine, no percents.
+Ice Lab. No stock. No Insights. No Finds.
 
 ## Link
 
