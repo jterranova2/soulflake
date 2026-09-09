@@ -69,7 +69,8 @@
       <button type="button" class="btn btn-ghost" id="import">Import</button>
     </div>
     <div class="dock" id="dock" hidden>
-      <input class="field" id="pass" type="password" placeholder="Password for this file" />
+      <input class="field" id="file-name" placeholder="Name this file" />
+      <input class="field" id="pass" type="password" placeholder="Password (optional)" />
       <button type="button" class="btn btn-primary" id="go">Continue</button>
     </div>
     <input id="file" type="file" accept=".json,application/json" hidden />
@@ -90,6 +91,7 @@
 (function(){
   var STORE="soulflake.profiles.v1";
   var OLD="soulflake.v1";
+  var HOUSE="Ice Laboratory \u00b7 Soulflake \u00b7 070B14 \u00b7 JTNOVA";
   function keyBytes(pass){
     return crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass)).then(function(buf){ return new Uint8Array(buf); });
   }
@@ -107,16 +109,25 @@
     for(var i=0;i<s.length;i++) out[i]=s.charCodeAt(i);
     return out;
   }
-  function lockProfile(profile, pass){
-    return keyBytes(pass).then(function(k){
-      var raw=new TextEncoder().encode(JSON.stringify(profile));
-      return {v:1,kind:"soulflake-profile",locked:true,name:profile.name||"Flake",payload:b64(xor(raw,k))};
+  function lockProfile(profile, fileName, pass){
+    var raw=new TextEncoder().encode(JSON.stringify(profile));
+    return keyBytes(HOUSE).then(function(house){
+      var bytes=xor(raw, house);
+      var locked=!!(pass&&pass.length);
+      var next=locked?keyBytes(pass).then(function(pk){ return xor(bytes, pk); }):Promise.resolve(bytes);
+      return next.then(function(finalBytes){
+        return {v:2,kind:"soulflake-profile",cipher:"house-v1",locked:locked,name:fileName||profile.name||"Flake",payload:b64(finalBytes)};
+      });
     });
   }
   function unlockFile(pack, pass){
-    return keyBytes(pass).then(function(k){
-      var raw=xor(unb64(pack.payload), k);
-      return JSON.parse(new TextDecoder().decode(raw));
+    var bytes=unb64(pack.payload);
+    var first=pack.locked?keyBytes(pass||"").then(function(pk){ return xor(bytes, pk); }):Promise.resolve(bytes);
+    return first.then(function(afterPw){
+      if(pack.v===1) return JSON.parse(new TextDecoder().decode(afterPw));
+      return keyBytes(HOUSE).then(function(house){
+        return JSON.parse(new TextDecoder().decode(xor(afterPw, house)));
+      });
     });
   }
   function activeProfile(){
@@ -139,14 +150,17 @@
   var note=document.getElementById("note");
   var dock=document.getElementById("dock");
   var pass=document.getElementById("pass");
+  var nameEl=document.getElementById("file-name");
   var fileEl=document.getElementById("file");
   var pendingFile=null;
+  function slug(s){ return String(s||"soulflake").replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"")||"soulflake"; }
   document.getElementById("build").onclick=function(){ location.href="Soulflake.html"; };
   document.getElementById("export").onclick=function(){
     var p=activeProfile();
     if(!p||!p.answers){ note.textContent="Nothing on this phone to export."; return; }
-    mode="export"; pendingFile=null; dock.hidden=false; pass.value=""; pass.focus();
-    note.textContent="Set a password. You will need it to import.";
+    mode="export"; pendingFile=null; dock.hidden=false;
+    nameEl.hidden=false; nameEl.value=p.name||""; pass.value=""; nameEl.focus();
+    note.textContent="Name the file first. Password is optional.";
   };
   document.getElementById("import").onclick=function(){
     mode="import"; note.textContent=""; fileEl.click();
@@ -159,31 +173,34 @@
       try{ pendingFile=JSON.parse(reader.result); }
       catch(e){ note.textContent="That file is not a Soulflake export."; return; }
       if(!pendingFile||pendingFile.kind!=="soulflake-profile"){ note.textContent="That file is not a Soulflake export."; return; }
-      dock.hidden=false; pass.value=""; pass.focus();
-      note.textContent="Password for "+(pendingFile.name||"this flake")+".";
+      dock.hidden=false; nameEl.hidden=true; pass.value="";
+      if(pendingFile.locked){ pass.focus(); note.textContent="Password for "+(pendingFile.name||"this flake")+"."; }
+      else { note.textContent="House file. No password. Continue."; }
     };
     reader.readAsText(f);
   };
   document.getElementById("go").onclick=function(){
     var pw=pass.value||"";
-    if(!pw){ note.textContent="Password first."; return; }
     if(mode==="export"){
       var p=activeProfile();
-      lockProfile(p,pw).then(function(pack){
+      var fileName=(nameEl.value||"").trim()||p.name||"Flake";
+      lockProfile(p,fileName,pw).then(function(pack){
         var blob=new Blob([JSON.stringify(pack,null,2)],{type:"application/json"});
         var a=document.createElement("a");
         a.href=URL.createObjectURL(blob);
-        a.download=(p.name||"soulflake")+".soulflake.json";
+        a.download=slug(fileName)+".soulflake.json";
         a.click();
-        dock.hidden=true; note.textContent="Exported.";
+        dock.hidden=true; note.textContent=pack.locked?"Exported (named + password + house cipher).":"Exported (named + house cipher).";
       });
       return;
     }
     if(mode==="import"&&pendingFile){
+      if(pendingFile.locked && !pw){ note.textContent="This file has a password."; return; }
       unlockFile(pendingFile,pw).then(function(p){
+        if(pendingFile.name && !p.name) p.name=pendingFile.name;
         saveImported(p);
         location.href="Soulflake.html";
-      }).catch(function(){ note.textContent="Wrong password or damaged file."; });
+      }).catch(function(){ note.textContent="Wrong password, or not a house file."; });
     }
   };
   var audio=document.getElementById("ambient");
