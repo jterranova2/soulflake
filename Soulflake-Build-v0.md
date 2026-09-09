@@ -1,18 +1,16 @@
 # Soulflake-Build-v0
 
-Live file. 2026-09-09 Welcome first in Soulflake.html.
+Live file. 2026-09-09 Welcome · My flake · Together.
 
 ## What changed
 
-Welcome is the first screen in `Soulflake.html`. Then Me. No Insights. No Finds.
+Welcome is the first screen in Soulflake.html. Then My flake.
 
-Wordmark is one word: Soulflake.
+Nav after Welcome: My flake · Together.
 
-Rotating lines (briefing locks that exist in this room):
-- A profile so precise it feels invasive — and clear enough to act on.
-- That’s uncomfortably specific — and useful.
+Never says Me or Others. No Insights. No Finds.
 
-Build your Flake goes to Me.
+Wordmark: Soulflake. Rotating briefing lines stay on Welcome.
 
 ## Link
 
