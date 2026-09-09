@@ -8,271 +8,130 @@
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
-:root{--midnight:#070B14;--violet:#A78BFA;--cyan:#67E8F9;--frost:#F8FAFC;--graphite:#94A3B8;--border:#2a3348;--surface:#12182a}
-*{box-sizing:border-box}html,body{margin:0;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;min-height:100%}
-button,input{font-family:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
-.serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
-.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 50% 36% at 70% 12%,rgba(167,139,250,.12),transparent 58%),var(--midnight)}
-.app{position:relative;z-index:2;min-height:100dvh}
-.chrome{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(42,51,72,.7);background:rgba(7,11,20,.92);backdrop-filter:blur(12px)}
-.inner{display:flex;align-items:center;gap:.35rem;max-width:64rem;margin:0 auto;padding:.4rem .7rem}
-.who{border:1px solid var(--border);background:var(--surface);color:var(--frost);border-radius:999px;min-height:36px;padding:0 .7rem;font-size:.85rem;max-width:11rem}
-.tabs{display:flex;gap:.1rem;flex:1;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
-.tabs button,.quiet{background:none;border:0;color:inherit;padding:.5rem .55rem;min-height:44px;border-radius:999px}
-.tabs button.on{color:var(--frost);background:var(--surface)}
-.page{max-width:64rem;margin:0 auto;padding:1rem .85rem 4rem}
-.caps{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
-h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
-.muted{color:var(--graphite)}
-.card{border:1px solid var(--border);border-radius:1rem;padding:1rem;background:rgba(18,24,42,.82);margin-top:.85rem}
-.chip{min-height:44px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--frost);padding:.55rem .75rem;text-align:left}
-.chip.on{border-color:var(--violet);background:rgba(167,139,250,.18)}
-.chips,.likert{display:flex;flex-wrap:wrap;gap:.45rem}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:.6rem 1.1rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--frost)}
-.btn-primary{background:var(--violet);color:var(--midnight);border-color:transparent}
-.flake-grid{display:grid;gap:1.5rem}
-.flake-cam{overflow:hidden;border-radius:1.2rem;max-width:22rem;margin:0 auto}
-.flake-stage{transition:transform 1.35s ease-in-out;transform-origin:50% 50%;will-change:transform}
-.flake-stage.zoom{transform:scale(2.05) translate(var(--tx),var(--ty))}
-@media(min-width:900px){.flake-grid{grid-template-columns:1fr 1fr;align-items:start}}
-.field{min-height:44px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--midnight);color:var(--frost);padding:0 .75rem}
-.list{display:grid;gap:.45rem;margin:.7rem 0}
-.scrim{position:fixed;inset:0;z-index:40;background:rgba(7,11,20,.72);display:grid;place-items:center;padding:1rem}
-.modal{width:min(22rem,100%);border:1px solid var(--border);border-radius:1.1rem;background:#12182a;padding:1.15rem;box-shadow:0 0 40px rgba(167,139,250,.18)}
-.modal h2{margin:.2rem 0 .35rem}
-.modal .row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
-.welcome{text-align:center;padding:2rem 0 3rem}
-.welcome .mark{max-width:16rem;margin:0 auto 1.2rem}
-.welcome h1{font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:-.03em;margin:.2rem 0 1rem}
-.rotate{min-height:3.2rem;color:var(--graphite);max-width:28rem;margin:0 auto 1.4rem;transition:opacity .6s}
-.wordmark{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+:root{--midnight:#070B14;--indigo:#1A1540;--violet:#A78BFA;--cyan:#67E8F9;--frost:#F8FAFC;--graphite:#94A3B8}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
+button{font-family:inherit;cursor:pointer}a{color:inherit;text-decoration:none}
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 40% at 72% 18%,rgba(167,139,250,.16),transparent 58%),radial-gradient(ellipse 45% 35% at 18% 78%,rgba(26,21,64,.55),transparent 55%),var(--midnight)}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
+header{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(248,250,252,.12);background:rgba(7,11,20,.78);backdrop-filter:blur(14px)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
+.wordmark{font-weight:700;font-size:1.15rem;letter-spacing:-.01em}
+.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72;transition:color .4s,background .4s,box-shadow .4s,border-color .4s,opacity .4s}
+.ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7);opacity:1;box-shadow:0 0 16px rgba(167,139,250,.55)}
+.hero{text-align:center;padding:2.6rem 0 4rem}
+.eyebrow{font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--violet);margin-bottom:1rem}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem}
+.rotate{min-height:3.4rem;max-width:28rem;margin:0 auto 1.6rem;color:var(--graphite);font-size:1.08rem;line-height:1.45;transition:opacity .7s}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:.7rem 1.35rem;font-weight:600;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
+.mark{width:min(220px,58vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.6rem;filter:drop-shadow(0 0 36px rgba(167,139,250,.4))}
+footer{position:relative;z-index:2;padding:2rem 0 3rem;border-top:1px solid rgba(248,250,252,.12);color:rgba(148,163,184,.75);font-size:.85rem;text-align:center}
+@media (prefers-reduced-motion:reduce){#snow{display:none}}
 </style>
 </head>
 <body>
+<canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<div class="app">
-<header class="chrome"><div class="inner">
-  <button type="button" class="who" id="who-btn" data-go="switch">Navigation</button>
+<audio id="ambient" autoplay loop playsinline preload="auto" src="assets/audio/frost-waltz-kevin-macleod.mp3"></audio>
+<header><div class="wrap nav">
   <span class="wordmark">Soulflake</span>
-  <nav class="tabs" aria-label="Primary">
-    <button type="button" data-go="welcome" id="t-welcome">Welcome</button>
-    <button type="button" data-go="me" id="t-me">My flake</button>
-    <button type="button" data-go="others" id="t-others">Together</button>
-  </nav>
-  <button type="button" class="quiet" id="export-btn">Export</button>
+  <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
 </div></header>
-<div id="page" class="page"></div>
-<div id="modal-root"></div>
-</div>
+<main class="wrap hero">
+  <p class="eyebrow">Welcome</p>
+  <img class="mark" src="assets/Soulflake-Welcome-Crystal.jpg" width="400" height="400" alt="" onerror="this.onerror=null;this.src='assets/soulflake-mark-v6.png'" />
+  <h1>Soulflake</h1>
+  <p class="rotate" id="line">A profile so precise it feels invasive — and clear enough to act on.</p>
+  <button type="button" class="btn" id="build">Build your Flake</button>
+</main>
+<footer><div class="wrap"><p>Prototype. Not a medical, clinical, or hiring tool.</p></div></footer>
 <script>
 (function(){
-var STORE="soulflake.profiles.v1";
-var OLD="soulflake.v1";
-var BANDS=[
-  {id:"taste",label:"Taste",color:"#67E8F9",angle:-90},
-  {id:"traits",label:"Traits",color:"#A78BFA",angle:-30},
-  {id:"bond",label:"Bond",color:"#93C5FD",angle:30},
-  {id:"conflict",label:"Conflict",color:"#E2E8F0",angle:150},
-  {id:"values",label:"Values",color:"#C4B5FD",angle:210},
-  {id:"context",label:"Context",color:"#94A3B8",angle:90}
-];
-var TASTE=["Radiohead","Talking Heads","Nina Simone","The Shins","Nirvana","Queen","White Stripes","Lynch","The Matrix","Fight Club","Arrival","Pesto","Alan Watts","Hike that becomes a debate","Ramen at midnight"];
-var L=[{v:1,l:"No"},{v:2,l:"A little"},{v:3,l:"Often"},{v:4,l:"That’s it"}];
-var TRAITS=[{id:"open",q:"Strange art and ideas feel like oxygen."},{id:"extra",q:"A room with people gives me energy more than it costs."},{id:"cons",q:"I finish the last 10% even when I’m bored of the idea."},{id:"agree",q:"I give people the benefit of the doubt."},{id:"neuro",q:"Small slights stay in my body."}];
-var BOND=[{id:"ending",q:"When someone close goes quiet, I start writing the ending."},{id:"chase",q:"After a fight I go quiet. I do not chase."},{id:"focus",q:"When I am deep in a thing, closeness can feel like an interruption."}];
-var VALS=[{id:"course",a:"My own course",b:"A stable ground"},{id:"truth",a:"The blunt truth",b:"The relationship"}];
-var CONF=[{id:"late",q:"They’re late again.",o:["Name the pattern","Go quiet","Joke it off"]},{id:"heat",q:"The room is heating up.",o:["Stay and say the hard line","Leave and cool off","Soften so nobody explodes"]},{id:"repair",q:"The next morning.",o:["Text first and own your part","Wait for them","Act like nothing happened"]}];
-var CTX=[{id:"faith",q:"Faith, as lived.",o:["Skip","Christian","Other faith","None / unsure"]},{id:"place",q:"Where you are.",o:["Skip","West Coast US","Other US","Outside the US"]}];
-var COPY={taste:{t:"Taste",l:"Pick what feels like you."},traits:{t:"Traits",l:"How you move. Not a type."},bond:{t:"Bond",l:"How you get close."},values:{t:"Values",l:"When it counts, what do you protect?"},conflict:{t:"Conflict",l:"What you do when it heats up."},context:{t:"Context",l:"Facts as you name them. Skip allowed."}};
-function uid(){return "sf-"+Math.random().toString(36).slice(2,8);}
-function blank(name){return {id:uid(),born:false,name:name||"",answers:{taste:[],traits:{},bond:{},values:{},conflict:{},context:{}}};}
-function loadStore(){
-  try{ var s=JSON.parse(localStorage.getItem(STORE)||"null"); if(s&&s.profiles&&s.profiles.length) return s; }catch(e){}
-  var migrated=null; try{ migrated=JSON.parse(localStorage.getItem(OLD)||"null"); }catch(e){}
-  if(migrated&&migrated.answers){ if(migrated.id==="sf-justin") migrated.id=uid(); if(!migrated.name) migrated.name=""; return {activeId:migrated.id,profiles:[migrated]}; }
-  var p=blank(""); return {activeId:p.id,profiles:[p]};
-}
-var store=loadStore();
-function persist(){ localStorage.setItem(STORE, JSON.stringify(store)); }
-function profile(){ return store.profiles.filter(function(p){return p.id===store.activeId;})[0]||store.profiles[0]; }
-function setActive(id){ store.activeId=id; persist(); }
-function lvl(id){
-  var a=profile().answers;
-  if(id==="taste") return Math.min(3,Math.ceil((a.taste||[]).length/3));
-  var bag=a[id]||{}; var n=Object.keys(bag).filter(function(k){return bag[k]&&bag[k]!=="Skip";}).length;
-  return n===0?0:n===1?1:n<=3?2:3;
-}
-function word(n){return n===0?"frost":n>=3?"fine":"forming";}
-function hi(n){return (n||0)>=3;} function lo(n){return (n||0)>0&&(n||0)<=2;}
-function flakeTitle(){
-  var p=profile(), t=p.answers.traits||{};
-  if(p.name) return p.name;
-  if(!Object.keys(t).length) return "My flake";
-  if(hi(t.open)&&hi(t.extra)) return "Curious, outgoing";
-  if(hi(t.open)&&lo(t.cons)) return "Idea-first";
-  return "My flake";
-}
-function about(){
-  var a=profile().answers, lines=[], t=a.traits||{}, bits=[];
-  if((a.taste||[]).length) lines.push("Taste: "+a.taste.slice(0,8).join(", ")+".");
-  if(hi(t.open)) bits.push("very curious"); else if(lo(t.open)) bits.push("likes the known");
-  if(hi(t.extra)) bits.push("outgoing"); else if(lo(t.extra)) bits.push("rooms cost energy");
-  if(hi(t.cons)) bits.push("finishes things"); else if(lo(t.cons)) bits.push("average at finishing");
-  if(hi(t.agree)) bits.push("gives the benefit"); else if(lo(t.agree)) bits.push("cooler than warm");
-  if(hi(t.neuro)) bits.push("slights linger");
-  if(bits.length) lines.push("How you move: "+bits.join(". ")+".");
-  if(hi((a.bond||{}).chase)) lines.push("After a fight: quiet, no chase.");
-  if(hi((a.bond||{}).ending)) lines.push("Silence from someone close makes you write the ending.");
-  var vals=Object.values(a.values||{});
-  if(vals.length) lines.push("You protect: "+vals.join(", ")+".");
-  if(a.conflict&&a.conflict.heat) lines.push("When the room heats: "+a.conflict.heat+".");
-  if(a.context&&a.context.faith&&a.context.faith!=="Skip") lines.push("Faith as named: "+a.context.faith+".");
-  var frost=BANDS.filter(function(b){return lvl(b.id)===0;}).map(function(b){return b.label;});
-  if(frost.length) lines.push("Still frost: "+frost.join(", ")+".");
-  if(!lines.length) lines.push("Skeleton only. Tap an arm. Uneven is allowed.");
-  return lines;
-}
-function flakeSvg(born){
-  var CX=200,CY=200;
-  function polar(deg,r){var a=deg*Math.PI/180;return {x:CX+r*Math.cos(a),y:CY+r*Math.sin(a)};}
-  var arms=BANDS.map(function(b){
-    var n=born?lvl(b.id):0, st=word(n), len=58+n*20, tip=polar(b.angle,len), hit=polar(b.angle,86), lab=polar(b.angle,168), stLab=polar(b.angle,186);
-    var w=st==="fine"?5.2:st==="forming"?3.4:2;
-    var dash=st==="frost"?"6 7":"";
-    var focused=!openBand||openBand===b.id;
-    var op=!born?0.32:focused?1:0.22;
-    var ticks="";
-    if(st==="fine"){
-      var a=b.angle*Math.PI/180, px=-Math.sin(a), py=Math.cos(a);
-      var mid=polar(b.angle,len*0.72);
-      ticks='<line x1="'+(mid.x-px*7)+'" y1="'+(mid.y-py*7)+'" x2="'+(mid.x+px*7)+'" y2="'+(mid.y+py*7)+'" stroke="'+b.color+'" stroke-width="2" stroke-linecap="round"/>';
-    }
-    var hitc=born?'<circle cx="'+hit.x+'" cy="'+hit.y+'" r="28" fill="transparent" style="cursor:pointer" data-arm="'+b.id+'"></circle>':"";
-    var text='<text x="'+lab.x+'" y="'+lab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#F8FAFC" font-size="13" font-weight="600" letter-spacing="0.08em" style="cursor:pointer" data-arm="'+b.id+'">'+b.label+'</text>';
-    var state='<text x="'+stLab.x+'" y="'+stLab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#94A3B8" font-size="9" letter-spacing="0.12em" style="cursor:pointer;text-transform:uppercase" data-arm="'+b.id+'">'+st+'</text>';
-    return '<g style="opacity:'+op+'"><line x1="'+CX+'" y1="'+CY+'" x2="'+tip.x+'" y2="'+tip.y+'" stroke="'+b.color+'" stroke-width="'+w+'" stroke-linecap="round" stroke-dasharray="'+dash+'"/>'+ticks+text+state+hitc+'</g>';
-  }).join("");
-  var core=born?"":' data-birth="1" style="cursor:pointer"';
-  return '<svg viewBox="0 0 400 400" role="img" aria-label="Your flake" style="display:block;width:100%">'+arms+
-    '<circle cx="200" cy="200" r="28" fill="transparent" style="cursor:pointer" data-zoom-out="1"></circle>'+
-    '<circle cx="200" cy="200" r="20" fill="none" stroke="#67E8F9" stroke-width="1.3" opacity="'+(born?0.45:0.95)+'"/><circle cx="200" cy="200" r="11" fill="#C4B5FD"'+core+'/></svg>';
-}
-function chip(on,label,attrs){return '<button type="button" class="chip'+(on?" on":"")+'" '+attrs+'>'+label+'</button>';}
-var view="welcome", openBand=null, qIndex=0, zoomingIn=false, lineTimer=null;
-var LINES=[
-  "A profile so precise it feels invasive \u2014 and clear enough to act on.",
-  "That\u2019s uncomfortably specific \u2014 and useful."
-];
-function renderWelcome(){
-  return '<section class="welcome"><p class="caps">Welcome</p><div class="mark">'+flakeSvg(false)+'</div><h1 class="serif">Soulflake</h1><p class="rotate" id="rotate-line">'+LINES[0]+'</p><button type="button" class="btn btn-primary" data-go="me">Build your Flake</button></section>';
-}
-function spinLines(){
-  var el=document.getElementById("rotate-line"); if(!el) return;
-  var i=0;
-  if(lineTimer) clearInterval(lineTimer);
-  lineTimer=setInterval(function(){
+  var LINES=[
+    "A profile so precise it feels invasive — and clear enough to act on.",
+    "That’s uncomfortably specific — and useful.",
+    "Listen deeply. You are never done.",
+    "Click an arm to carve it.",
+    "More truth in — better matches, rooms, Tuesday sentences.",
+    "Lopsided is honest. Empty is frost."
+  ];
+  var el=document.getElementById("line"), i=0;
+  setInterval(function(){
     i=(i+1)%LINES.length;
     el.style.opacity="0";
-    setTimeout(function(){ el.textContent=LINES[i]; el.style.opacity="1"; }, 400);
+    setTimeout(function(){ el.textContent=LINES[i]; el.style.opacity="1"; }, 450);
   }, 5200);
-}
-function bandItems(id){
-  if(id==="taste") return TASTE.map(function(c){return {kind:"taste",q:"Is this you?", item:c};});
-  if(id==="traits") return TRAITS.map(function(item){return {kind:"likert",bag:"traits",id:item.id,q:item.q};});
-  if(id==="bond") return BOND.map(function(item){return {kind:"likert",bag:"bond",id:item.id,q:item.q};});
-  if(id==="values") return VALS.map(function(item){return {kind:"pair",id:item.id,q:"When it counts I protect\u2026",a:item.a,b:item.b};});
-  if(id==="conflict") return CONF.map(function(item){return {kind:"pick",bag:"conflict",id:item.id,q:item.q,o:item.o};});
-  if(id==="context") return [{kind:"name",q:"What should we call you?"}].concat(CTX.map(function(item){return {kind:"pick",bag:"context",id:item.id,q:item.q,o:item.o};}));
-  return [];
-}
-function renderBand(id){
-  var p=profile(), items=bandItems(id);
-  if(qIndex<0) qIndex=0; if(qIndex>=items.length) qIndex=items.length-1;
-  var item=items[qIndex], body="", n=items.length, step=(qIndex+1)+" of "+n;
-  if(item.kind==="taste"){ var on=(p.answers.taste||[]).indexOf(item.item)>=0; body="<p>"+item.q+"</p><h3 class=\"serif\">"+item.item+"</h3><div class=\"chips\">"+chip(on,"Yes",'data-taste="'+item.item+'"')+chip(false,"Not this",'data-skip="1"')+"</div>"; }
-  if(item.kind==="likert") body="<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(p.answers[item.bag][item.id]===o.v,o.l,'data-k="'+item.bag+'" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";
-  if(item.kind==="pair") body="<p>"+item.q+'</p><div class="chips">'+chip(p.answers.values[item.id]===item.a,item.a,'data-k="values" data-id="'+item.id+'" data-v="'+item.a+'"')+chip(p.answers.values[item.id]===item.b,item.b,'data-k="values" data-id="'+item.id+'" data-v="'+item.b+'"')+"</div>";
-  if(item.kind==="pick") body="<p>"+item.q+'</p><div class="chips">'+item.o.map(function(o){return chip(p.answers[item.bag][item.id]===o,o,'data-k="'+item.bag+'" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";
-  if(item.kind==="name") body='<p>'+item.q+'</p><input class="field" id="name-in" value="'+(p.name||"")+'" placeholder="Your name on this phone" /><button type="button" class="btn" data-skip="1" style="margin-top:.7rem">Next</button>';
-  return '<section class="card"><p class="caps">'+COPY[id].t+' · '+step+' · '+word(lvl(id))+'</p><h2 class="serif">'+COPY[id].t+'</h2><p class="muted">'+COPY[id].l+' One at a time.</p><div style="margin-top:1rem;display:grid;gap:1rem">'+body+'</div><button type="button" class="btn" data-close-band style="margin-top:1rem">Back</button></section>';
-}
-function renderMe(){
-  var p=profile(); var right;
-  if(openBand) right=renderBand(openBand);
-  else if(p.born){ right='<p class="caps">'+p.id+'</p><h1 class="serif">'+flakeTitle()+'</h1>'+about().map(function(l){return "<p>"+l+"</p>";}).join("")+'<p class="muted">'+BANDS.map(function(b){return b.label+" "+word(lvl(b.id));}).join(" · ")+'</p>'; }
-  else { right='<div class="card"><p class="caps">My flake</p><h2 class="serif">Press the center of yourself</h2><p class="muted">Name this flake. Six arms appear. Tap one.</p><input class="field" id="birth-name" placeholder="Your name" value="'+(p.name||"")+'" style="margin:1rem 0" /><button type="button" class="btn btn-primary" data-birth="1">Press the center</button></div>'; }
-  var cam='', stage='flake-stage';
-  if(openBand){ var b=BANDS.filter(function(x){return x.id===openBand;})[0]; var rad=b.angle*Math.PI/180; cam=' style="--tx:'+(-Math.cos(rad)*28)+'%;--ty:'+(-Math.sin(rad)*28)+'%"'; if(!zoomingIn) stage+=' zoom'; }
-  return '<p class="caps">My flake</p><div class="flake-grid"><div class="flake-cam"><div class="'+stage+'"'+cam+'>'+flakeSvg(p.born)+'</div></div>'+(p.born&&!openBand?'<p class="muted" style="text-align:center">Tap an arm. Frost, forming, or fine — no percents.</p>':'')+(openBand?'<p style="text-align:center;margin:.6rem 0 0"><button type="button" class="btn" data-zoom-out="1">Back</button></p>':'')+'<div>'+right+'</div></div>';
-}
-function renderSwitch(){
-  var rows=store.profiles.map(function(p){ var on=p.id===store.activeId?" on":""; return '<button type="button" class="chip'+on+'" data-pick="'+p.id+'">'+(p.name||"Unnamed")+(p.born?"":" · not started")+'</button>'; }).join("");
-  return '<p class="caps">This phone</p><h1 class="serif">Named profiles</h1><div class="card"><div class="list">'+rows+'</div><input class="field" id="new-name" placeholder="Name for a new flake" style="margin:1rem 0 .6rem" /><button type="button" class="btn btn-primary" id="add-profile">Add profile</button><button type="button" class="btn" data-go="me" style="margin-left:.4rem">Back to My flake</button></div>';
-}
-function show(v){
-  view=v;
-  ["welcome","me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
-  document.getElementById("who-btn").textContent="Navigation";
-  document.getElementById("export-btn").hidden = (v!=="me");
-  var page=document.getElementById("page");
-  if(lineTimer){ clearInterval(lineTimer); lineTimer=null; }
-  if(v==="welcome"){ page.innerHTML=renderWelcome(); spinLines(); }
-  else if(v==="me"){
-    page.innerHTML=renderMe();
-    if(openBand && zoomingIn){ var st=page.querySelector(".flake-stage"); requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(st) st.classList.add("zoom"); zoomingIn=false; }); }); }
-    else zoomingIn=false;
+
+  document.getElementById("build").onclick=function(){ window.scrollTo({top:0,behavior:"smooth"}); };
+
+  var audio=document.getElementById("ambient");
+  var btn=document.getElementById("sound");
+  var SOUND_KEY="soulflake.sound";
+  var muted=localStorage.getItem(SOUND_KEY)==="off";
+  var playing=false, LEVEL=0.07, FADE=3, actx=null, gain=null;
+  function setBtn(on){
+    btn.textContent=on?"Sound on":"Sound off";
+    btn.classList.toggle("on",on);
+    btn.setAttribute("aria-pressed",on?"true":"false");
   }
-  else if(v==="switch") page.innerHTML=renderSwitch();
-  else page.innerHTML='<p class="caps">Together</p><h1 class="serif">People you already know</h1><div class="card"><p class="muted">Compare later. No compatibility percentage.</p><button type="button" class="btn btn-primary" id="import-btn" style="margin-top:1rem">Import</button><input id="import-file" type="file" accept=".json,application/json" hidden /><p class="muted" id="import-note" style="margin-top:.7rem"></p></div>';
-}
-document.body.addEventListener("click",function(e){
-  var t=e.target.closest("[data-go],[data-birth],[data-arm],[data-taste],[data-k],[data-close-band],[data-zoom-out],[data-pick],[data-skip],#add-profile");
-  if(!t) return;
-  if(t.id==="add-profile"){ var n=((document.getElementById("new-name")||{}).value||"").trim(); if(!n){ alert("Name the new flake first."); return; } var p=blank(n); store.profiles.push(p); setActive(p.id); openBand=null; show("me"); return; }
-  if(t.hasAttribute("data-pick")){ setActive(t.getAttribute("data-pick")); openBand=null; show("me"); return; }
-  if(t.hasAttribute("data-go")){ var g=t.getAttribute("data-go"); if(g==="me") openBand=null; show(g); return; }
-  if(t.hasAttribute("data-birth")){ var p=profile(); var n=((document.getElementById("birth-name")||{}).value||p.name||"").trim(); if(!n){ alert("Name this flake first."); return; } p.name=n; p.born=true; persist(); show("me"); return; }
-  if(t.hasAttribute("data-arm")){ openBand=t.getAttribute("data-arm"); qIndex=0; zoomingIn=true; show("me"); return; }
-  if(t.hasAttribute("data-close-band")||t.hasAttribute("data-zoom-out")){ openBand=null; show("me"); return; }
-  if(t.hasAttribute("data-skip")){ var items=bandItems(openBand); if(qIndex<items.length-1) qIndex++; else openBand=null; show("me"); return; }
-  if(t.hasAttribute("data-taste")){ var c=t.getAttribute("data-taste"), cur=profile().answers.taste||[]; if(cur.indexOf(c)<0) profile().answers.taste=cur.concat(c); persist(); var items=bandItems(openBand); if(qIndex<items.length-1) qIndex++; else openBand=null; show("me"); return; }
-  if(t.hasAttribute("data-k")){ var k=t.getAttribute("data-k"), id=t.getAttribute("data-id"); if(t.hasAttribute("data-n")) profile().answers[k][id]=Number(t.getAttribute("data-n")); else profile().answers[k][id]=t.getAttribute("data-v"); persist(); var items=bandItems(openBand); if(qIndex<items.length-1) qIndex++; else openBand=null; show("me"); return; }
-});
-document.body.addEventListener("input",function(e){ if(e.target.id==="name-in"||e.target.id==="birth-name"){ profile().name=e.target.value; persist(); } });
-var HOUSE="Ice Laboratory \u00b7 Soulflake \u00b7 070B14 \u00b7 JTNOVA";
-function keyBytes(pass){ return crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass)).then(function(buf){ return new Uint8Array(buf); }); }
-function xor(bytes, key){ var out=new Uint8Array(bytes.length); for(var i=0;i<bytes.length;i++) out[i]=bytes[i]^key[i%key.length]; return out; }
-function b64(bytes){ var s=""; for(var i=0;i<bytes.length;i++) s+=String.fromCharCode(bytes[i]); return btoa(s); }
-function unb64(str){ var s=atob(str), out=new Uint8Array(s.length); for(var i=0;i<s.length;i++) out[i]=s.charCodeAt(i); return out; }
-function slug(s){ return String(s||"soulflake").replace(/[^a-zA-Z0-9._-]+/g,"-").replace(/-+/g,"-").replace(/^-|-$/g,"")||"soulflake"; }
-function lockProfile(profile, fileName, pass){
-  var raw=new TextEncoder().encode(JSON.stringify(profile));
-  return keyBytes(HOUSE).then(function(house){ var bytes=xor(raw, house); var locked=!!(pass&&pass.length); var next=locked?keyBytes(pass).then(function(pk){ return xor(bytes, pk); }):Promise.resolve(bytes); return next.then(function(finalBytes){ return {v:2,kind:"soulflake-profile",cipher:"house-v1",locked:locked,name:fileName||profile.name||"Flake",payload:b64(finalBytes)}; }); });
-}
-function unlockFile(pack, pass){
-  var bytes=unb64(pack.payload);
-  var first=pack.locked?keyBytes(pass||"").then(function(pk){ return xor(bytes, pk); }):Promise.resolve(bytes);
-  return first.then(function(afterPw){ if(pack.v===1) return JSON.parse(new TextDecoder().decode(afterPw)); return keyBytes(HOUSE).then(function(house){ return JSON.parse(new TextDecoder().decode(xor(afterPw, house))); }); });
-}
-function closeModal(){ document.getElementById("modal-root").innerHTML=""; }
-function openExport(){
-  var p=profile(); if(!p||!p.born){ alert("Build a flake first."); return; }
-  document.getElementById("modal-root").innerHTML='<div class="scrim" id="scrim"><div class="modal"><p class="caps">Export</p><h2 class="serif">Name this file</h2><p class="muted">Password is optional.</p><input class="field" id="ex-name" value="'+(p.name||"")+'" placeholder="Name" style="margin:.8rem 0 .5rem" /><input class="field" id="ex-pass" type="password" placeholder="Password (optional)" /><div class="row"><button type="button" class="btn btn-primary" id="ex-go">Export</button><button type="button" class="btn" id="ex-cancel">Cancel</button></div></div></div>';
-}
-document.getElementById("export-btn").onclick=function(){ openExport(); };
-document.body.addEventListener("click",function(e){
-  if(e.target.id==="scrim"||e.target.id==="ex-cancel"){ closeModal(); return; }
-  if(e.target.id==="ex-go"){ var p=profile(); var fileName=(document.getElementById("ex-name").value||"").trim()||p.name||"Flake"; lockProfile(p,fileName,document.getElementById("ex-pass").value||"").then(function(pack){ var a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([JSON.stringify(pack,null,2)],{type:"application/json"})); a.download=slug(fileName)+".soulflake.json"; a.click(); closeModal(); }); return; }
-  if(e.target.id==="import-btn"){ document.getElementById("import-file").click(); return; }
-});
-document.body.addEventListener("change",function(e){
-  if(e.target.id!=="import-file") return;
-  var f=e.target.files&&e.target.files[0]; var note=document.getElementById("import-note"); if(!f) return;
-  var reader=new FileReader();
-  reader.onload=function(){ var pack; try{ pack=JSON.parse(reader.result); }catch(err){ if(note) note.textContent="Not a Soulflake export."; return; } if(!pack||pack.kind!=="soulflake-profile"){ if(note) note.textContent="Not a Soulflake export."; return; } var pw=""; if(pack.locked){ pw=window.prompt("Password for "+(pack.name||"this flake"))||""; if(!pw){ if(note) note.textContent="This file has a password."; return; } } unlockFile(pack,pw).then(function(p){ if(!p.id) p.id=uid(); p.born=true; if(pack.name&&!p.name) p.name=pack.name; store.profiles.push(p); setActive(p.id); show("me"); }).catch(function(){ if(note) note.textContent="Wrong password, or not a house file."; }); };
-  reader.readAsText(f);
-});
-show("welcome");
+  function fadeVol(from,to,done){
+    var t0=performance.now();
+    function tick(now){
+      var t=Math.min(1,(now-t0)/(FADE*1000));
+      try{ audio.volume=from+(to-from)*t; }catch(e){}
+      if(t<1) requestAnimationFrame(tick);
+      else if(done) done();
+    }
+    requestAnimationFrame(tick);
+  }
+  function quietNode(){
+    if(gain) return;
+    try{
+      actx=actx||new (window.AudioContext||window.webkitAudioContext)();
+      var hook=function(){
+        if(!actx||actx.state!=="running"||gain) return;
+        var src=actx.createMediaElementSource(audio);
+        gain=actx.createGain();
+        gain.gain.value=0;
+        src.connect(gain).connect(actx.destination);
+        gain.gain.linearRampToValueAtTime(LEVEL, actx.currentTime+FADE);
+      };
+      if(actx.state==="running") hook(); else actx.resume().then(hook);
+    }catch(e){}
+  }
+  function fadeIn(){
+    if(muted) return;
+    setBtn(true);
+    audio.muted=false;
+    try{ audio.volume=0; }catch(e){}
+    var start=function(){
+      var p=audio.play();
+      var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); fadeVol(0,LEVEL); quietNode(); };
+      if(p&&p.then) p.then(ok).catch(function(){ playing=false; }); else ok();
+    };
+    if(audio.readyState>=3) start(); else audio.addEventListener("canplay",start,{once:true});
+  }
+  function fadeOut(){
+    playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off"); setBtn(false);
+    if(gain&&actx){ var now=actx.currentTime; gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value,now); gain.gain.linearRampToValueAtTime(0,now+FADE); }
+    fadeVol(audio.volume||LEVEL,0,function(){ if(muted) audio.pause(); });
+  }
+  btn.onclick=function(e){ e.stopPropagation(); if(playing&&!audio.paused) fadeOut(); else { muted=false; fadeIn(); } };
+  if(muted) setBtn(false);
+  else {
+    setBtn(true); fadeIn();
+    ["pointerdown","touchstart","click","keydown","scroll"].forEach(function(ev){
+      window.addEventListener(ev,function(){ if(!muted){ if(audio.paused||!playing) fadeIn(); else quietNode(); } },{passive:true});
+    });
+  }
+
+  var c=document.getElementById("snow"), g=c.getContext("2d");
+  if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  var w=0,h=0,flakes=[];
+  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.15+Math.random()*.55,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
+  function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}); }
+  function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
+  resize(); frame(); addEventListener("resize",resize);
 })();
 </script>
 </body>
