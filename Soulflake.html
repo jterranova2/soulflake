@@ -32,8 +32,8 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
 .btn-primary{background:var(--violet);color:var(--midnight);border-color:transparent}
 .flake-grid{display:grid;gap:1.5rem}
 .flake-cam{overflow:hidden;border-radius:1.2rem;max-width:22rem;margin:0 auto}
-.flake-stage{transition:transform 1.15s ease-in-out;transform-origin:50% 50%;will-change:transform}
-.flake-stage.zoom{transform:scale(2.2) translate(var(--tx),var(--ty))}
+.flake-stage{transition:transform 1.35s ease-in-out;transform-origin:50% 50%;will-change:transform}
+.flake-stage.zoom{transform:scale(2.05) translate(var(--tx),var(--ty))}
 @media(min-width:900px){.flake-grid{grid-template-columns:1fr 1fr;align-items:start}}
 .field{min-height:44px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--midnight);color:var(--frost);padding:0 .75rem}
 .list{display:grid;gap:.45rem;margin:.7rem 0}
@@ -51,8 +51,6 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
   <nav class="tabs" aria-label="Primary">
     <button type="button" data-go="welcome" id="t-welcome">Welcome</button>
     <button type="button" data-go="me" id="t-me">Me</button>
-    <button type="button" data-go="insights" id="t-insights">Insights</button>
-    <button type="button" data-go="finds" id="t-finds">Finds</button>
     <button type="button" data-go="others" id="t-others">Others</button>
   </nav>
   <button type="button" class="quiet" id="export-btn">Export</button>
@@ -132,11 +130,21 @@ function flakeSvg(born){
   var CX=200,CY=200;
   function polar(deg,r){var a=deg*Math.PI/180;return {x:CX+r*Math.cos(a),y:CY+r*Math.sin(a)};}
   var arms=BANDS.map(function(b){
-    var n=born?lvl(b.id):0, len=62+n*18, tip=polar(b.angle,len), hit=polar(b.angle,80), lab=polar(b.angle,168);
-    var w=2.2+n*1.15, op=!born?0.35:1;
-    var hitc=born?'<circle cx="'+hit.x+'" cy="'+hit.y+'" r="26" fill="transparent" style="cursor:pointer" data-arm="'+b.id+'"></circle>':"";
+    var n=born?lvl(b.id):0, st=word(n), len=58+n*20, tip=polar(b.angle,len), hit=polar(b.angle,86), lab=polar(b.angle,168), stLab=polar(b.angle,186);
+    var w=st==="fine"?5.2:st==="forming"?3.4:2;
+    var dash=st==="frost"?"6 7":"";
+    var focused=!openBand||openBand===b.id;
+    var op=!born?0.32:focused?1:0.22;
+    var ticks="";
+    if(st==="fine"){
+      var a=b.angle*Math.PI/180, px=-Math.sin(a), py=Math.cos(a);
+      var mid=polar(b.angle,len*0.72);
+      ticks='<line x1="'+(mid.x-px*7)+'" y1="'+(mid.y-py*7)+'" x2="'+(mid.x+px*7)+'" y2="'+(mid.y+py*7)+'" stroke="'+b.color+'" stroke-width="2" stroke-linecap="round"/>';
+    }
+    var hitc=born?'<circle cx="'+hit.x+'" cy="'+hit.y+'" r="28" fill="transparent" style="cursor:pointer" data-arm="'+b.id+'"></circle>':"";
     var text='<text x="'+lab.x+'" y="'+lab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#F8FAFC" font-size="13" font-weight="600" letter-spacing="0.08em" style="cursor:pointer" data-arm="'+b.id+'">'+b.label+'</text>';
-    return '<g style="opacity:'+op+'"><line x1="'+CX+'" y1="'+CY+'" x2="'+tip.x+'" y2="'+tip.y+'" stroke="'+b.color+'" stroke-width="'+w+'" stroke-linecap="round"/>'+text+hitc+'</g>';
+    var state='<text x="'+stLab.x+'" y="'+stLab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#94A3B8" font-size="9" letter-spacing="0.12em" style="cursor:pointer;text-transform:uppercase" data-arm="'+b.id+'">'+st+'</text>';
+    return '<g style="opacity:'+op+'"><line x1="'+CX+'" y1="'+CY+'" x2="'+tip.x+'" y2="'+tip.y+'" stroke="'+b.color+'" stroke-width="'+w+'" stroke-linecap="round" stroke-dasharray="'+dash+'"/>'+ticks+text+state+hitc+'</g>';
   }).join("");
   var core=born?"":' data-birth="1" style="cursor:pointer"';
   return '<svg viewBox="0 0 400 400" role="img" aria-label="Your flake" style="display:block;width:100%">'+arms+
@@ -178,11 +186,10 @@ function renderSwitch(){
   var rows=store.profiles.map(function(p){ var on=p.id===store.activeId?" on":""; return '<button type="button" class="chip'+on+'" data-pick="'+p.id+'">'+(p.name||"Unnamed")+(p.born?"":" · not started")+'</button>'; }).join("");
   return '<p class="caps">This phone</p><h1 class="serif">Named profiles</h1><div class="card"><div class="list">'+rows+'</div><input class="field" id="new-name" placeholder="Name for a new flake" style="margin:1rem 0 .6rem" /><button type="button" class="btn btn-primary" id="add-profile">Add profile</button><button type="button" class="btn" data-go="me" style="margin-left:.4rem">Back to Me</button></div>';
 }
-function renderShell(name,title,body){ return '<p class="caps">'+name+'</p><h1 class="serif">'+title+'</h1><div class="card"><p class="muted">'+body+'</p><button type="button" class="btn" data-go="me" style="margin-top:1rem">Back to Me</button></div>'; }
 function show(v){
   view=v;
   if(v==="welcome"){ location.href="index.html"; return; }
-  ["welcome","me","insights","finds","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
+  ["welcome","me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
   document.getElementById("who-btn").textContent="Navigation";
   document.getElementById("export-btn").hidden = (v!=="me");
   var page=document.getElementById("page");
@@ -192,8 +199,6 @@ function show(v){
     else zoomingIn=false;
   }
   else if(v==="switch") page.innerHTML=renderSwitch();
-  else if(v==="insights") page.innerHTML=renderShell("Insights","Not yet","Carve arms first.");
-  else if(v==="finds") page.innerHTML=renderShell("Finds","Not yet","Later, from thick arms.");
   else page.innerHTML='<p class="caps">Others</p><h1 class="serif">People you already know</h1><div class="card"><p class="muted">Compare later. No compatibility percentage.</p><button type="button" class="btn btn-primary" id="import-btn" style="margin-top:1rem">Import</button><input id="import-file" type="file" accept=".json,application/json" hidden /><p class="muted" id="import-note" style="margin-top:.7rem"></p></div>';
 }
 document.body.addEventListener("click",function(e){
