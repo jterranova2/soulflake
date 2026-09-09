@@ -3,60 +3,57 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Soulflake — Home</title>
+<title>Soulflake — Me</title>
 <meta name="theme-color" content="#070B14" />
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{--midnight:#070B14;--violet:#A78BFA;--cyan:#67E8F9;--frost:#F8FAFC;--graphite:#94A3B8;--border:#2a3348;--surface:#12182a}
 *{box-sizing:border-box}html,body{margin:0;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;min-height:100%}
-button{font-family:inherit;cursor:pointer}a{color:inherit;text-decoration:none}
+button,input{font-family:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
 .serif{font-family:"Instrument Serif",Georgia,serif;font-weight:400}
 .glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 50% 36% at 70% 12%,rgba(167,139,250,.12),transparent 58%),var(--midnight)}
 .app{position:relative;z-index:2;min-height:100dvh}
 .chrome{position:sticky;top:0;z-index:20;border-bottom:1px solid rgba(42,51,72,.7);background:rgba(7,11,20,.92);backdrop-filter:blur(12px)}
-.inner{display:flex;align-items:center;gap:.4rem;max-width:72rem;margin:0 auto;padding:.45rem .75rem}
-.logo{font-weight:700}.logo span{color:var(--violet)}
+.inner{display:flex;align-items:center;gap:.35rem;max-width:64rem;margin:0 auto;padding:.4rem .7rem}
+.who{border:1px solid var(--border);background:var(--surface);color:var(--frost);border-radius:999px;min-height:36px;padding:0 .7rem;font-size:.85rem;max-width:8.5rem}
 .tabs{display:flex;gap:.1rem;flex:1;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--graphite)}
-.tabs button,.quiet{background:none;border:0;color:inherit;padding:.55rem .65rem;min-height:44px;border-radius:999px}
+.tabs button,.quiet{background:none;border:0;color:inherit;padding:.5rem .55rem;min-height:44px;border-radius:999px}
 .tabs button.on{color:var(--frost);background:var(--surface)}
-.page{max-width:72rem;margin:0 auto;padding:1rem .85rem 4rem}
+.page{max-width:64rem;margin:0 auto;padding:1rem .85rem 4rem}
 .caps{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--graphite)}
 h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
 .muted{color:var(--graphite)}
-.card{border:1px solid var(--border);border-radius:1rem;padding:1rem;background:rgba(18,24,42,.82)}
-.home{display:grid;gap:1rem}
-@media(min-width:960px){.home{grid-template-columns:1fr minmax(16rem,22rem) 1fr;align-items:start}}
-.widget h3{margin:.2rem 0 .5rem;font-size:1rem}
+.card{border:1px solid var(--border);border-radius:1rem;padding:1rem;background:rgba(18,24,42,.82);margin-top:.85rem}
 .chip{min-height:44px;border-radius:10px;border:1px solid var(--border);background:transparent;color:var(--frost);padding:.55rem .75rem;text-align:left}
 .chip.on{border-color:var(--violet);background:rgba(167,139,250,.18)}
 .chips,.likert{display:flex;flex-wrap:wrap;gap:.45rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;border-radius:999px;padding:.6rem 1.1rem;font-weight:600;border:1px solid var(--border);background:transparent;color:var(--frost)}
 .btn-primary{background:var(--violet);color:var(--midnight);border-color:transparent}
-.voices{display:grid;gap:.55rem;margin-top:.75rem}
-.voice{border-left:2px solid var(--violet);padding:.2rem 0 .2rem .75rem;color:var(--graphite);font-size:.92rem}
-.voice b{display:block;color:var(--violet);font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.15rem}
-.hint{font-size:.85rem;color:var(--graphite);text-align:center;margin-top:.5rem}
+.flake-grid{display:grid;gap:1.5rem}
+@media(min-width:900px){.flake-grid{grid-template-columns:1fr 1fr;align-items:start}}
+.field{min-height:44px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--midnight);color:var(--frost);padding:0 .75rem}
+.list{display:grid;gap:.45rem;margin:.7rem 0}
 </style>
 </head>
 <body>
 <div class="glow"></div>
 <div class="app">
 <header class="chrome"><div class="inner">
-  <a class="logo" href="#home">Soul<span>flake</span></a>
-  <nav class="tabs">
-    <button type="button" data-go="home" id="t-home">Home</button>
-    <button type="button" data-go="report" id="t-report">Report</button>
+  <button type="button" class="who" id="who-btn" data-go="switch">Who</button>
+  <nav class="tabs" aria-label="Primary">
+    <button type="button" data-go="me" id="t-me">Me</button>
+    <button type="button" data-go="insights" id="t-insights">Insights</button>
+    <button type="button" data-go="finds" id="t-finds">Finds</button>
+    <button type="button" data-go="others" id="t-others">Others</button>
   </nav>
-  <button type="button" class="quiet" id="sound">Sound</button>
-  <button type="button" class="quiet" id="out">Sign out</button>
 </div></header>
-<audio id="ambient" loop preload="metadata" src="assets/audio/frost-waltz-kevin-macleod.mp3"></audio>
 <div id="page" class="page"></div>
 </div>
 <script>
 (function(){
-var KEY="soulflake.v1";
+var STORE="soulflake.profiles.v1";
+var OLD="soulflake.v1";
 var BANDS=[
   {id:"taste",label:"Taste",color:"#67E8F9",angle:-90},
   {id:"traits",label:"Traits",color:"#A78BFA",angle:-30},
@@ -72,160 +69,169 @@ var BOND=[{id:"ending",q:"When someone close goes quiet, I start writing the end
 var VALS=[{id:"course",a:"My own course",b:"A stable ground"},{id:"truth",a:"The blunt truth",b:"The relationship"}];
 var CONF=[{id:"late",q:"They’re late again.",o:["Name the pattern","Go quiet","Joke it off"]},{id:"heat",q:"The room is heating up.",o:["Stay and say the hard line","Leave and cool off","Soften so nobody explodes"]},{id:"repair",q:"The next morning.",o:["Text first and own your part","Wait for them","Act like nothing happened"]}];
 var CTX=[{id:"faith",q:"Faith, as lived.",o:["Skip","Christian","Other faith","None / unsure"]},{id:"place",q:"Where you are.",o:["Skip","West Coast US","Other US","Outside the US"]}];
-function empty(){return {id:"sf-"+Math.random().toString(36).slice(2,8),born:true,name:"",answers:{taste:[],traits:{},bond:{},values:{},conflict:{},context:{}}};}
-function load(){try{var p=Object.assign(empty(),JSON.parse(localStorage.getItem(KEY)||"null"));return p;}catch(e){return empty();}}
-var profile=load();
-if(!profile||!profile.born){location.replace("index.html");return;}
-function save(){localStorage.setItem(KEY,JSON.stringify(profile));}
+var COPY={taste:{t:"Taste",l:"Pick what feels like you."},traits:{t:"Traits",l:"How you move. Not a type."},bond:{t:"Bond",l:"How you get close."},values:{t:"Values",l:"When it counts, what do you protect?"},conflict:{t:"Conflict",l:"What you do when it heats up."},context:{t:"Context",l:"Facts as you name them. Skip allowed."}};
+function uid(){return "sf-"+Math.random().toString(36).slice(2,8);}
+function blank(name){return {id:uid(),born:false,name:name||"",answers:{taste:[],traits:{},bond:{},values:{},conflict:{},context:{}}};}
+function loadStore(){
+  try{
+    var s=JSON.parse(localStorage.getItem(STORE)||"null");
+    if(s&&s.profiles&&s.profiles.length) return s;
+  }catch(e){}
+  var migrated=null;
+  try{ migrated=JSON.parse(localStorage.getItem(OLD)||"null"); }catch(e){}
+  if(migrated&&migrated.answers){
+    if(migrated.id==="sf-justin") migrated.id=uid();
+    if(!migrated.name) migrated.name="";
+    return {activeId:migrated.id,profiles:[migrated]};
+  }
+  var p=blank("");
+  return {activeId:p.id,profiles:[p]};
+}
+var store=loadStore();
+function persist(){ localStorage.setItem(STORE, JSON.stringify(store)); }
+function profile(){ return store.profiles.filter(function(p){return p.id===store.activeId;})[0]||store.profiles[0]; }
+function setActive(id){ store.activeId=id; persist(); }
 function lvl(id){
-  var a=profile.answers;
+  var a=profile().answers;
   if(id==="taste") return Math.min(3,Math.ceil((a.taste||[]).length/3));
   var bag=a[id]||{}; var n=Object.keys(bag).filter(function(k){return bag[k]&&bag[k]!=="Skip";}).length;
   return n===0?0:n===1?1:n<=3?2:3;
 }
 function word(n){return n===0?"frost":n===1?"branching":n===2?"forming":"fine";}
-function hi(n){return (n||0)>=3;}
-function lo(n){return (n||0)>0&&(n||0)<=2;}
-function title(){
-  var t=profile.answers.traits||{};
-  if(!Object.keys(t).length) return profile.name||"Home";
+function hi(n){return (n||0)>=3;} function lo(n){return (n||0)>0&&(n||0)<=2;}
+function flakeTitle(){
+  var p=profile(), t=p.answers.traits||{};
+  if(p.name) return p.name;
+  if(!Object.keys(t).length) return "Me";
   if(hi(t.open)&&hi(t.extra)) return "Curious, outgoing";
   if(hi(t.open)&&lo(t.cons)) return "Idea-first";
-  return profile.name||"Home";
+  return "Me";
 }
-function analysis(){
-  var t=profile.answers.traits||{}, bits=[];
+function about(){
+  var a=profile().answers, lines=[], t=a.traits||{}, bits=[];
+  if((a.taste||[]).length) lines.push("Taste: "+a.taste.slice(0,8).join(", ")+".");
   if(hi(t.open)) bits.push("very curious"); else if(lo(t.open)) bits.push("likes the known");
   if(hi(t.extra)) bits.push("outgoing"); else if(lo(t.extra)) bits.push("rooms cost energy");
   if(hi(t.cons)) bits.push("finishes things"); else if(lo(t.cons)) bits.push("average at finishing");
   if(hi(t.agree)) bits.push("gives the benefit"); else if(lo(t.agree)) bits.push("cooler than warm");
   if(hi(t.neuro)) bits.push("slights linger");
-  return bits.length?bits.join(". ")+".":"Traits still frost. Tap that arm.";
-}
-function voices(){
-  var out=[], t=profile.answers.traits||{}, taste=profile.answers.taste||[], b=profile.answers.bond||{}, c=profile.answers.conflict||{};
-  if(taste.length) out.push({w:"What works",l:"Lead with "+taste[0]+". Already on your list."});
-  if(hi(b.chase)) out.push({w:"What costs you",l:"After a fight you go quiet and stay there."});
-  else if(hi(b.ending)) out.push({w:"What costs you",l:"Silence from them and you start writing the ending."});
-  else if(hi(t.neuro)) out.push({w:"What costs you",l:"Small slights stay in your body. Name them the same day."});
-  if(c.repair==="Text first and own your part") out.push({w:"Tuesday",l:"You already said you text first. Do that before noon."});
-  else if(c.repair==="Wait for them") out.push({w:"Tuesday",l:"Waiting is the pattern. If you want it repaired, go first once."});
-  else if(c.repair) out.push({w:"Tuesday",l:"Acting like nothing happened only works if they play along."});
+  if(bits.length) lines.push("How you move: "+bits.join(". ")+".");
+  if(hi((a.bond||{}).chase)) lines.push("After a fight: quiet, no chase.");
+  if(hi((a.bond||{}).ending)) lines.push("Silence from someone close makes you write the ending.");
+  var vals=Object.values(a.values||{});
+  if(vals.length) lines.push("You protect: "+vals.join(", ")+".");
+  if(a.conflict&&a.conflict.heat) lines.push("When the room heats: "+a.conflict.heat+".");
+  if(a.context&&a.context.faith&&a.context.faith!=="Skip") lines.push("Faith as named: "+a.context.faith+".");
   var frost=BANDS.filter(function(b){return lvl(b.id)===0;}).map(function(b){return b.label;});
-  if(frost.length&&out.length<3) out.push({w:"Next carve",l:"Still frost: "+frost.join(", ")+". Pick one arm."});
-  return out.slice(0,3);
+  if(frost.length) lines.push("Still frost: "+frost.join(", ")+".");
+  if(!lines.length) lines.push("Skeleton only. Tap an arm. Uneven is allowed.");
+  return lines;
 }
-function flakeSvg(){
+function flakeSvg(born){
   var CX=200,CY=200;
   function polar(deg,r){var a=deg*Math.PI/180;return {x:CX+r*Math.cos(a),y:CY+r*Math.sin(a)};}
   var arms=BANDS.map(function(b){
-    var n=lvl(b.id), len=62+n*18, tip=polar(b.angle,len), hit=polar(b.angle,80), lab=polar(b.angle,168);
-    var w=2.2+n*1.15, op=n===0?0.4:1;
-    return '<g style="opacity:'+op+'"><line x1="'+CX+'" y1="'+CY+'" x2="'+tip.x+'" y2="'+tip.y+'" stroke="'+b.color+'" stroke-width="'+w+'" stroke-linecap="round"/>'+
-      '<text x="'+lab.x+'" y="'+lab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#94a3b8" font-size="11" letter-spacing="0.14em">'+b.label+'</text>'+
-      '<circle cx="'+hit.x+'" cy="'+hit.y+'" r="26" fill="transparent" style="cursor:pointer" data-arm="'+b.id+'"></circle></g>';
+    var n=born?lvl(b.id):0, len=62+n*18, tip=polar(b.angle,len), hit=polar(b.angle,80), lab=polar(b.angle,168);
+    var w=2.2+n*1.15, op=!born?0.22:n===0?0.4:1;
+    var hitc=born?'<circle cx="'+hit.x+'" cy="'+hit.y+'" r="26" fill="transparent" style="cursor:pointer" data-arm="'+b.id+'"></circle>':"";
+    var text='<text x="'+lab.x+'" y="'+lab.y+'" text-anchor="middle" dominant-baseline="middle" fill="#94a3b8" font-size="11" letter-spacing="0.14em">'+b.label+'</text>';
+    return '<g style="opacity:'+op+'"><line x1="'+CX+'" y1="'+CY+'" x2="'+tip.x+'" y2="'+tip.y+'" stroke="'+b.color+'" stroke-width="'+w+'" stroke-linecap="round"/>'+text+hitc+'</g>';
   }).join("");
+  var core=born?"":' data-birth="1" style="cursor:pointer"';
   return '<svg viewBox="0 0 400 400" role="img" aria-label="Your flake" style="display:block;width:100%;max-width:22rem;margin:0 auto">'+arms+
-    '<circle cx="200" cy="200" r="20" fill="none" stroke="#67E8F9" stroke-width="1.3" opacity=".45"/><circle cx="200" cy="200" r="11" fill="#C4B5FD"/></svg>';
+    '<circle cx="200" cy="200" r="20" fill="none" stroke="#67E8F9" stroke-width="1.3" opacity="'+(born?0.45:0.95)+'"/><circle cx="200" cy="200" r="11" fill="#C4B5FD"'+core+'/></svg>';
 }
-function chip(on,label,attrs){return '<button type="button" class="chip'+(on?' on':'')+'" '+attrs+'>'+label+'</button>';}
-var view="home", focus=null;
-function widgetPair(){
-  if(!focus){
-    var picks=(profile.answers.taste||[]).slice(0,6).join(", ")||"No taste picked yet.";
-    return [
-      '<div class="card widget"><p class="caps">How you move</p><h3 class="serif">Self-analysis</h3><p>'+analysis()+'</p><button class="btn" data-go="traits" style="margin-top:.7rem">Open Traits</button></div>',
-      '<div class="card widget"><p class="caps">Taste</p><h3 class="serif">What you reach for</h3><p class="muted">'+picks+'</p><button class="btn" data-go="taste" style="margin-top:.7rem">Open Taste</button></div>'
-    ];
-  }
-  var b=BANDS.filter(function(x){return x.id===focus;})[0];
-  return [
-    '<div class="card widget"><p class="caps">'+b.label+'</p><h3 class="serif">'+word(lvl(focus))+'</h3><p class="muted">This arm only. Empty stays frost.</p><p>'+bandBlurb(focus)+'</p></div>',
-    '<div class="card widget"><p class="caps">Do next</p><h3 class="serif">Carve '+b.label+'</h3><p class="muted">Answer a few. Climb out. The flake stays on Home.</p><button class="btn btn-primary" data-go="'+focus+'">Open '+b.label+' page</button></div>'
-  ];
-}
-function bandBlurb(id){
-  var a=profile.answers;
-  if(id==="taste") return (a.taste&&a.taste.length)?a.taste.slice(0,8).join(", ")+".":"Taste is frost.";
-  if(id==="traits") return analysis();
-  if(id==="bond") return hi(a.bond.chase)?"After a fight: quiet, no chase.":(Object.keys(a.bond||{}).length?"Bond has a few answers.":"Bond is frost.");
-  if(id==="values") return Object.values(a.values||{}).length?"You protect: "+Object.values(a.values).join(", ")+".":"Values is frost.";
-  if(id==="conflict") return a.conflict.heat?("When it heats: "+a.conflict.heat+"."):"Conflict is frost.";
-  if(id==="context") return (a.context.faith&&a.context.faith!=="Skip")?("Faith as named: "+a.context.faith+"."):"Context is frost.";
-  return "";
-}
-function renderHome(){
-  return '<p class="caps">Home</p><h1 class="serif">'+title()+'</h1><p class="muted">Flake in the middle. Left and right change when you tap an arm.</p>'+
-    '<div class="home"><div id="w-left"></div><div>'+flakeSvg()+'<p class="hint">Tap an arm. Insights follow that arm.</p></div><div id="w-right"></div></div>';
-}
+function chip(on,label,attrs){return '<button type="button" class="chip'+(on?" on":"")+'" '+attrs+'>'+label+'</button>';}
+var view="me", openBand=null;
 function renderBand(id){
-  var copy={taste:"Pick what feels like you.",traits:"How you move. Not a type.",bond:"How you get close.",values:"When it counts, what do you protect?",conflict:"What you do when it heats up.",context:"Facts as you name them. Skip allowed."};
-  var body="";
-  if(id==="taste") body='<div class="chips">'+TASTE.map(function(c){return chip((profile.answers.taste||[]).indexOf(c)>=0,c,'data-taste="'+c+'"');}).join("")+'</div>';
-  if(id==="traits") body=TRAITS.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(profile.answers.traits[item.id]===o.v,o.l,'data-k="traits" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";}).join("");
-  if(id==="bond") body=BOND.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(profile.answers.bond[item.id]===o.v,o.l,'data-k="bond" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";}).join("");
-  if(id==="values") body=VALS.map(function(item){return "<p>When it counts I protect…</p><div class=\"chips\">"+chip(profile.answers.values[item.id]===item.a,item.a,'data-k="values" data-id="'+item.id+'" data-v="'+item.a+'"')+chip(profile.answers.values[item.id]===item.b,item.b,'data-k="values" data-id="'+item.id+'" data-v="'+item.b+'"')+"</div>";}).join("");
-  if(id==="conflict") body=CONF.map(function(item){return "<p>"+item.q+'</p><div class="chips">'+item.o.map(function(o){return chip(profile.answers.conflict[item.id]===o,o,'data-k="conflict" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";}).join("");
-  if(id==="context") body='<p>What should we call you?</p><input id="name-in" value="'+(profile.name||"")+'" placeholder="First name" style="min-height:44px;width:100%;border-radius:10px;border:1px solid var(--border);background:var(--midnight);color:var(--frost);padding:0 .75rem;margin-bottom:1rem" />'+
-    CTX.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+item.o.map(function(o){return chip(profile.answers.context[item.id]===o,o,'data-k="context" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";}).join("");
-  var b=BANDS.filter(function(x){return x.id===id;})[0];
-  return '<p class="caps">'+b.label+' page</p><h1 class="serif">'+b.label+'</h1><p class="muted">'+copy[id]+'</p><div class="card" style="margin-top:1rem;display:grid;gap:1rem">'+body+'</div><button class="btn" data-go="home" style="margin-top:1rem">Back to Home</button>';
+  var p=profile(), body="";
+  if(id==="taste") body='<div class="chips">'+TASTE.map(function(c){return chip((p.answers.taste||[]).indexOf(c)>=0,c,'data-taste="'+c+'"');}).join("")+'</div>';
+  if(id==="traits") body=TRAITS.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(p.answers.traits[item.id]===o.v,o.l,'data-k="traits" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";}).join("");
+  if(id==="bond") body=BOND.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+L.map(function(o){return chip(p.answers.bond[item.id]===o.v,o.l,'data-k="bond" data-id="'+item.id+'" data-n="'+o.v+'"');}).join("")+"</div>";}).join("");
+  if(id==="values") body=VALS.map(function(item){return "<p>When it counts I protect…</p><div class=\"chips\">"+chip(p.answers.values[item.id]===item.a,item.a,'data-k="values" data-id="'+item.id+'" data-v="'+item.a+'"')+chip(p.answers.values[item.id]===item.b,item.b,'data-k="values" data-id="'+item.id+'" data-v="'+item.b+'"')+"</div>";}).join("");
+  if(id==="conflict") body=CONF.map(function(item){return "<p>"+item.q+'</p><div class="chips">'+item.o.map(function(o){return chip(p.answers.conflict[item.id]===o,o,'data-k="conflict" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";}).join("");
+  if(id==="context") body='<p>What should we call you?</p><input class="field" id="name-in" value="'+(p.name||"")+'" placeholder="Your name on this phone" />'+
+    CTX.map(function(item){return "<p>"+item.q+'</p><div class="likert">'+item.o.map(function(o){return chip(p.answers.context[item.id]===o,o,'data-k="context" data-id="'+item.id+'" data-v="'+o+'"');}).join("")+"</div>";}).join("");
+  return '<section class="card"><p class="caps">'+id+'</p><h2 class="serif">'+COPY[id].t+'</h2><p class="muted">'+COPY[id].l+'</p><div style="margin-top:1rem;display:grid;gap:1rem">'+body+'</div><button type="button" class="btn" data-close-band style="margin-top:1rem">Climb out</button></section>';
 }
-function renderReport(){
-  var vs=voices();
-  var lines=BANDS.map(function(b){return b.label+" · "+word(lvl(b.id));}).join(" · ");
-  return '<p class="caps">Report</p><h1 class="serif">How this sums you</h1><p class="muted">Three cuts of the same answers. Not a diagnosis.</p>'+
-    '<div class="card"><p>'+analysis()+'</p><p class="muted">'+lines+'</p>'+(vs.length?'<div class="voices">'+vs.map(function(v){return '<div class="voice"><b>'+v.w+'</b>'+v.l+'</div>';}).join("")+'</div>':'')+'</div>'+
-    '<button class="btn" data-go="home" style="margin-top:1rem">Back to Home</button>';
-}
-function show(v,arm){
-  if(arm) focus=arm;
-  view=v;
-  location.hash=v==="home"?(focus?"home-"+focus: "home"):v;
-  document.getElementById("t-home").classList.toggle("on",v==="home");
-  document.getElementById("t-report").classList.toggle("on",v==="report");
-  var page=document.getElementById("page");
-  if(v==="home"){
-    page.innerHTML=renderHome();
-    var boxes=page.querySelectorAll(".home > div");
-    var pair=widgetPair();
-    boxes[0].innerHTML=pair[0];
-    boxes[2].innerHTML=pair[1];
-    return;
+function renderMe(){
+  var p=profile();
+  var right;
+  if(openBand) right=renderBand(openBand);
+  else if(p.born){
+    right='<p class="caps">'+p.id+'</p><h1 class="serif">'+flakeTitle()+'</h1>'+about().map(function(l){return "<p>"+l+"</p>";}).join("")+
+      '<p class="muted">'+BANDS.map(function(b){return b.label+" "+word(lvl(b.id));}).join(" · ")+'</p>';
+  } else {
+    right='<div class="card"><p class="caps">Me</p><h2 class="serif">Press the center of yourself</h2><p class="muted">Name this flake. Six arms appear. Tap one. Answer. Climb out. It stays on this phone.</p>'+
+      '<input class="field" id="birth-name" placeholder="Your name" value="'+(p.name||"")+'" style="margin:1rem 0" />'+
+      '<button type="button" class="btn btn-primary" data-birth="1">Press the center</button></div>';
   }
-  if(v==="report"){ page.innerHTML=renderReport(); return; }
-  page.innerHTML=renderBand(v);
+  return '<p class="caps">Me</p><div class="flake-grid"><div>'+flakeSvg(p.born)+(p.born?'<p class="muted" style="text-align:center">Tap an arm to dive in. Climb out when you are done.</p>':'')+'</div><div>'+right+'</div></div>';
 }
-function parseHash(){
-  var h=(location.hash||"#home").slice(1);
-  if(h==="report") return show("report");
-  if(h.indexOf("home-")===0){ focus=h.slice(5); return show("home",focus); }
-  if(BANDS.some(function(b){return b.id===h;})) return show(h);
-  show("home");
+function renderSwitch(){
+  var rows=store.profiles.map(function(p){
+    var on=p.id===store.activeId?" on":"";
+    var label=(p.name||"Unnamed")+(p.born?"":" · not started");
+    return '<button type="button" class="chip'+on+'" data-pick="'+p.id+'">'+label+'</button>';
+  }).join("");
+  return '<p class="caps">This phone</p><h1 class="serif">Named profiles</h1><p class="muted">Only on this device. No Justin preset. No account server.</p>'+
+    '<div class="card"><div class="list">'+rows+'</div>'+
+    '<input class="field" id="new-name" placeholder="Name for a new flake" style="margin:1rem 0 .6rem" />'+
+    '<button type="button" class="btn btn-primary" id="add-profile">Add profile</button>'+
+    '<button type="button" class="btn" data-go="me" style="margin-left:.4rem">Back to Me</button></div>';
+}
+function renderShell(name,title,body){
+  return '<p class="caps">'+name+'</p><h1 class="serif">'+title+'</h1><div class="card"><p class="muted">'+body+'</p><button type="button" class="btn" data-go="me" style="margin-top:1rem">Back to Me</button></div>';
+}
+function show(v){
+  view=v;
+  ["me","insights","finds","others"].forEach(function(id){
+    var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id);
+  });
+  var who=document.getElementById("who-btn");
+  who.textContent=profile().name||"Who";
+  var page=document.getElementById("page");
+  if(v==="me") page.innerHTML=renderMe();
+  else if(v==="switch") page.innerHTML=renderSwitch();
+  else if(v==="insights") page.innerHTML=renderShell("Insights","Not yet","This page fills from Me. Carve arms first. Nothing to act on until those answers exist. Not a shop.");
+  else if(v==="finds") page.innerHTML=renderShell("Finds","Not yet","Nights, rooms, people — later, and only from thick arms. Not a shop. Not a feed.");
+  else page.innerHTML=renderShell("Others","Not yet","People you already know. Compare later. No compatibility percentage. No type table.");
 }
 document.body.addEventListener("click",function(e){
-  var t=e.target.closest("[data-go],[data-arm],[data-taste],[data-k],#sound,#out");
+  var t=e.target.closest("[data-go],[data-birth],[data-arm],[data-taste],[data-k],[data-close-band],[data-pick],#add-profile");
   if(!t) return;
-  if(t.id==="sound"){ var a=document.getElementById("ambient"); if(a.paused){a.volume=0.07;a.play();t.textContent="Sound on";} else {a.pause();t.textContent="Sound";} return; }
-  if(t.id==="out"){ location.href="index.html"; return; }
-  if(t.hasAttribute("data-arm")){ focus=t.getAttribute("data-arm"); show("home",focus); return; }
-  if(t.hasAttribute("data-go")){ var g=t.getAttribute("data-go"); if(g==="home"){focus=null;} show(g); return; }
+  if(t.id==="add-profile"){
+    var n=(document.getElementById("new-name")||{}).value||"";
+    n=n.trim();
+    if(!n){ alert("Name the new flake first."); return; }
+    var p=blank(n); store.profiles.push(p); setActive(p.id); openBand=null; show("me"); return;
+  }
+  if(t.hasAttribute("data-pick")){ setActive(t.getAttribute("data-pick")); openBand=null; show("me"); return; }
+  if(t.hasAttribute("data-go")){ var g=t.getAttribute("data-go"); if(g==="me") openBand=null; show(g); return; }
+  if(t.hasAttribute("data-birth")){
+    var p=profile();
+    var n=((document.getElementById("birth-name")||{}).value||p.name||"").trim();
+    if(!n){ alert("Name this flake first."); return; }
+    p.name=n; p.born=true; persist(); show("me"); return;
+  }
+  if(t.hasAttribute("data-arm")){ openBand=t.getAttribute("data-arm"); show("me"); return; }
+  if(t.hasAttribute("data-close-band")){ openBand=null; show("me"); return; }
   if(t.hasAttribute("data-taste")){
-    var c=t.getAttribute("data-taste"); var cur=profile.answers.taste||[];
-    profile.answers.taste=cur.indexOf(c)>=0?cur.filter(function(x){return x!==c;}):cur.concat(c); save(); show("taste"); return;
+    var c=t.getAttribute("data-taste"), cur=profile().answers.taste||[];
+    profile().answers.taste=cur.indexOf(c)>=0?cur.filter(function(x){return x!==c;}):cur.concat(c);
+    persist(); show("me"); return;
   }
   if(t.hasAttribute("data-k")){
     var k=t.getAttribute("data-k"), id=t.getAttribute("data-id");
-    if(t.hasAttribute("data-n")) profile.answers[k][id]=Number(t.getAttribute("data-n"));
-    else profile.answers[k][id]=t.getAttribute("data-v");
-    save(); show(k); return;
+    if(t.hasAttribute("data-n")) profile().answers[k][id]=Number(t.getAttribute("data-n"));
+    else profile().answers[k][id]=t.getAttribute("data-v");
+    persist(); show("me"); return;
   }
 });
-document.body.addEventListener("input",function(e){ if(e.target.id==="name-in"){ profile.name=e.target.value; save(); }});
-window.addEventListener("hashchange",parseHash);
-var audio=document.getElementById("ambient");
-window.addEventListener("pointerdown",function u(){ audio.volume=0.07; audio.play().catch(function(){}); window.removeEventListener("pointerdown",u); },{once:true});
-parseHash();
+document.body.addEventListener("input",function(e){
+  if(e.target.id==="name-in"||e.target.id==="birth-name"){ profile().name=e.target.value; persist(); document.getElementById("who-btn").textContent=profile().name||"Who"; }
+});
+show("me");
 })();
 </script>
 </body>
