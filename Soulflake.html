@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Soulflake — Me</title>
+<title>Soulflake</title>
 <meta name="theme-color" content="#070B14" />
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -41,6 +41,11 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
 .modal{width:min(22rem,100%);border:1px solid var(--border);border-radius:1.1rem;background:#12182a;padding:1.15rem;box-shadow:0 0 40px rgba(167,139,250,.18)}
 .modal h2{margin:.2rem 0 .35rem}
 .modal .row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:1rem}
+.welcome{text-align:center;padding:2rem 0 3rem}
+.welcome .mark{max-width:16rem;margin:0 auto 1.2rem}
+.welcome h1{font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:-.03em;margin:.2rem 0 1rem}
+.rotate{min-height:3.2rem;color:var(--graphite);max-width:28rem;margin:0 auto 1.4rem;transition:opacity .6s}
+.wordmark{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
 </style>
 </head>
 <body>
@@ -48,7 +53,9 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
 <div class="app">
 <header class="chrome"><div class="inner">
   <button type="button" class="who" id="who-btn" data-go="switch">Navigation</button>
+  <span class="wordmark">Soulflake</span>
   <nav class="tabs" aria-label="Primary">
+    <button type="button" data-go="welcome" id="t-welcome">Welcome</button>
     <button type="button" data-go="me" id="t-me">Me</button>
     <button type="button" data-go="others" id="t-others">Others</button>
   </nav>
@@ -151,12 +158,29 @@ function flakeSvg(born){
     '<circle cx="200" cy="200" r="20" fill="none" stroke="#67E8F9" stroke-width="1.3" opacity="'+(born?0.45:0.95)+'"/><circle cx="200" cy="200" r="11" fill="#C4B5FD"'+core+'/></svg>';
 }
 function chip(on,label,attrs){return '<button type="button" class="chip'+(on?" on":"")+'" '+attrs+'>'+label+'</button>';}
-var view="me", openBand=null, qIndex=0, zoomingIn=false;
+var view="welcome", openBand=null, qIndex=0, zoomingIn=false, lineTimer=null;
+var LINES=[
+  "A profile so precise it feels invasive \u2014 and clear enough to act on.",
+  "That\u2019s uncomfortably specific \u2014 and useful."
+];
+function renderWelcome(){
+  return '<section class="welcome"><p class="caps">Welcome</p><div class="mark">'+flakeSvg(false)+'</div><h1 class="serif">Soulflake</h1><p class="rotate" id="rotate-line">'+LINES[0]+'</p><button type="button" class="btn btn-primary" data-go="me">Build your Flake</button></section>';
+}
+function spinLines(){
+  var el=document.getElementById("rotate-line"); if(!el) return;
+  var i=0;
+  if(lineTimer) clearInterval(lineTimer);
+  lineTimer=setInterval(function(){
+    i=(i+1)%LINES.length;
+    el.style.opacity="0";
+    setTimeout(function(){ el.textContent=LINES[i]; el.style.opacity="1"; }, 400);
+  }, 5200);
+}
 function bandItems(id){
   if(id==="taste") return TASTE.map(function(c){return {kind:"taste",q:"Is this you?", item:c};});
   if(id==="traits") return TRAITS.map(function(item){return {kind:"likert",bag:"traits",id:item.id,q:item.q};});
   if(id==="bond") return BOND.map(function(item){return {kind:"likert",bag:"bond",id:item.id,q:item.q};});
-  if(id==="values") return VALS.map(function(item){return {kind:"pair",id:item.id,q:"When it counts I protect…",a:item.a,b:item.b};});
+  if(id==="values") return VALS.map(function(item){return {kind:"pair",id:item.id,q:"When it counts I protect\u2026",a:item.a,b:item.b};});
   if(id==="conflict") return CONF.map(function(item){return {kind:"pick",bag:"conflict",id:item.id,q:item.q,o:item.o};});
   if(id==="context") return [{kind:"name",q:"What should we call you?"}].concat(CTX.map(function(item){return {kind:"pick",bag:"context",id:item.id,q:item.q,o:item.o};}));
   return [];
@@ -187,11 +211,13 @@ function renderSwitch(){
 }
 function show(v){
   view=v;
-  ["me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
+  ["welcome","me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
   document.getElementById("who-btn").textContent="Navigation";
   document.getElementById("export-btn").hidden = (v!=="me");
   var page=document.getElementById("page");
-  if(v==="me"){
+  if(lineTimer){ clearInterval(lineTimer); lineTimer=null; }
+  if(v==="welcome"){ page.innerHTML=renderWelcome(); spinLines(); }
+  else if(v==="me"){
     page.innerHTML=renderMe();
     if(openBand && zoomingIn){ var st=page.querySelector(".flake-stage"); requestAnimationFrame(function(){ requestAnimationFrame(function(){ if(st) st.classList.add("zoom"); zoomingIn=false; }); }); }
     else zoomingIn=false;
@@ -246,7 +272,7 @@ document.body.addEventListener("change",function(e){
   reader.onload=function(){ var pack; try{ pack=JSON.parse(reader.result); }catch(err){ if(note) note.textContent="Not a Soulflake export."; return; } if(!pack||pack.kind!=="soulflake-profile"){ if(note) note.textContent="Not a Soulflake export."; return; } var pw=""; if(pack.locked){ pw=window.prompt("Password for "+(pack.name||"this flake"))||""; if(!pw){ if(note) note.textContent="This file has a password."; return; } } unlockFile(pack,pw).then(function(p){ if(!p.id) p.id=uid(); p.born=true; if(pack.name&&!p.name) p.name=pack.name; store.profiles.push(p); setActive(p.id); show("me"); }).catch(function(){ if(note) note.textContent="Wrong password, or not a house file."; }); };
   reader.readAsText(f);
 });
-show("me");
+show("welcome");
 })();
 </script>
 </body>
