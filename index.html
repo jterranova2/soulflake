@@ -80,49 +80,45 @@
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
   var muted=localStorage.getItem(SOUND_KEY)==="off";
-  var actx, gain, playing=false, fadeTimer=null, LEVEL=0.035, FADE=3;
+  var playing=false, fadeTimer=null, LEVEL=0.18, FADE=3;
   function setBtn(on){
     btn.textContent = on ? "Sound on" : "Sound off";
     btn.classList.toggle("on", on);
     btn.setAttribute("aria-pressed", on ? "true" : "false");
   }
-  function hook(){
-    if(actx) return;
-    try{
-      actx=new (window.AudioContext||window.webkitAudioContext)();
-      var src=actx.createMediaElementSource(audio);
-      gain=actx.createGain();
-      gain.gain.value=0;
-      src.connect(gain).connect(actx.destination);
-    }catch(e){}
-  }
-  function ramp(to){
-    if(!gain){ try{ audio.volume = to; }catch(e){} return; }
-    var now=actx.currentTime;
-    gain.gain.cancelScheduledValues(now);
-    gain.gain.setValueAtTime(gain.gain.value, now);
-    gain.gain.linearRampToValueAtTime(to, now+FADE);
+  function fadeVol(from, to, done){
+    var t0=performance.now();
+    function tick(now){
+      var t=Math.min(1,(now-t0)/(FADE*1000));
+      try{ audio.volume = from + (to-from)*t; }catch(e){}
+      if(t<1) requestAnimationFrame(tick);
+      else if(done) done();
+    }
+    requestAnimationFrame(tick);
   }
   function fadeIn(){
     if(muted) return;
     clearTimeout(fadeTimer);
     setBtn(true);
     audio.muted=false;
-    var go=function(){
-      playing=true;
-      localStorage.setItem(SOUND_KEY,"on");
-      hook();
-      if(actx && actx.state==="suspended") actx.resume();
-      ramp(LEVEL);
+    try{ audio.volume = 0; }catch(e){}
+    var start=function(){
+      var p=audio.play();
+      var ok=function(){
+        playing=true;
+        localStorage.setItem(SOUND_KEY,"on");
+        fadeVol(0, LEVEL);
+      };
+      if(p&&p.then) p.then(ok).catch(function(){ playing=false; });
+      else ok();
     };
-    var p=audio.play();
-    if(p&&p.then) p.then(go).catch(function(){ playing=false; });
-    else go();
+    if(audio.readyState>=3) start();
+    else audio.addEventListener("canplay", start, {once:true});
   }
   function fadeOut(){
     playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off");
-    clearTimeout(fadeTimer); setBtn(false); ramp(0);
-    fadeTimer=setTimeout(function(){ if(muted) audio.pause(); }, FADE*1000+50);
+    clearTimeout(fadeTimer); setBtn(false);
+    fadeVol(audio.volume||LEVEL, 0, function(){ if(muted) audio.pause(); });
   }
   btn.onclick=function(e){ e.stopPropagation(); if(playing && !audio.paused) fadeOut(); else { muted=false; fadeIn(); } };
   if(muted) setBtn(false);
@@ -130,7 +126,7 @@
     setBtn(true);
     fadeIn();
     ["pointerdown","touchstart","click","keydown","scroll"].forEach(function(ev){
-      window.addEventListener(ev, function kick(){ if(!muted && (audio.paused || !playing)) fadeIn(); }, {passive:true});
+      window.addEventListener(ev, function(){ if(!muted && (audio.paused || !playing)) fadeIn(); }, {passive:true});
     });
     document.addEventListener("visibilitychange", function(){ if(!document.hidden && !muted && (audio.paused || !playing)) fadeIn(); });
     window.addEventListener("pageshow", function(){ if(!muted) fadeIn(); });
