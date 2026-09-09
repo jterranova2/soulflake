@@ -47,7 +47,7 @@
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<audio id="ambient" loop preload="metadata" src="assets/audio/frost-waltz-kevin-macleod.mp3"></audio>
+<audio id="ambient" loop preload="metadata" src="assets/audio/frost-waltz-kevin-macleod.mp3" crossorigin="anonymous"></audio>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#">Soul<span>flake</span></a>
@@ -95,7 +95,22 @@
   };
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
-  function on(){ audio.volume=0.07; audio.play().then(function(){btn.textContent="Sound on";}).catch(function(){}); }
+  var actx, gain;
+  function hook(){
+    if(actx) return;
+    try{
+      actx=new (window.AudioContext||window.webkitAudioContext)();
+      var src=actx.createMediaElementSource(audio);
+      gain=actx.createGain();
+      gain.gain.value=0.06;
+      src.connect(gain).connect(actx.destination);
+    }catch(e){ audio.volume=0.05; }
+  }
+  function on(){
+    hook();
+    if(actx) actx.resume();
+    audio.play().then(function(){btn.textContent="Sound on";}).catch(function(){});
+  }
   btn.onclick=function(){ if(audio.paused) on(); else { audio.pause(); btn.textContent="Sound off"; } };
   window.addEventListener("pointerdown", function u(){ on(); window.removeEventListener("pointerdown", u); }, {once:true});
   var c=document.getElementById("snow"), g=c.getContext("2d");
