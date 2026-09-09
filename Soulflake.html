@@ -49,7 +49,6 @@ h1.serif{font-size:clamp(1.6rem,3.5vw,2.2rem);margin:.15rem 0 .4rem}
 <header class="chrome"><div class="inner">
   <button type="button" class="who" id="who-btn" data-go="switch">Navigation</button>
   <nav class="tabs" aria-label="Primary">
-    <button type="button" data-go="welcome" id="t-welcome">Welcome</button>
     <button type="button" data-go="me" id="t-me">Me</button>
     <button type="button" data-go="others" id="t-others">Others</button>
   </nav>
@@ -188,8 +187,7 @@ function renderSwitch(){
 }
 function show(v){
   view=v;
-  if(v==="welcome"){ location.href="index.html"; return; }
-  ["welcome","me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
+  ["me","others"].forEach(function(id){ var el=document.getElementById("t-"+id); if(el) el.classList.toggle("on", v===id); });
   document.getElementById("who-btn").textContent="Navigation";
   document.getElementById("export-btn").hidden = (v!=="me");
   var page=document.getElementById("page");
