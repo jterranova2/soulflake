@@ -51,11 +51,11 @@
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<audio id="ambient" loop preload="metadata" src="assets/audio/frost-waltz-kevin-macleod.mp3" crossorigin="anonymous"></audio>
+<audio id="ambient" loop preload="auto" src="assets/audio/frost-waltz-kevin-macleod.mp3" crossorigin="anonymous"></audio>
 <header>
   <div class="wrap nav">
     <a class="logo" href="#">Soul<span>flake</span></a>
-    <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
+    <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
   </div>
 </header>
 <main class="wrap hero">
@@ -205,7 +205,9 @@
   };
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
-  var actx, gain, wanted=false, fadeTimer=null, LEVEL=0.06, FADE=3;
+  var SOUND_KEY="soulflake.sound";
+  var muted=localStorage.getItem(SOUND_KEY)==="off";
+  var actx, gain, wanted=false, fadeTimer=null, LEVEL=0.035, FADE=3;
   function setBtn(on){
     btn.textContent = on ? "Sound on" : "Sound off";
     btn.classList.toggle("on", on);
@@ -229,15 +231,22 @@
     gain.gain.linearRampToValueAtTime(to, now+FADE);
   }
   function fadeIn(){
-    wanted=true; clearTimeout(fadeTimer); hook(); if(actx) actx.resume(); setBtn(true); ramp(0);
+    wanted=true; muted=false; localStorage.setItem(SOUND_KEY,"on");
+    clearTimeout(fadeTimer); hook(); if(actx) actx.resume(); setBtn(true); ramp(0);
     audio.play().then(function(){ ramp(LEVEL); }).catch(function(){});
   }
   function fadeOut(){
-    wanted=false; clearTimeout(fadeTimer); setBtn(false); ramp(0);
+    wanted=false; muted=true; localStorage.setItem(SOUND_KEY,"off");
+    clearTimeout(fadeTimer); setBtn(false); ramp(0);
     fadeTimer=setTimeout(function(){ if(!wanted) audio.pause(); }, FADE*1000+50);
   }
-  btn.onclick=function(){ if(wanted) fadeOut(); else fadeIn(); };
-  window.addEventListener("pointerdown", function u(){ if(!wanted) fadeIn(); window.removeEventListener("pointerdown", u); }, {once:true});
+  btn.onclick=function(e){ e.stopPropagation(); if(wanted) fadeOut(); else fadeIn(); };
+  if(muted) setBtn(false);
+  else {
+    setBtn(true);
+    fadeIn();
+    window.addEventListener("pointerdown", function u(){ if(!wanted && !muted) fadeIn(); window.removeEventListener("pointerdown", u); }, {once:true});
+  }
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
