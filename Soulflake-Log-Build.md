@@ -13,7 +13,8 @@ None.
 
 ## Done
 
-- 2026-09-09 arm zoom. Tap arm = camera into that sector + that arm’s questions. Center or Back = whole flake. Same page. 1.35s ease-in-out, no bounce. Arms read frost / forming / fine only. No percents. Frames 70–78 were not in this repo (`GrokBot-Handoff/style-frames/` 404). Shipped from the written lock, not from missing JPGs.
+- 2026-09-09 nav: Me · Others only. Insights and Finds pulled off the site. Welcome is the first-visit landing (`index.html`), not a tab.
+- 2026-09-09 arm zoom.
 - Welcome chrome.
 - Export popup on Me. Import on Others only.
 - Sound default ON, persist off.

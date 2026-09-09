@@ -1,18 +1,16 @@
 # Soulflake-Build-v0
 
-Live file. 2026-09-09 arm zoom.
+Live file. 2026-09-09 nav Me · Others.
 
 ## What changed
 
-Me: tap an arm and the camera zooms into that sector (1.35s ease-in-out, no bounce). That arm’s questions stay on the same page, one at a time. Tap the core or Back to zoom out.
+Insights and Finds are off the site. No tabs, no shell pages.
 
-Arms draw three states only — frost (thin dashed), forming (solid), fine (thicker + a tick). Labels stay clickable. No percent scores.
+App chrome is Me · Others only.
 
-Other arms dim while zoomed. Nav stays Welcome · Me · Others.
+Welcome stays the first-visit page at `/` (`index.html`) — snowfall, Sound, Build your Flake. It is not a nav item on Me.
 
-## Missing from this room
-
-`Soulflake-Design-v0.md` and `GrokBot-Handoff/style-frames/70-arm-frost.jpg`–`78-sound.jpg` are not in `jterranova2/soulflake`. Did not invent extra chrome from those filenames.
+Arm zoom still: tap arm, camera eases in, frost / forming / fine, no percents.
 
 ## Link
 
