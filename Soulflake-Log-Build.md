@@ -13,9 +13,7 @@ None.
 
 ## Done
 
-- 2026-09-09 assets 70–74. Same Taste arm: frost, forming, fine. Then zoom-out / zoom-in. Files in GrokBot-Handoff/style-frames/. Did not edit Soulflake.html.
-- 2026-09-09 nav: Me · Others only. Insights and Finds off the site.
+- 2026-09-09 Welcome first screen in Soulflake.html. Nav Welcome · Me · Others. One word Soulflake. Two briefing lines rotate. No Insights. No Finds.
+- 2026-09-09 assets 70–74.
 - 2026-09-09 arm zoom.
-- Welcome chrome.
 - Export popup on Me. Import on Others only.
-- Sound default ON, persist off.

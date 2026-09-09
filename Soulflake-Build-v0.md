@@ -1,21 +1,18 @@
 # Soulflake-Build-v0
 
-Live file. 2026-09-09 nav Me · Others.
+Live file. 2026-09-09 Welcome first in Soulflake.html.
 
-## What changed on the page
+## What changed
 
-Unchanged this pass. Soulflake.html was not edited.
+Welcome is the first screen in `Soulflake.html`. Then Me. No Insights. No Finds.
 
-## Assets this pass
+Wordmark is one word: Soulflake.
 
-`GrokBot-Handoff/style-frames/`
-- 70-arm-frost.jpg — same Taste arm, dashed
-- 71-arm-forming.jpg — solid medium
-- 72-arm-fine.jpg — thick + tick
-- 73-zoom-out.jpg — whole flake small
-- 74-zoom-in.jpg — camera into Taste
+Rotating lines (briefing locks that exist in this room):
+- A profile so precise it feels invasive — and clear enough to act on.
+- That’s uncomfortably specific — and useful.
 
-Ice Lab. No stock. No Insights. No Finds.
+Build your Flake goes to Me.
 
 ## Link
 
