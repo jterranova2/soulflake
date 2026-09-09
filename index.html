@@ -11,7 +11,8 @@
     :root { --midnight:#070B14; --violet:#A78BFA; --frost:#F8FAFC; --graphite:#94A3B8; }
     * { box-sizing: border-box; }
     html, body { margin:0; min-height:100%; background:var(--midnight); color:var(--frost); font-family:Inter,system-ui,sans-serif; }
-    button { font-family:inherit; cursor:pointer; }
+    button,input { font-family:inherit; }
+    button { cursor:pointer; }
     a { color:inherit; text-decoration:none; }
     .glow { position:fixed; inset:0; pointer-events:none; z-index:0;
       background: radial-gradient(ellipse 55% 40% at 72% 18%, rgba(167,139,250,.16), transparent 58%),
@@ -40,6 +41,8 @@
     .hero-visual { display:grid; place-items:center; width:100%; }
     .mark { width:min(220px,58vw); height:auto; aspect-ratio:1/1; object-fit:contain; object-position:center; display:block; filter:drop-shadow(0 0 36px rgba(167,139,250,.4)); animation:floaty 6s ease-in-out infinite; }
     @keyframes floaty { 50% { transform:translateY(-8px); } }
+    .dock { margin-top:1rem; display:grid; gap:.55rem; max-width:22rem; }
+    .field { min-height:44px; width:100%; border-radius:10px; border:1px solid rgba(248,250,252,.2); background:#070B14; color:#F8FAFC; padding:0 .75rem; }
     footer { position:relative; z-index:2; padding:2rem 0 3rem; border-top:1px solid rgba(248,250,252,.12); color:rgba(148,163,184,.75); font-size:.85rem; }
     footer a { text-decoration:underline; text-underline-offset:2px; }
     @media (prefers-reduced-motion:reduce){ #snow,.mark{animation:none;} #snow{display:none;} }
@@ -52,10 +55,7 @@
 <header>
   <div class="wrap nav">
     <a class="logo" href="#">Soul<span>flake</span></a>
-    <div style="display:flex;gap:.55rem;align-items:center">
-      <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
-      <button type="button" class="btn btn-ghost" id="signin">Sign in</button>
-    </div>
+    <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
   </div>
 </header>
 <main class="wrap hero">
@@ -65,9 +65,16 @@
     <p class="sub">A profile so precise it feels invasive — and clear enough to act on.</p>
     <div class="cta">
       <button type="button" class="btn btn-primary" id="build">Build your Flake</button>
+      <button type="button" class="btn btn-ghost" id="export">Export</button>
+      <button type="button" class="btn btn-ghost" id="import">Import</button>
     </div>
+    <div class="dock" id="dock" hidden>
+      <input class="field" id="pass" type="password" placeholder="Password for this file" />
+      <button type="button" class="btn btn-primary" id="go">Continue</button>
+    </div>
+    <input id="file" type="file" accept=".json,application/json" hidden />
     <p class="note" id="note"></p>
-    <p class="micro">Prototype · not a clinical assessment</p>
+    <p class="micro">Welcome stays signed out. Carry a flake with Export / Import.</p>
   </div>
   <div class="hero-visual">
     <img class="mark" src="assets/soulflake-mark-v6.png" width="400" height="400" alt="Soulflake mark" />
@@ -81,18 +88,103 @@
 </footer>
 <script>
 (function(){
-  var KEY="soulflake.v1";
-  function load(){ try{ return JSON.parse(localStorage.getItem(KEY)||"null"); }catch(e){ return null; } }
-  function empty(){ return {id:"sf-"+Math.random().toString(36).slice(2,8), born:true, name:"", answers:{taste:[],traits:{},bond:{},values:{},conflict:{},context:{}}}; }
-  document.getElementById("build").onclick=function(){
-    var p=load();
-    if(!p||!p.born){ p=empty(); localStorage.setItem(KEY, JSON.stringify(p)); }
-    location.href="Soulflake.html#home";
+  var STORE="soulflake.profiles.v1";
+  var OLD="soulflake.v1";
+  function keyBytes(pass){
+    return crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass)).then(function(buf){ return new Uint8Array(buf); });
+  }
+  function xor(bytes, key){
+    var out=new Uint8Array(bytes.length);
+    for(var i=0;i<bytes.length;i++) out[i]=bytes[i]^key[i%key.length];
+    return out;
+  }
+  function b64(bytes){
+    var s=""; for(var i=0;i<bytes.length;i++) s+=String.fromCharCode(bytes[i]);
+    return btoa(s);
+  }
+  function unb64(str){
+    var s=atob(str), out=new Uint8Array(s.length);
+    for(var i=0;i<s.length;i++) out[i]=s.charCodeAt(i);
+    return out;
+  }
+  function lockProfile(profile, pass){
+    return keyBytes(pass).then(function(k){
+      var raw=new TextEncoder().encode(JSON.stringify(profile));
+      return {v:1,kind:"soulflake-profile",locked:true,name:profile.name||"Flake",payload:b64(xor(raw,k))};
+    });
+  }
+  function unlockFile(pack, pass){
+    return keyBytes(pass).then(function(k){
+      var raw=xor(unb64(pack.payload), k);
+      return JSON.parse(new TextDecoder().decode(raw));
+    });
+  }
+  function activeProfile(){
+    try{
+      var s=JSON.parse(localStorage.getItem(STORE)||"null");
+      if(s&&s.profiles&&s.profiles.length){
+        return s.profiles.filter(function(p){return p.id===s.activeId;})[0]||s.profiles[0];
+      }
+    }catch(e){}
+    try{ return JSON.parse(localStorage.getItem(OLD)||"null"); }catch(e){ return null; }
+  }
+  function saveImported(p){
+    p=p||{};
+    if(!p.id) p.id="sf-"+Math.random().toString(36).slice(2,8);
+    p.born=true;
+    var s={activeId:p.id,profiles:[p]};
+    localStorage.setItem(STORE, JSON.stringify(s));
+  }
+  var mode=null;
+  var note=document.getElementById("note");
+  var dock=document.getElementById("dock");
+  var pass=document.getElementById("pass");
+  var fileEl=document.getElementById("file");
+  var pendingFile=null;
+  document.getElementById("build").onclick=function(){ location.href="Soulflake.html"; };
+  document.getElementById("export").onclick=function(){
+    var p=activeProfile();
+    if(!p||!p.answers){ note.textContent="Nothing on this phone to export."; return; }
+    mode="export"; pendingFile=null; dock.hidden=false; pass.value=""; pass.focus();
+    note.textContent="Set a password. You will need it to import.";
   };
-  document.getElementById("signin").onclick=function(){
-    var p=load();
-    if(p&&p.born){ location.href="Soulflake.html#home"; return; }
-    document.getElementById("note").textContent="No flake on this phone yet. Build one first.";
+  document.getElementById("import").onclick=function(){
+    mode="import"; note.textContent=""; fileEl.click();
+  };
+  fileEl.onchange=function(){
+    var f=fileEl.files&&fileEl.files[0];
+    if(!f) return;
+    var reader=new FileReader();
+    reader.onload=function(){
+      try{ pendingFile=JSON.parse(reader.result); }
+      catch(e){ note.textContent="That file is not a Soulflake export."; return; }
+      if(!pendingFile||pendingFile.kind!=="soulflake-profile"){ note.textContent="That file is not a Soulflake export."; return; }
+      dock.hidden=false; pass.value=""; pass.focus();
+      note.textContent="Password for "+(pendingFile.name||"this flake")+".";
+    };
+    reader.readAsText(f);
+  };
+  document.getElementById("go").onclick=function(){
+    var pw=pass.value||"";
+    if(!pw){ note.textContent="Password first."; return; }
+    if(mode==="export"){
+      var p=activeProfile();
+      lockProfile(p,pw).then(function(pack){
+        var blob=new Blob([JSON.stringify(pack,null,2)],{type:"application/json"});
+        var a=document.createElement("a");
+        a.href=URL.createObjectURL(blob);
+        a.download=(p.name||"soulflake")+".soulflake.json";
+        a.click();
+        dock.hidden=true; note.textContent="Exported.";
+      });
+      return;
+    }
+    if(mode==="import"&&pendingFile){
+      unlockFile(pendingFile,pw).then(function(p){
+        saveImported(p);
+        location.href="Soulflake.html";
+      }).catch(function(){ note.textContent="Wrong password or damaged file."; });
+    }
   };
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
@@ -120,19 +212,11 @@
     gain.gain.linearRampToValueAtTime(to, now+FADE);
   }
   function fadeIn(){
-    wanted=true;
-    clearTimeout(fadeTimer);
-    hook();
-    if(actx) actx.resume();
-    setBtn(true);
-    ramp(0);
+    wanted=true; clearTimeout(fadeTimer); hook(); if(actx) actx.resume(); setBtn(true); ramp(0);
     audio.play().then(function(){ ramp(LEVEL); }).catch(function(){});
   }
   function fadeOut(){
-    wanted=false;
-    clearTimeout(fadeTimer);
-    setBtn(false);
-    ramp(0);
+    wanted=false; clearTimeout(fadeTimer); setBtn(false); ramp(0);
     fadeTimer=setTimeout(function(){ if(!wanted) audio.pause(); }, FADE*1000+50);
   }
   btn.onclick=function(){ if(wanted) fadeOut(); else fadeIn(); };
