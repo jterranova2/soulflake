@@ -71,7 +71,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<audio id="ambient" loop playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
+<audio id="ambient" loop playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3?v=3"></audio>
 <div class="wrap top">
   <span class="wordmark">Soulflake</span>
   <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
@@ -252,49 +252,38 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
-  var muted=localStorage.getItem(SOUND_KEY)==="off";
+  localStorage.removeItem(SOUND_KEY);
+  var muted=false;
   var playing=false, LEVEL=0.18, FADE=2;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
     btn.setAttribute("aria-pressed",on?"true":"false");
   }
-  function fadeVol(from,to,done){
-    var t0=performance.now();
-    function tick(now){
-      var t=Math.min(1,(now-t0)/(FADE*1000));
-      try{ audio.volume=from+(to-from)*t; }catch(e){}
-      if(t<1) requestAnimationFrame(tick);
-      else if(done) done();
-    }
-    requestAnimationFrame(tick);
-  }
-  function fadeIn(){
-    if(muted) return;
+  function startPlay(){
+    muted=false;
     audio.muted=false;
-    try{ audio.volume=0; }catch(e){}
+    try{ audio.volume=LEVEL; }catch(e){}
     var p=audio.play();
-    var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); setBtn(true); fadeVol(0,LEVEL); };
-    if(p&&p.then) p.then(ok).catch(function(){ playing=false; setBtn(false); }); else ok();
+    var ok=function(){ playing=true; setBtn(true); };
+    if(p&&p.then) p.then(ok).catch(function(){ playing=false; setBtn(false); });
+    else ok();
   }
-  function fadeOut(){
-    playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off"); setBtn(false);
-    fadeVol(audio.volume||LEVEL,0,function(){ if(muted) audio.pause(); });
+  function stopPlay(){
+    playing=false; muted=true; setBtn(false);
+    audio.pause();
   }
-  btn.onclick=function(e){
+  btn.addEventListener("click",function(e){
     e.preventDefault();
     e.stopPropagation();
-    if(!muted && playing && !audio.paused) fadeOut();
-    else { muted=false; fadeIn(); }
-  };
-  if(muted) setBtn(false);
-  else {
-    setBtn(false);
-    fadeIn();
-    var unlock=function(){ if(!muted && (audio.paused||!playing)) fadeIn(); };
-    window.addEventListener("pointerdown", unlock, {passive:true});
-    window.addEventListener("touchstart", unlock, {passive:true});
-  }
+    if(playing && !audio.paused) stopPlay();
+    else startPlay();
+  });
+  setBtn(false);
+  startPlay();
+  function unlock(){ if(!muted) startPlay(); }
+  window.addEventListener("pointerdown", unlock, {passive:true});
+  window.addEventListener("touchstart", unlock, {passive:true});
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
