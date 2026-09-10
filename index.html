@@ -71,10 +71,10 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<audio id="ambient" autoplay loop playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
+<audio id="ambient" loop playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
   <span class="wordmark">Soulflake</span>
-  <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
+  <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
 </div>
 <main class="wrap">
   <section class="hero">
@@ -253,7 +253,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
   var muted=localStorage.getItem(SOUND_KEY)==="off";
-  var playing=false, LEVEL=0.25, FADE=2;
+  var playing=false, LEVEL=0.18, FADE=2;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
@@ -271,12 +271,11 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   }
   function fadeIn(){
     if(muted) return;
-    setBtn(true);
     audio.muted=false;
-    try{ audio.volume=0.25; }catch(e){}
+    try{ audio.volume=0; }catch(e){}
     var p=audio.play();
-    var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); };
-    if(p&&p.then) p.then(ok).catch(function(){ playing=false; }); else ok();
+    var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); setBtn(true); fadeVol(0,LEVEL); };
+    if(p&&p.then) p.then(ok).catch(function(){ playing=false; setBtn(false); }); else ok();
   }
   function fadeOut(){
     playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off"); setBtn(false);
@@ -290,12 +289,9 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   };
   if(muted) setBtn(false);
   else {
-    setBtn(true);
+    setBtn(false);
     fadeIn();
-    var unlock=function(e){
-      if(btn.contains(e.target)) return;
-      if(!muted && (audio.paused||!playing)) fadeIn();
-    };
+    var unlock=function(){ if(!muted && (audio.paused||!playing)) fadeIn(); };
     window.addEventListener("pointerdown", unlock, {passive:true});
     window.addEventListener("touchstart", unlock, {passive:true});
   }
