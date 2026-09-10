@@ -1,11 +1,12 @@
 # Room: Traits
 
-**Live page:** `Soulflake.html` arm `traits`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `traits`
 **Lead:** How you move. Not a type. One question at a time.
 
 Likert: No / A little / Often / That’s me (1–4)
 
-## Live wording (slightly shortened from 09-08)
+## Last live wording (slightly shortened from 09-08)
 
 - open — Strange art and ideas feel like oxygen.
 - extra — A room with people gives me energy more than it costs.

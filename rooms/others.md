@@ -1,7 +1,10 @@
 # Room: Others
 
-**Live:** `Soulflake.html` tab Others
-**Status:** Shell. “Not yet. Compare later. No compatibility percentage.”
+**Public name on the page:** Together. Never print Others.
+**See:** `rooms/together.md`.
+**Live tonight:** not shipped. Not a tab.
+
+Status when it last existed as a shell: “Not yet. Compare later. No compatibility percentage.”
 
 `/compare` in the old SPA only redirected here.
 

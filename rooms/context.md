@@ -1,9 +1,10 @@
 # Room: Context
 
-**Live page:** `Soulflake.html` arm `context`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `context`
 **Lead:** Facts as you name them. Skip allowed. One field at a time.
 
-- Name field (What should we call you?) — also the birth-name on Me
+- Name field (What should we call you?) — also the birth-name on My flake
 - Faith, as lived: Skip / Christian / Other faith / None / unsure
 - Where you are, roughly: Skip / West Coast US / Other US / Outside the US
 

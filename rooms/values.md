@@ -1,9 +1,10 @@
 # Room: Values
 
-**Live page:** `Soulflake.html` arm `values`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `values`
 **Lead:** When it counts, what do you protect? One pair at a time.
 
-## Live pairs
+## Last live pairs
 
 - course: My own course / A stable ground
 - truth: The blunt truth / The relationship

@@ -1,8 +1,8 @@
 # Room: Report
 
-**Status:** Designed 09-08. Not in the live nav on 09-09.
+**Status:** Designed 09-08. Not in live nav. Insights is also off the site tonight.
 **Was going to be:** `Soulflake.html#report`
-**Now:** Insights tab is a shell that should grow into this.
+**Now:** Insights should grow into this when both rooms return.
 
 ## Keep this copy
 
@@ -11,6 +11,6 @@
 - Self-analysis paragraph from Traits
 - Growth line: each arm · frost/branching/forming/fine
 - Voices (up to three): What works / What costs you / Tuesday
-- Back to Me (was Back to Home)
+- Back to My flake (never Back to Me)
 
 Do not turn this into a type, a score, or a hiring read. When Insights is carved, start from this file, not from a shop.

@@ -1,9 +1,10 @@
 # Room: Conflict
 
-**Live page:** `Soulflake.html` arm `conflict`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `conflict`
 **Lead:** What you do when it heats up. One scene at a time.
 
-## Live wording (short)
+## Last live wording (short)
 
 - late — They’re late again. Name the pattern / Go quiet / Joke it off
 - heat — The room is heating up. Stay and say the hard line / Leave and cool off / Soften so nobody explodes

@@ -1,11 +1,12 @@
 # Room: Bond
 
-**Live page:** `Soulflake.html` arm `bond`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `bond`
 **Lead:** How you get close. Not a diagnosis. One question at a time.
 
 Same Likert as Traits.
 
-## Live items
+## Last live items
 
 - ending — When someone close goes quiet, I start writing the ending.
 - chase — After a fight I go quiet. I do not chase.

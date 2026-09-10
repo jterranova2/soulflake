@@ -1,6 +1,8 @@
-# Style frames 70–74
+# Style frames
 
-Ice Lab. Same Taste arm. No stock. No Insights. No Finds.
+Ice Lab. No stock. No Insights. No Finds. Never Me or Others on a frame title.
+
+## 70–74 — Taste arm camera (not in live html)
 
 | File | Lock |
 |---|---|
@@ -10,4 +12,15 @@ Ice Lab. Same Taste arm. No stock. No Insights. No Finds.
 | `73-zoom-out.jpg` | Whole flake small in the field |
 | `74-zoom-in.jpg` | Camera into the Taste sector |
 
-Do not ship these into Soulflake.html from this pass.
+Do not ship 70–74 into Soulflake.html from a Welcome-only pass.
+
+## 80–83 — Welcome pitch (referenced live, files missing)
+
+| File | Block |
+|---|---|
+| `80-welcome-hole.jpg` | The hole |
+| `81-welcome-sixcuts.jpg` | Six cuts, not a type |
+| `82-welcome-grows.jpg` | It grows when you tell it |
+| `83-welcome-together.jpg` | Built to be used |
+
+`index.html` looks for these at site root. `Soulflake.html` looks here. A text stub for 80 was removed. Real JPEGs still need to land.

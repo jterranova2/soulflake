@@ -1,9 +1,10 @@
 # Room: Taste
 
-**Live page:** `Soulflake.html` arm `taste`
+**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**When carved:** My flake arm `taste`
 **Lead:** Pick what feels like you. Skip the rest. One chip at a time.
 
-## Live bank (short)
+## Last live bank (short)
 
 Radiohead, Talking Heads, Nina Simone, The Shins, Nirvana, Queen, White Stripes, Lynch, The Matrix, Fight Club, Arrival, Pesto, Alan Watts, Hike that becomes a debate, Ramen at midnight
 
