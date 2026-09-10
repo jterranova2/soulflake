@@ -15,7 +15,7 @@ button{font-family:inherit;cursor:pointer}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
-.wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em}
+.wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC}.wordmark .flake{color:#67E8F9}
 .ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72;transition:color .4s,background .4s,box-shadow .4s,border-color .4s,opacity .4s}
 .ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7);opacity:1;box-shadow:0 0 16px rgba(167,139,250,.55)}
 .hero{text-align:center;padding:2.4rem 0 2.2rem}
@@ -73,7 +73,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <div class="glow"></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
-  <span class="wordmark">Soulflake</span>
+  <span class="wordmark">Soul<span class="flake">flake</span></span>
   <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
 </div>
 <main class="wrap">
