@@ -52,6 +52,10 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
   .hero-flake .draw{stroke-dashoffset:0}
   .hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5{opacity:1}
 }
+.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5,
+.hero-flake.me .spin-bands{display:none}
+.hero-flake.me .draw{animation:none;stroke-dashoffset:0}
+body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .pitch{padding:.4rem 0 2.4rem}
 .block{margin:2.6rem 0;max-width:36rem}
 .block img,.block svg{width:100%;height:auto;border-radius:1rem;margin:0 0 1rem;display:block}
@@ -223,6 +227,16 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 </main>
 <script>
 (function(){
+  function showMe(){
+    document.body.classList.add("me");
+    var fl=document.querySelector(".hero-flake");
+    if(fl) fl.classList.add("me");
+    var h=document.querySelector(".hero h1");
+    if(h) h.textContent="My flake";
+  }
+  var b1=document.getElementById("build"), b2=document.getElementById("build-2");
+  if(b1) b1.onclick=showMe;
+  if(b2) b2.onclick=showMe;
   var LINES=["Know yourself. Then be known.","See yourself clearly enough to be met.","The closer you get to you, the closer you can get to anyone.","First an honest picture. Then a real room.","You can’t be found if you can’t be named.","Depth with yourself. Then depth with someone else."];
   var el=document.getElementById("line"), i=0;
   function nextLine(){
