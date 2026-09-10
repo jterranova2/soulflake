@@ -21,7 +21,7 @@ button{font-family:inherit;cursor:pointer}
 .hero{text-align:center;padding:2.4rem 0 2.2rem}
 h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem;line-height:1.06}
 h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
-.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;transition:opacity .7s}
+.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;transition:opacity 1.5s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:700;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
 .mark{width:min(240px,62vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;filter:drop-shadow(0 0 36px rgba(167,139,250,.4))}
 .pitch{padding:.4rem 0 2.4rem}
@@ -50,25 +50,25 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
   </section>
   <section class="pitch">
     <div class="block">
-      <img src="80-welcome-hole.jpg" alt="" />
+      <img src="IMG-commercial-1-hole.jpg" alt="" />
       <h2>The hole</h2>
       <p>You walk in blurry.</p>
       <p>Most people are guessing. Guessing who they are. Guessing why the room went cold. Guessing what to do next.</p>
     </div>
     <div class="block">
-      <img src="81-welcome-sixcuts.jpg" alt="" />
+      <img src="IMG-commercial-2-sixcuts.jpg" alt="" />
       <h2>Six cuts, not a type</h2>
       <p>Not another letter.</p>
       <p>Traits. Taste. Bond. Values. Conflict. Context. Each arm is its own picture. Empty stays quiet. Filled gets sharp.</p>
     </div>
     <div class="block">
-      <img src="82-welcome-grows.jpg" alt="" />
+      <img src="IMG-commercial-3-grows.jpg" alt="" />
       <h2>It grows when you tell it</h2>
       <p>The more you say, the more it can say back.</p>
       <p>Skip what you want. The flake goes lopsided on purpose. That’s honesty, not a broken quiz.</p>
     </div>
     <div class="block">
-      <img src="83-welcome-together.jpg" alt="" />
+      <img src="IMG-commercial-4-together.jpg" alt="" />
       <h2>Built to be used</h2>
       <p>Know yourself. Then be known.</p>
       <p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p>
@@ -90,11 +90,17 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
     "Depth with yourself. Then depth with someone else."
   ];
   var el=document.getElementById("line"), i=0;
-  setInterval(function(){
-    i=(i+1)%LINES.length;
+  function nextLine(){
     el.style.opacity="0";
-    setTimeout(function(){ el.textContent=LINES[i]; el.style.opacity="1"; }, 700);
-  }, 6000);
+    setTimeout(function(){
+      i=(i+1)%LINES.length;
+      el.textContent=LINES[i];
+      setTimeout(function(){ el.style.opacity="1"; }, 1500);
+    }, 1500);
+    setTimeout(nextLine, 11500);
+  }
+  setTimeout(nextLine, 7000);
+
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
@@ -156,6 +162,7 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
     window.addEventListener("touchstart", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); }, {passive:true});
     window.addEventListener("keydown", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); });
   }
+
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
