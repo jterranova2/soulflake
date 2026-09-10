@@ -71,10 +71,10 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="glow"></div>
-<audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3?v=4"></audio>
+<audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3?v=5"></audio>
 <div class="wrap top">
   <span class="wordmark">Soulflake</span>
-  <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
+  <button type="button" class="ambient on" id="sound" aria-pressed="true">Sound on</button>
 </div>
 <main class="wrap">
   <section class="hero">
@@ -254,19 +254,38 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
   var playing=false;
-  var LEVEL=1;
+  var ctx=null, srcNode=null, gainNode=null;
+  var GAIN=1.5;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
     btn.setAttribute("aria-pressed",on?"true":"false");
   }
+  function hookGain(){
+    if(srcNode){
+      if(ctx && ctx.state==="suspended") ctx.resume();
+      return;
+    }
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC) return;
+      ctx=new AC();
+      srcNode=ctx.createMediaElementSource(audio);
+      gainNode=ctx.createGain();
+      gainNode.gain.value=GAIN;
+      srcNode.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      if(ctx.state==="suspended") ctx.resume();
+    }catch(e){}
+  }
   function startPlay(){
     wantOn=true;
     audio.muted=false;
-    try{ audio.volume=LEVEL; }catch(e){}
+    try{ audio.volume=1; }catch(e){}
+    hookGain();
     var p=audio.play();
-    function ok(){ playing=true; setBtn(true); localStorage.setItem(SOUND_KEY,"on"); }
-    if(p&&p.then) p.then(ok).catch(function(){ playing=false; setBtn(false); });
+    function ok(){ playing=true; setBtn(true); }
+    if(p&&p.then) p.then(ok).catch(function(){ playing=false; if(wantOn) setBtn(true); });
     else ok();
   }
   function stopPlay(){
@@ -274,19 +293,21 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
     localStorage.setItem(SOUND_KEY,"off");
     setBtn(false);
     audio.pause();
+    if(ctx && ctx.state==="running") ctx.suspend();
   }
   btn.addEventListener("pointerdown",function(e){
     e.preventDefault();
     e.stopPropagation();
-    if(playing && !audio.paused) stopPlay();
-    else startPlay();
+    if(wantOn && playing && !audio.paused) stopPlay();
+    else { localStorage.removeItem(SOUND_KEY); startPlay(); }
   });
   btn.addEventListener("click",function(e){ e.preventDefault(); e.stopPropagation(); });
-  setBtn(false);
+  setBtn(wantOn);
   if(wantOn) startPlay();
   function unlock(e){
     if(!wantOn) return;
     if(btn.contains(e.target)) return;
+    hookGain();
     if(audio.paused || !playing) startPlay();
   }
   window.addEventListener("pointerdown", unlock, {passive:true});
