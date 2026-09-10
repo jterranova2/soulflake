@@ -185,7 +185,7 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
   var muted=localStorage.getItem(SOUND_KEY)==="off";
-  var playing=false, LEVEL=0.18, FADE=2, actx=null, gain=null;
+  var playing=false, LEVEL=0.25, FADE=2;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
@@ -201,43 +201,24 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
     }
     requestAnimationFrame(tick);
   }
-  function quietNode(){
-    if(gain) return;
-    try{
-      actx=actx||new (window.AudioContext||window.webkitAudioContext)();
-      var hook=function(){
-        if(!actx||actx.state!=="running"||gain) return;
-        var src=actx.createMediaElementSource(audio);
-        gain=actx.createGain();
-        gain.gain.value=0;
-        src.connect(gain).connect(actx.destination);
-        gain.gain.linearRampToValueAtTime(LEVEL, actx.currentTime+FADE);
-      };
-      if(actx.state==="running") hook(); else actx.resume().then(hook);
-    }catch(e){}
-  }
   function fadeIn(){
     if(muted) return;
     setBtn(true);
     audio.muted=false;
-    try{ audio.volume=0; }catch(e){}
-    var start=function(){
-      var p=audio.play();
-      var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); fadeVol(0,LEVEL); quietNode(); };
-      if(p&&p.then) p.then(ok).catch(function(){ playing=false; }); else ok();
-    };
-    if(audio.readyState>=2) start(); else audio.addEventListener("canplay",start,{once:true});
+    try{ audio.volume=0.25; }catch(e){}
+    var p=audio.play();
+    var ok=function(){ playing=true; localStorage.setItem(SOUND_KEY,"on"); };
+    if(p&&p.then) p.then(ok).catch(function(){ playing=false; }); else ok();
   }
   function fadeOut(){
     playing=false; muted=true; localStorage.setItem(SOUND_KEY,"off"); setBtn(false);
-    if(gain&&actx){ var now=actx.currentTime; gain.gain.cancelScheduledValues(now); gain.gain.setValueAtTime(gain.gain.value,now); gain.gain.linearRampToValueAtTime(0,now+FADE); }
     fadeVol(audio.volume||LEVEL,0,function(){ if(muted) audio.pause(); });
   }
   btn.onclick=function(e){
     e.preventDefault();
     e.stopPropagation();
-    if(muted){ muted=false; fadeIn(); }
-    else fadeOut();
+    if(!muted && playing && !audio.paused) fadeOut();
+    else { muted=false; fadeIn(); }
   };
   if(muted) setBtn(false);
   else {
@@ -249,7 +230,6 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
     };
     window.addEventListener("pointerdown", unlock, {passive:true});
     window.addEventListener("touchstart", unlock, {passive:true});
-    window.addEventListener("keydown", function(){ if(!muted && (audio.paused||!playing)) fadeIn(); });
   }
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
