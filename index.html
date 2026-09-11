@@ -72,12 +72,34 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.18rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
+.vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 70% 60% at 50% 38%, transparent 42%, rgba(7,11,20,.55) 100%);mix-blend-mode:multiply}
+.fog{position:fixed;inset:-20% -10%;pointer-events:none;z-index:1}
+.fog i{position:absolute;inset:0;opacity:.22;filter:blur(28px);background:radial-gradient(ellipse 55% 28% at 30% 62%, rgba(248,250,252,.18), transparent 70%),radial-gradient(ellipse 50% 24% at 72% 48%, rgba(148,163,184,.12), transparent 68%)}
+.fog i:first-child{animation:fogA 38s ease-in-out infinite}
+.fog i:last-child{animation:fogB 46s ease-in-out infinite reverse;opacity:.16}
+@keyframes fogA{0%,100%{transform:translate(-4%,2%)}50%{transform:translate(5%,-3%)}}
+@keyframes fogB{0%,100%{transform:translate(3%,-2%)}50%{transform:translate(-6%,4%)}}
+.ground{position:fixed;left:0;right:0;bottom:0;height:22vh;pointer-events:none;z-index:2;background:linear-gradient(180deg, transparent, rgba(248,250,252,.03) 40%, rgba(248,250,252,.07));box-shadow:inset 0 -40px 60px rgba(248,250,252,.04)}
+.ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
+.flake-stage{position:relative;width:min(288px,74.4vw);margin:0 auto 1.4rem}
+.flake-stage .mark{width:100%;margin:0}
+.ice-ring{position:absolute;inset:-8%;pointer-events:none}
+.ice-ring circle{fill:none;stroke:rgba(248,250,252,.38);stroke-width:.7;stroke-dasharray:720;stroke-dashoffset:720;animation:ringDraw 20s ease forwards}
+@keyframes ringDraw{to{stroke-dashoffset:0}}
+.breath{position:absolute;left:50%;top:46%;width:18%;height:38%;transform:translate(-50%,-80%);pointer-events:none;background:radial-gradient(ellipse at 50% 90%, rgba(248,250,252,.22), transparent 70%);filter:blur(8px);opacity:.35;animation:breath 9s ease-in-out infinite}
+@keyframes breath{0%,100%{transform:translate(-50%,-70%) scaleY(.7);opacity:.12}50%{transform:translate(-50%,-95%) scaleY(1.15);opacity:.4}}
+.glint{position:absolute;inset:8%;pointer-events:none;border-radius:50%;background:linear-gradient(115deg, transparent 40%, rgba(248,250,252,.45) 50%, transparent 60%);mix-blend-mode:screen;opacity:0;animation:glintWalk 22s ease-in-out infinite}
+@keyframes glintWalk{0%,12%{opacity:0;transform:translateX(-30%) rotate(-8deg)}18%{opacity:.55}28%{opacity:0;transform:translateX(30%) rotate(8deg)}100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){.fog i,.breath,.glint,.ice-ring circle{animation:none}.ice-ring circle{stroke-dashoffset:0}.glint,.breath,.fog{display:none}}
 @media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}.rays b{animation:none}}
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
+<div class="fog" aria-hidden="true"><i></i><i></i></div>
+<div class="vignette" aria-hidden="true"></div>
+<div class="ground" aria-hidden="true"></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
   <span class="wordmark">Soul<span class="flake">flake</span></span>
@@ -85,6 +107,10 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 </div>
 <main class="wrap">
   <section class="hero">
+    <div class="flake-stage">
+    <svg class="ice-ring" viewBox="0 0 400 400" aria-hidden="true"><circle cx="200" cy="200" r="168"/></svg>
+    <div class="breath"></div>
+    <div class="glint"></div>
     <svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake ceiling motion">
   <defs>
     <radialGradient id="core" cx="50%" cy="50%" r="50%">
@@ -164,6 +190,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
     <circle cx="200" cy="200" r="2.5" fill="#F8FAFC"/>
   </g>
 </svg>
+    </div>
     <h1>Meet your Soulflake</h1>
     <p class="rotate" id="line">Know yourself. Then be known.</p>
     <button type="button" class="btn" id="build">Get started</button>
@@ -323,8 +350,8 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
-  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.08+Math.random()*.22,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
-  function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}); }
+  function spawn(y,moon){ var m=!!moon||Math.random()>.91; return {x:Math.random()*w,y:y?Math.random()*h:-12,r:m?2.2+Math.random()*3.2:.6+Math.random()*1.8,vy:m?.03+Math.random()*.08:.08+Math.random()*.22,vx:-.12+Math.random()*.24,a:m?.08+Math.random()*.18:.15+Math.random()*.45,tw:Math.random()*6.28,tws:m?.004+Math.random()*.01:.01+Math.random()*.02,cyan:!m&&Math.random()>.82,moon:m}; }
+  function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}).concat(Array.from({length:8},function(){return spawn(true,true);})); }
   function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
   resize(); frame(); addEventListener("resize",resize);
 })();
