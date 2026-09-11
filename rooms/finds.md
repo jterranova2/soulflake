@@ -1,6 +1,6 @@
 # Room: Finds
 
-**Live tonight:** off the site. Not a tab.
+**Live tonight:** off the site. Not a tab. Get started does not open this room.
 **Status:** later-room. Shell copy when it last existed: “Not yet. Later, and only from thick arms.”
 
 Nights, rooms, people — later, and only from thick arms. Not a shop. Not a feed.

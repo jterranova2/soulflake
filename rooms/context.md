@@ -1,6 +1,6 @@
 # Room: Context
 
-**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**Live tonight:** arm not shipped. Welcome Get started only shows g0 frost spines.
 **When carved:** My flake arm `context`
 **Lead:** Facts as you name them. Skip allowed. One field at a time.
 

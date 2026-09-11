@@ -1,4 +1,4 @@
-# Soulflake rooms — catch-up through 2026-09-09 evening
+# Soulflake rooms — catch-up through 2026-09-10 night
 
 Shared brief for every room. Two layers:
 
@@ -10,32 +10,34 @@ Custom domain: https://soulflake.justinterranova.com
 Repo: https://github.com/jterranova2/soulflake  
 Drive: https://drive.google.com/drive/folders/1SJDEMUCLDrHchtkjCOQQYOP7fKDKEsZN
 
-## Live now (canon as of 2026-09-09 night)
+## Live now (canon as of 2026-09-10 night / 2026-09-11 early UTC)
 
-Layer 0. Welcome only. Root homepage is Welcome. `Soulflake.html` is the same Welcome page, not the flake yet. Kill the split: one mood, one word, one button.
+Layer 0 plus a thin Get started stub. Root homepage is Welcome. `Soulflake.html` is the same Welcome page. Kill the split: one mood, one word, one button — until Get started flips the same page into a frost My flake.
 
-1. Midnight / violet / frost. Snowfall. Wordmark **Soulflake**. Crystal mark (`assets/Soulflake-Welcome-Crystal.jpg`, fallback `assets/soulflake-mark-v6.png`).
+1. Midnight / violet / frost. Snowfall (slower than the morning page). Wordmark **Soul** frost `#F8FAFC`, **flake** cyan `#67E8F9`. Hero is a live six-color dendrite SVG, not a crystal JPEG. Size `min(288px, 74.4vw)` (20% larger than the 09-09 mark).
 2. Headline: **Meet your Soulflake**.
-3. Six rotating briefing lines (6s, fade):
+3. Six rotating briefing lines (first change at 7s, then every 11.5s, 1.5s fade each way):
    - Know yourself. Then be known.
    - See yourself clearly enough to be met.
    - The closer you get to you, the closer you can get to anyone.
    - First an honest picture. Then a real room.
    - You can’t be found if you can’t be named.
    - Depth with yourself. Then depth with someone else.
-4. Button copy is **Get started** (not Build your Flake). Hero + bottom. Handlers are not wired yet — Layer 0 stopped at Welcome.
-5. Scroll pitch, CEO order, frames 80–83:
+4. Button copy is **Get started**, weight 500. Hero + bottom. Click runs `showMe()`: `body.me` + `.hero-flake.me`, headline becomes **My flake**, pitch / cue / rotate / bottom hide, bands g1–g5 drop, only g0 frost spines stay. No questions, no profiles, no arm zoom yet.
+5. Scroll pitch, CEO order. Frames 80–83 JPEGs are gone. Each block is an inline SVG on the midnight field:
    - The hole — You walk in blurry. Most people are guessing.
    - Six cuts, not a type — Traits. Taste. Bond. Values. Conflict. Context.
    - It grows when you tell it — lopsided on purpose.
    - Built to be used — Know yourself. Then be known. No score. Glue, grind, repair.
    Cue: Start with one arm.
-6. Sound: Frost Waltz, autoplay + first-gesture retry. Level **0.18**. Fade **2s**. Gain node for iPhone. Persist `soulflake.sound`. Off stays off. Button glows when on.
-7. **No nav.** Never print **Me** or **Others** on the page. Insights and Finds are off the site. No Export / Import dock. No Sign in.
-8. Frame files: `index.html` points at root `80-welcome-hole.jpg` … `83-welcome-together.jpg`. `Soulflake.html` points at `GrokBot-Handoff/style-frames/80…`. Those JPEGs are still missing from the tree (text stub for 80 was removed). Copy is canon; images are not shipped.
-9. Not a medical, clinical, or hiring tool.
+6. Sound: `assets/audio/AUDIO-welcome.mp3` only. Frost Waltz file deleted. On by default unless `soulflake.sound` is `off`. Element volume 1. Gain node **2.2**. First-gesture unlock if autoplay is blocked. Off stays off. Button glows when on.
+7. Atmosphere that stayed: moonlight-white rays with a hint of cyan (opacity cut 25% from the first ray pass), fog, vignette, breath, ground frost. Atmosphere that was tried and killed: ice ring, glint sweep, halo.
+8. Hero flake motion: arm-g0…g5 grow/ease, spin-bands 51.2s, spin-crystal reverse 76.8s, draw-on then bloom. `prefers-reduced-motion` kills motion, fog, breath, snow.
+9. Arm hues on the drawing: cyan `#67E8F9`, violet `#A78BFA`, blue `#93C5FD`, graphite `#94A3B8`, lavender `#C4B5FD`, frost `#E2E8F0`. Bond / Values sit in the violet–lavender pair.
+10. **No nav.** Never print **Me** or **Others** on the page. Insights and Finds are off the site. No Export / Import dock. No Sign in.
+11. Not a medical, clinical, or hiring tool.
 
-## Public names (from chat / commits after the morning brief)
+## Public names (unchanged)
 
 When chrome comes back, the words on the page are:
 
@@ -52,11 +54,11 @@ Internal file names (`rooms/home.md`, `rooms/others.md`) stay so old links do no
 `frost` → `branching` → `forming` → `fine`  
 Level from how many answers exist on that arm, not from a score. No percents on the flake.
 
-My flake camera (designed today, not live tonight): tap an arm, slow zoom into that sector on the same page. Center or Back zooms out. Empty stays frost.
+My flake camera (designed 09-09, not live tonight): tap an arm, slow zoom into that sector on the same page. Center or Back zooms out. Empty stays frost. Tonight Get started only shows g0 frost spines.
 
 ## Said in chat / builder snapshot, still missing from live
 
-Restore on the next carve. Do not treat Layer 0 Welcome as the whole product.
+Restore on the next carve. Do not treat Layer 0 Welcome + the g0 stub as the whole product.
 
 - My flake itself (named on-device profiles, six arms, one question at a time)
 - Taste grouped: Music / Film / Talk-night
@@ -67,8 +69,10 @@ Restore on the next carve. Do not treat Layer 0 Welcome as the whole product.
 - Export / Import (carry a flake, no account) — not a Welcome dock
 - Together (compare later, no compatibility %)
 - Report as a real Insights interior (three cuts of the same answers)
-- Get started wired to the flake
-- Real JPEGs for frames 80–83 (and 70–74 arm zoom)
+- Get started wired past the g0 stub into a real first question
+- Real JPEGs for frames 80–83 are no longer required; inline SVGs are the pitch. Arm-zoom frames 70–74 still not drawn.
+
+Tried on 09-10 and discarded: commercial JPEGs `IMG-commercial-1-4`, ice ring, glint sweep, halo, Web Audio mute-at-zero, Frost Waltz as the Welcome bed.
 
 Justin sample flake is **dev / export only**, never a default user on a phone:
 

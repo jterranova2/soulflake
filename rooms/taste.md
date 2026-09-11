@@ -1,6 +1,6 @@
 # Room: Taste
 
-**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**Live tonight:** arm not shipped. Welcome Get started only shows g0 frost spines.
 **When carved:** My flake arm `taste`
 **Lead:** Pick what feels like you. Skip the rest. One chip at a time.
 

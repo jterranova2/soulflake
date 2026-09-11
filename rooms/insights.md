@@ -1,6 +1,6 @@
 # Room: Insights
 
-**Live tonight:** off the site. Not a tab.
+**Live tonight:** off the site. Not a tab. Get started does not open this room.
 **Status:** later-room. Shell copy when it last existed: “Not yet. Carve arms first. Not a shop.”
 
 ## Job when carved

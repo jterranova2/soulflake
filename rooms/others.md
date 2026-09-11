@@ -2,7 +2,7 @@
 
 **Public name on the page:** Together. Never print Others.
 **See:** `rooms/together.md`.
-**Live tonight:** not shipped. Not a tab.
+**Live tonight:** not shipped. Not a tab. Get started does not open this room.
 
 Status when it last existed as a shell: “Not yet. Compare later. No compatibility percentage.”
 

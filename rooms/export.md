@@ -5,7 +5,7 @@
 
 ## Rules when it returns
 
-- Not on Welcome. Welcome stays mood.
+- Not on Welcome. Welcome stays mood. The 09-10 Get started stub is also not an export dock.
 - Name the file first. Password is optional.
 - Every export is XOR’d with SHA-256 of the house key, then optionally XOR’d with SHA-256 of the password, then Base64.
 - Shape: `{ v: 2, kind: "soulflake-profile", cipher: "house-v1", locked, name, payload }`

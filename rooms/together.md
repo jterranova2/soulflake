@@ -2,7 +2,7 @@
 
 **Public name:** Together. Never Others on the page.
 **File twin:** `rooms/others.md` (same job, old name).
-**Live tonight:** not shipped.
+**Live tonight:** not shipped. Not behind Get started.
 
 ## Job when carved
 

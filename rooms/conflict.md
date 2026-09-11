@@ -1,6 +1,6 @@
 # Room: Conflict
 
-**Live tonight:** arm not shipped. `Soulflake.html` is Welcome only.
+**Live tonight:** arm not shipped. Welcome Get started only shows g0 frost spines.
 **When carved:** My flake arm `conflict`
 **Lead:** What you do when it heats up. One scene at a time.
 

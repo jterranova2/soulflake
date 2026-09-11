@@ -1,13 +1,13 @@
 # Room: Home / My flake
 
 **Public name:** My flake. Never Me on the page.
-**Live tonight:** not shipped. `Soulflake.html` is Welcome only.
+**Live tonight:** a stub only. Get started on Welcome runs `showMe()`: headline **My flake**, hero locked to g0 frost spines, pitch hidden. No profiles. No questions. No arm zoom.
 
 ## When carved
 
 Named on-device profiles. Press the center after naming. Six arms. One question at a time. Climb out. Arm titles clickable and brighter.
 
-Tap an arm: slow camera zoom into that sector on the same page. Center or Back zooms out. States: frost / forming / fine only. No percents.
+Tap an arm: slow camera zoom into that sector on the same page. Center or Back zooms out. States: frost / forming / fine only. No percents. The 09-10 stub is the frost empty state of that camera, not the camera itself.
 
 Chrome when it returns: **Welcome · My flake · Together**. Insights and Finds stay off chrome.
 
