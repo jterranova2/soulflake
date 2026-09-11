@@ -77,26 +77,19 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 70% 60% at 50% 38%, transparent 42%, rgba(7,11,20,.55) 100%);mix-blend-mode:multiply}
-.fog{position:fixed;inset:-20% -10%;pointer-events:none;z-index:1}
-.fog i{position:absolute;inset:0;opacity:.22;filter:blur(28px);background:radial-gradient(ellipse 55% 28% at 30% 62%, rgba(248,250,252,.18), transparent 70%),radial-gradient(ellipse 50% 24% at 72% 48%, rgba(148,163,184,.12), transparent 68%)}
-.fog i:first-child{animation:fogA 38s ease-in-out infinite}
-.fog i:last-child{animation:fogB 46s ease-in-out infinite reverse;opacity:.16}
-@keyframes fogA{0%,100%{transform:translate(-4%,2%)}50%{transform:translate(5%,-3%)}}
-@keyframes fogB{0%,100%{transform:translate(3%,-2%)}50%{transform:translate(-6%,4%)}}
 .ground{position:fixed;left:0;right:0;bottom:0;height:22vh;pointer-events:none;z-index:2;background:linear-gradient(180deg, transparent, rgba(248,250,252,.03) 40%, rgba(248,250,252,.07));box-shadow:inset 0 -40px 60px rgba(248,250,252,.04)}
 .ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
 .flake-stage{position:relative;width:min(288px,74.4vw);margin:0 auto 1.4rem}
 .flake-stage .mark{width:100%;margin:0}
 .breath{position:absolute;left:50%;top:46%;width:18%;height:38%;transform:translate(-50%,-80%);pointer-events:none;background:radial-gradient(ellipse at 50% 90%, rgba(248,250,252,.22), transparent 70%);filter:blur(8px);opacity:.35;animation:breath 9s ease-in-out infinite}
 @keyframes breath{0%,100%{transform:translate(-50%,-70%) scaleY(.7);opacity:.12}50%{transform:translate(-50%,-95%) scaleY(1.15);opacity:.4}}
-@media (prefers-reduced-motion:reduce){.fog i,.breath{animation:none}.breath,.fog{display:none}}
+@media (prefers-reduced-motion:reduce){.breath{animation:none;display:none}}
 @media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}.rays b{animation:none}}
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
-<div class="fog" aria-hidden="true"><i></i><i></i></div>
 <div class="vignette" aria-hidden="true"></div>
 <div class="ground" aria-hidden="true"></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
