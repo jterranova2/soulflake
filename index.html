@@ -14,11 +14,11 @@ button{font-family:inherit;cursor:pointer}
 .glow{display:none}
 .rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
 .rays{background:none}
-.rays b{left:50%;top:-22%;width:28vw;height:140%;background:linear-gradient(180deg, rgba(248,250,252,.30), rgba(103,232,249,.06) 38%, transparent 80%);filter:blur(18px);transform-origin:50% 0;opacity:.525}
-.rays b:nth-child(1){transform:translateX(-50%) rotate(-11deg);animation:shimmerRay 7.5s ease-in-out infinite}
-.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:22vw;opacity:.41;animation:shimmerRay 9s ease-in-out infinite .8s}
-.rays b:nth-child(3){transform:translateX(-50%) rotate(10deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
-@keyframes shimmerRay{0%,100%{opacity:.54}50%{opacity:.285}}
+.rays b{left:50%;top:-12%;width:7vw;height:88%;background:linear-gradient(180deg, rgba(248,250,252,.22), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(7px);transform-origin:50% 0;opacity:.38}
+.rays b:nth-child(1){transform:translateX(-50%) rotate(-8deg);animation:shimmerRay 7.5s ease-in-out infinite}
+.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:5vw;opacity:.28;animation:shimmerRay 9s ease-in-out infinite .8s}
+.rays b:nth-child(3){transform:translateX(-50%) rotate(8deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
+@keyframes shimmerRay{0%,100%{opacity:.34}50%{opacity:.16}}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
