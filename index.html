@@ -29,7 +29,7 @@ button{font-family:inherit;cursor:pointer}
 .hero{text-align:center;padding:2.4rem 0 2.2rem}
 h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem;line-height:1.06}
 h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
-.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;opacity:0;transition:opacity 1.5s linear}
+.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;opacity:0;transition:opacity 2.6s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
 .mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
 .hero-flake .core{display:none}
@@ -271,7 +271,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   }
   var LINES=["Know thyself, and then be known.","See yourself clearly enough to be met.","The closer you get to you, the closer you can get to anyone.","First an honest picture. Then a real room.","You can’t be found if you can’t be named.","Depth with yourself. Then depth with someone else."];
   var el=document.getElementById("line"), i=0;
-  setTimeout(function(){ if(el) el.style.opacity="1"; }, 400);
+  setTimeout(function(){ if(el) el.style.opacity="1"; }, 1800);
   function nextLine(){
     el.style.opacity="0";
     setTimeout(function(){
@@ -281,7 +281,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
     }, 1500);
     setTimeout(nextLine, 11500);
   }
-  setTimeout(nextLine, 7000);
+  setTimeout(nextLine, 9000);
   var audio=document.getElementById("ambient");
   var btn=document.getElementById("sound");
   var SOUND_KEY="soulflake.sound";
