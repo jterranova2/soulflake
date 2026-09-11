@@ -13,7 +13,8 @@
 button{font-family:inherit;cursor:pointer}
 .glow{display:none}
 .rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
-.rays{background:none}
+.rays{background:none;transition:opacity .7s ease}
+.rays.away{opacity:0}
 .rays b{left:50%;top:-12%;width:7vw;height:88%;background:linear-gradient(180deg, rgba(248,250,252,.22), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(7px);transform-origin:50% 0;opacity:.38}
 .rays b:nth-child(1){transform:translateX(-50%) rotate(-8deg);animation:shimmerRay 7.5s ease-in-out infinite}
 .rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:5vw;opacity:.28;animation:shimmerRay 9s ease-in-out infinite .8s}
@@ -259,6 +260,15 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var b1=document.getElementById("build"), b2=document.getElementById("build-2");
   if(b1) b1.onclick=showMe;
   if(b2) b2.onclick=showMe;
+  var rays=document.querySelector(".rays");
+  var hero=document.querySelector(".hero");
+  if(rays&&hero&&"IntersectionObserver" in window){
+    var io=new IntersectionObserver(function(ents){
+      var e=ents[0];
+      rays.classList.toggle("away", !(e&&e.isIntersecting&&e.intersectionRatio>0.35));
+    },{threshold:[0,0.35,0.6,1]});
+    io.observe(hero);
+  }
   var LINES=["Know yourself. Then be known.","See yourself clearly enough to be met.","The closer you get to you, the closer you can get to anyone.","First an honest picture. Then a real room.","You can’t be found if you can’t be named.","Depth with yourself. Then depth with someone else."];
   var el=document.getElementById("line"), i=0;
   function nextLine(){
