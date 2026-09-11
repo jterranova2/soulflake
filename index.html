@@ -76,7 +76,6 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.05rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
-.vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 70% 60% at 50% 38%, transparent 42%, rgba(7,11,20,.55) 100%);mix-blend-mode:multiply}
 .ground{position:fixed;left:0;right:0;bottom:0;height:22vh;pointer-events:none;z-index:2;background:linear-gradient(180deg, transparent, rgba(248,250,252,.03) 40%, rgba(248,250,252,.07));box-shadow:inset 0 -40px 60px rgba(248,250,252,.04)}
 .ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
 .flake-stage{position:relative;width:min(288px,74.4vw);margin:0 auto 1.4rem}
@@ -90,7 +89,6 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
-<div class="vignette" aria-hidden="true"></div>
 <div class="ground" aria-hidden="true"></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
