@@ -58,7 +58,7 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 @keyframes shimmer{0%,100%{opacity:.35}50%{opacity:1}}
 @keyframes hub{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){
-  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .draw,.hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .shimmer,.hero-flake .hub,.hero-flake .core{animation:none}
+  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .draw,.hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .shimmer,.hero-flake .hub,.hero-flake .core,.pitch-pin .spin{animation:none}
   .hero-flake .draw{stroke-dashoffset:0}
   .hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5{opacity:1}
 }
@@ -66,14 +66,14 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .hero-flake.me .spin-bands{display:none}
 .hero-flake.me .draw{animation:none;stroke-dashoffset:0}
 body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
-.pitch{padding:.4rem 0 2.4rem}
-.block{margin:2.2rem 0;max-width:36rem;display:flex;align-items:center;gap:1.1rem}
-.block:nth-child(even){flex-direction:row-reverse}
-.block img,.block svg{width:42%;flex:0 0 42%;height:auto;border-radius:0;margin:0;display:block;background:transparent}
-.block .copy{flex:1;min-width:0;text-align:left}
-.block .copy h2{margin:0 0 .45rem;font-size:clamp(1.35rem,4.2vw,1.85rem)}
-.block .copy p{margin:.35rem 0 0}
-.block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.05rem}
+.pitch{padding:0 0 1rem}
+.pitch-pin{position:sticky;top:4.6rem;z-index:3;display:flex;justify-content:center;pointer-events:none;margin:0 0 .2rem}
+.pitch-pin svg{width:min(148px,36vw);height:auto;filter:drop-shadow(0 0 18px rgba(167,139,250,.28))}
+.pitch-pin .spin{animation:spin 48s linear infinite;transform-origin:60px 60px}
+.beat{min-height:78vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 0 12vh}
+.beat .n{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(103,232,249,.7);margin:0 0 .55rem}
+.beat h2{margin:0 0 .55rem;font-size:clamp(1.7rem,6vw,2.4rem)}
+.beat p{color:var(--graphite);line-height:1.6;margin:.4rem 0 0;font-size:1.12rem;max-width:28rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
 .vignette{position:fixed;inset:0;pointer-events:none;z-index:1;background:radial-gradient(ellipse 70% 60% at 50% 38%, transparent 42%, rgba(7,11,20,.55) 100%);mix-blend-mode:multiply}
@@ -193,67 +193,49 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
     <button type="button" class="btn" id="build">Get started</button>
   </section>
   <section class="pitch">
-    <div class="block">
-<svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <circle cx="200" cy="150" r="72" fill="none" stroke="#A78BFA" stroke-width="2" stroke-dasharray="16 10" opacity="0.9"/>
-  <circle cx="200" cy="150" r="4" fill="#67E8F9"/>
-</svg>
-      <div class="copy">
+    <div class="pitch-pin" aria-hidden="true">
+      <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+        <g class="spin" fill="none" stroke-linecap="round">
+          <g stroke="#67E8F9" stroke-width="1.2" transform="translate(60 60)">
+            <line y2="-42"/><line transform="rotate(60)" y2="-42"/><line transform="rotate(120)" y2="-42"/>
+            <line transform="rotate(180)" y2="-42"/><line transform="rotate(240)" y2="-42"/><line transform="rotate(300)" y2="-42"/>
+            <g stroke-width=".7" opacity=".85">
+              <g transform="translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+              <g transform="rotate(60) translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+              <g transform="rotate(120) translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+              <g transform="rotate(180) translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+              <g transform="rotate(240) translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+              <g transform="rotate(300) translate(0 -18)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+            </g>
+            <circle r="4" stroke="#A78BFA"/>
+          </g>
+        </g>
+      </svg>
+    </div>
+    <article class="beat">
+      <p class="n">01</p>
       <h2>The hole</h2>
       <p>You walk in blurry.</p>
       <p>Most people are guessing. Guessing who they are. Guessing why the room went cold. Guessing what to do next.</p>
-      </div>
-    </div>
-    <div class="block">
-<svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g transform="translate(200 150)" fill="none" stroke="#F8FAFC" stroke-width="1.5">
-    <line y1="-90" y2="-18"/>
-    <line transform="rotate(60)" y1="-90" y2="-18"/>
-    <line transform="rotate(120)" y1="-90" y2="-18"/>
-    <line transform="rotate(180)" y1="-90" y2="-18"/>
-    <line transform="rotate(240)" y1="-90" y2="-18"/>
-    <line transform="rotate(300)" y1="-90" y2="-18"/>
-    <circle r="8" stroke="#67E8F9"/>
-  </g>
-</svg>
-      <div class="copy">
+    </article>
+    <article class="beat">
+      <p class="n">02</p>
       <h2>Six cuts, not a type</h2>
       <p>Not another letter.</p>
       <p>Traits. Taste. Bond. Values. Conflict. Context. Each arm is its own picture. Empty stays quiet. Filled gets sharp.</p>
-      </div>
-    </div>
-    <div class="block">
-<svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g fill="none" stroke="#A78BFA" stroke-width="1.5">
-    <line x1="80" y1="220" x2="80" y2="90"/>
-    <path d="M200 220 L200 130 L170 100 M200 130 L230 95" />
-    <path d="M320 220 L320 80 L290 50 M320 80 L350 55 M320 120 L355 95 M320 120 L285 90" stroke="#67E8F9"/>
-  </g>
-</svg>
-      <div class="copy">
+    </article>
+    <article class="beat">
+      <p class="n">03</p>
       <h2>It grows when you tell it</h2>
       <p>The more you say, the more it can say back.</p>
       <p>Skip what you want. The flake goes lopsided on purpose. That’s honesty, not a broken quiz.</p>
-      </div>
-    </div>
-    <div class="block">
-<svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-    <g transform="translate(130 150)" fill="none" stroke="#A78BFA" stroke-width="1.4">
-    <line y1="-50" y2="-12"/><line transform="rotate(60)" y1="-50" y2="-12"/><line transform="rotate(120)" y1="-50" y2="-12"/><line transform="rotate(180)" y1="-50" y2="-12"/><line transform="rotate(240)" y1="-50" y2="-12"/><line transform="rotate(300)" y1="-50" y2="-12"/>
-    <circle r="5"/>
-  </g>
-  <g transform="translate(270 150)" fill="none" stroke="#67E8F9" stroke-width="1.4">
-    <line y1="-50" y2="-12"/><line transform="rotate(60)" y1="-50" y2="-12"/><line transform="rotate(120)" y1="-50" y2="-12"/><line transform="rotate(180)" y1="-50" y2="-12"/><line transform="rotate(240)" y1="-50" y2="-12"/><line transform="rotate(300)" y1="-50" y2="-12"/>
-    <circle r="5"/>
-  </g>
-  <circle cx="200" cy="150" r="3" fill="#F8FAFC"/>
-</svg>
-      <div class="copy">
+    </article>
+    <article class="beat">
+      <p class="n">04</p>
       <h2>Built to be used</h2>
       <p>Know yourself. Then be known.</p>
       <p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p>
-      </div>
-    </div>
+    </article>
   </section>
   <p class="cue">Start with one arm.</p>
   <div class="bottom">
