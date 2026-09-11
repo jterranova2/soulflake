@@ -11,60 +11,66 @@
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
-.glow{display:none}
-.rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
-.rays{background:radial-gradient(ellipse 28% 55% at 50% -6%, rgba(103,232,249,.12), transparent 70%);mix-blend-mode:screen}
-.rays b{left:50%;top:-18%;width:18vw;height:130%;background:linear-gradient(180deg, rgba(103,232,249,.165), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(16px);transform-origin:50% 0;opacity:.41}
-.rays b:nth-child(1){transform:translateX(-50%) rotate(-9deg);animation:shimmerRay 7.5s ease-in-out infinite}
-.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:14vw;opacity:.3;animation:shimmerRay 9s ease-in-out infinite .8s}
-.rays b:nth-child(3){transform:translateX(-50%) rotate(8deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
-@keyframes shimmerRay{0%,100%{opacity:.41}50%{opacity:.21}}
+.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 40% at 72% 18%,rgba(167,139,250,.16),transparent 58%),radial-gradient(ellipse 45% 35% at 18% 78%,rgba(26,21,64,.55),transparent 55%),var(--midnight)}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
 .wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC}.wordmark .flake{color:#67E8F9}
-.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72}
+.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72;transition:color .4s,background .4s,box-shadow .4s,border-color .4s,opacity .4s}
 .ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7);opacity:1;box-shadow:0 0 16px rgba(167,139,250,.55)}
 .hero{text-align:center;padding:2.4rem 0 2.2rem}
 h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem;line-height:1.06}
 h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
 .rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;transition:opacity 1.5s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
-.mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;display:block;margin:0 auto 1.4rem}
-.hero-flake .core{display:none}
+.mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent;filter:drop-shadow(0 0 36px rgba(167,139,250,.4))}
+.hero-flake .core{animation:core 8s ease-in-out infinite}
 .hero-flake .spin-bands{animation:spin 64s linear infinite;transform-origin:200px 200px}
 .hero-flake .spin-crystal{animation:spin-rev 96s linear infinite;transform-origin:200px 200px}
+.hero-flake .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 5.5s ease forwards}
+.hero-flake .bloom{opacity:0;animation:bloom 7s ease forwards}
 .hero-flake .g0{animation:hold 22s ease-in-out infinite}
 .hero-flake .g1{animation:rise1 22s ease-in-out infinite}
 .hero-flake .g2{animation:rise2 22s ease-in-out infinite}
 .hero-flake .g3{animation:rise3 22s ease-in-out infinite}
 .hero-flake .g4{animation:rise4 22s ease-in-out infinite}
 .hero-flake .g5{animation:rise5 22s ease-in-out infinite}
+.hero-flake .shimmer{animation:shimmer 4.8s ease-in-out infinite}
+.hero-flake .hub{animation:hub 3.6s ease-in-out infinite}
+@keyframes core{50%{opacity:.55}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes spin-rev{to{transform:rotate(-360deg)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes bloom{0%{opacity:0}35%{opacity:1}100%{opacity:1}}
 @keyframes hold{0%,100%{opacity:.3}12%,80%{opacity:1}}
 @keyframes rise1{0%,8%{opacity:0}16%,76%{opacity:1}88%,100%{opacity:0}}
 @keyframes rise2{0%,16%{opacity:0}24%,70%{opacity:1}84%,100%{opacity:0}}
 @keyframes rise3{0%,24%{opacity:0}32%,66%{opacity:1}80%,100%{opacity:0}}
 @keyframes rise4{0%,32%{opacity:0}40%,62%{opacity:1}76%,100%{opacity:0}}
 @keyframes rise5{0%,42%{opacity:0}50%,60%{opacity:1}72%,100%{opacity:0}}
+@keyframes shimmer{0%,100%{opacity:.35}50%{opacity:1}}
+@keyframes hub{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){
-  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.rays b{animation:none}
-  #snow{display:none}.rotate{transition:none}
+  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .draw,.hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .shimmer,.hero-flake .hub,.hero-flake .core{animation:none}
+  .hero-flake .draw{stroke-dashoffset:0}
+  .hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5{opacity:1}
 }
-.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5,.hero-flake.me .spin-bands{display:none}
+.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5,
+.hero-flake.me .spin-bands{display:none}
+.hero-flake.me .draw{animation:none;stroke-dashoffset:0}
 body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .pitch{padding:.4rem 0 2.4rem}
 .block{margin:2.6rem 0;max-width:36rem}
-.block svg{width:100%;height:auto;border-radius:1rem;margin:0 0 1rem;display:block}
+.block img,.block svg{width:100%;height:auto;border-radius:1rem;margin:0 0 1rem;display:block}
 .block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.18rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
+@media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}}
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
+<div class="glow"></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
   <span class="wordmark">Soul<span class="flake">flake</span></span>
@@ -72,34 +78,152 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 </div>
 <main class="wrap">
   <section class="hero">
-    <svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake">
-      <defs>
-        <filter id="glow" x="-40%" y="-40%" width="180%" height="180%"><feGaussianBlur stdDeviation="1.4" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-        <g id="arm"><line y2="-160" stroke="currentColor" stroke-width="1.35"/><g transform="translate(0 -40)"><line transform="rotate(-60)" y2="-20"/><line transform="rotate(60)" y2="-20"/></g><g transform="translate(0 -74)"><line transform="rotate(-60)" y2="-32"/><line transform="rotate(60)" y2="-32"/></g><g transform="translate(0 -114)"><line transform="rotate(-60)" y2="-24"/><line transform="rotate(60)" y2="-24"/></g></g>
-      </defs>
-      <g class="spin-crystal" fill="none" stroke-linecap="round" filter="url(#glow)">
-        <g class="g5" color="#67E8F9" transform="translate(200 200)"><use href="#arm"/></g>
-        <g class="g5" color="#A78BFA" transform="rotate(60 200 200) translate(200 200)"><use href="#arm"/></g>
-        <g class="g5" color="#60A5FA" transform="rotate(120 200 200) translate(200 200)"><use href="#arm"/></g>
-        <g class="g5" color="#94A3B8" transform="rotate(180 200 200) translate(200 200)"><use href="#arm"/></g>
-        <g class="g5" color="#C084FC" transform="rotate(240 200 200) translate(200 200)"><use href="#arm"/></g>
-        <g class="g5" color="#E2E8F0" transform="rotate(300 200 200) translate(200 200)"><use href="#arm"/></g>
-      </g>
-      <polygon points="200,189 210,194.5 210,205.5 200,211 190,205.5 190,194.5" fill="#070B14" stroke="#67E8F9" stroke-width="1.2"/>
-      <circle cx="200" cy="200" r="2.5" fill="#F8FAFC"/>
-    </svg>
+    <svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake ceiling motion">
+  <defs>
+    <radialGradient id="core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#67E8F9" stop-opacity=".42"/>
+      <stop offset="55%" stop-color="#A78BFA" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#070B14" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <polygon id="star" points="0,-100 22,-38 86.6,-50 38,-10 86.6,50 22,38 0,100 -22,38 -86.6,50 -38,-10 -86.6,-50 -22,-38"/>
+    <polygon id="hex" points="0,-100 86.6,-50 86.6,50 0,100 -86.6,50 -86.6,-50"/>
+    <g id="twig">
+      <line y2="-9" stroke="currentColor" stroke-width=".45"/>
+      <g transform="translate(0 -5)"><line transform="rotate(-60)" y2="-4"/><line transform="rotate(60)" y2="-4"/></g>
+    </g>
+    <g id="arm-g0">
+      <line y2="-26" stroke="currentColor" stroke-width="1.35"/>
+      <polygon points="0,-12 2.6,-14 2.6,-18 0,-20 -2.6,-18 -2.6,-14" stroke="currentColor" stroke-width=".4" fill="none"/>
+    </g>
+    <g id="arm-g1">
+      <line y1="-26" y2="-160" stroke="currentColor" stroke-width="1.35"/>
+      <line x1="-2.6" y1="-22" x2="-2.6" y2="-128" stroke="currentColor" stroke-width=".35" opacity=".8"/>
+      <line x1="2.6" y1="-22" x2="2.6" y2="-128" stroke="currentColor" stroke-width=".35" opacity=".8"/>
+    </g>
+    <g id="arm-g2" stroke="currentColor" fill="none" stroke-width=".95">
+      <g transform="translate(0 -14)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+      <g transform="translate(0 -26)"><line transform="rotate(-60)" y2="-14"/><line transform="rotate(60)" y2="-14"/></g>
+      <g transform="translate(0 -40)"><line transform="rotate(-60)" y2="-20"/><line transform="rotate(60)" y2="-20"/></g>
+    </g>
+    <g id="arm-g3" stroke="currentColor" fill="none" stroke-width=".95">
+      <g transform="translate(0 -56)"><line transform="rotate(-60)" y2="-26"/><line transform="rotate(60)" y2="-26"/></g>
+      <g transform="translate(0 -74)"><line transform="rotate(-60)" y2="-32"/><line transform="rotate(60)" y2="-32"/></g>
+    </g>
+    <g id="arm-g4" stroke="currentColor" fill="none" stroke-width=".95">
+      <g transform="translate(0 -94)"><line transform="rotate(-60)" y2="-30"/><line transform="rotate(60)" y2="-30"/></g>
+      <g transform="translate(0 -114)"><line transform="rotate(-60)" y2="-24"/><line transform="rotate(60)" y2="-24"/></g>
+      <g transform="translate(0 -132)"><line transform="rotate(-60)" y2="-16"/><line transform="rotate(60)" y2="-16"/></g>
+      <g transform="translate(0 -146)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+      <polygon points="-6.4,-150 6.4,-150 9.4,-158 6.4,-166 -6.4,-166 -9.4,-158" stroke-width=".8"/>
+    </g>
+    <g id="arm-g5" stroke="currentColor" fill="none">
+      <g transform="translate(0 -26) rotate(-60) translate(0 -8)"><use href="#twig"/></g>
+      <g transform="translate(0 -26) rotate(60) translate(0 -8)"><use href="#twig"/></g>
+      <g transform="translate(0 -40) rotate(-60) translate(0 -12)"><use href="#twig"/></g>
+      <g transform="translate(0 -40) rotate(60) translate(0 -12)"><use href="#twig"/></g>
+      <g transform="translate(0 -56) rotate(-60) translate(0 -14)"><use href="#twig"/></g>
+      <g transform="translate(0 -56) rotate(60) translate(0 -14)"><use href="#twig"/></g>
+      <g transform="translate(0 -74) rotate(-60) translate(0 -18)"><use href="#twig"/></g>
+      <g transform="translate(0 -74) rotate(60) translate(0 -18)"><use href="#twig"/></g>
+      <g transform="translate(0 -94) rotate(-60) translate(0 -16)"><use href="#twig"/></g>
+      <g transform="translate(0 -94) rotate(60) translate(0 -16)"><use href="#twig"/></g>
+      <g transform="translate(0 -114) rotate(-60) translate(0 -13)"><use href="#twig"/></g>
+      <g transform="translate(0 -114) rotate(60) translate(0 -13)"><use href="#twig"/></g>
+    </g>
+  </defs>
+  <circle class="core" cx="200" cy="200" r="118" fill="url(#core)"/>
+  <g class="spin-bands bloom" transform="translate(200 200)" fill="none" stroke-linejoin="miter" filter="url(#glow)">
+    <g class="g0"><use href="#hex" transform="scale(.16)" stroke="#94A3B8" stroke-width="1"/><use href="#star" transform="scale(.22)" stroke="#94A3B8" stroke-width=".55"/></g>
+    <g class="g1"><use href="#hex" transform="scale(.32)" stroke="#A78BFA" stroke-width=".9"/><use href="#star" transform="scale(.40)" stroke="#A78BFA" stroke-width=".5"/></g>
+    <g class="g2"><use href="#hex" transform="scale(.50)" stroke="#93C5FD" stroke-width=".8"/><use href="#star" transform="scale(.58)" stroke="#93C5FD" stroke-width=".45"/></g>
+    <g class="g3"><use href="#hex" transform="scale(.68)" stroke="#C4B5FD" stroke-width=".7"/><use href="#star" transform="scale(.76)" stroke="#C4B5FD" stroke-width=".4"/></g>
+    <g class="g4"><use href="#hex" transform="scale(.86)" stroke="#67E8F9" stroke-width=".65"/><use href="#star" transform="scale(.93)" stroke="#67E8F9" stroke-width=".38"/></g>
+    <g class="g5"><use href="#hex" transform="scale(1.04)" stroke="#E2E8F0" stroke-width=".55"/><use href="#star" transform="scale(1.12)" stroke="#E2E8F0" stroke-width=".32"/></g>
+  </g>
+  <g class="spin-crystal" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#glow)">
+    <g color="#67E8F9" transform="translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+    <g color="#A78BFA" transform="rotate(60 200 200) translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+    <g color="#93C5FD" transform="rotate(120 200 200) translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+    <g color="#94A3B8" transform="rotate(180 200 200) translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+    <g color="#C4B5FD" transform="rotate(240 200 200) translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+    <g color="#E2E8F0" transform="rotate(300 200 200) translate(200 200)"><use class="g0" href="#arm-g0"/><use class="g1" href="#arm-g1"/><use class="g2" href="#arm-g2"/><use class="g3" href="#arm-g3"/><use class="g4" href="#arm-g4"/><use class="g5 shimmer" href="#arm-g5"/></g>
+  </g>
+  <g class="hub" transform-origin="200px 200px">
+    <polygon points="200,189 210,194.5 210,205.5 200,211 190,205.5 190,194.5" fill="#070B14" stroke="#67E8F9" stroke-width="1.2"/>
+    <circle cx="200" cy="200" r="2.5" fill="#F8FAFC"/>
+  </g>
+</svg>
     <h1>Meet your Soulflake</h1>
     <p class="rotate" id="line">Know yourself. Then be known.</p>
     <button type="button" class="btn" id="build">Get started</button>
   </section>
   <section class="pitch">
-    <div class="block"><h2>The hole</h2><p>You walk in blurry.</p><p>Most people are guessing. Guessing who they are. Guessing why the room went cold. Guessing what to do next.</p></div>
-    <div class="block"><h2>Six cuts, not a type</h2><p>Not another letter.</p><p>Traits. Taste. Bond. Values. Conflict. Context. Each arm is its own picture. Empty stays quiet. Filled gets sharp.</p></div>
-    <div class="block"><h2>It grows when you tell it</h2><p>The more you say, the more it can say back.</p><p>Skip what you want. The flake goes lopsided on purpose. That is honesty, not a broken quiz.</p></div>
-    <div class="block"><h2>Built to be used</h2><p>Know yourself. Then be known.</p><p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p></div>
+    <div class="block">
+      <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="300" fill="#070B14"/>
+  <circle cx="200" cy="150" r="72" fill="none" stroke="#A78BFA" stroke-width="2" stroke-dasharray="16 10" opacity="0.9"/>
+  <circle cx="200" cy="150" r="4" fill="#67E8F9"/>
+</svg>
+      <h2>The hole</h2>
+      <p>You walk in blurry.</p>
+      <p>Most people are guessing. Guessing who they are. Guessing why the room went cold. Guessing what to do next.</p>
+    </div>
+    <div class="block">
+      <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="300" fill="#070B14"/>
+  <g transform="translate(200 150)" fill="none" stroke="#F8FAFC" stroke-width="1.5">
+    <line y1="-90" y2="-18"/>
+    <line transform="rotate(60)" y1="-90" y2="-18"/>
+    <line transform="rotate(120)" y1="-90" y2="-18"/>
+    <line transform="rotate(180)" y1="-90" y2="-18"/>
+    <line transform="rotate(240)" y1="-90" y2="-18"/>
+    <line transform="rotate(300)" y1="-90" y2="-18"/>
+    <circle r="8" stroke="#67E8F9"/>
+  </g>
+</svg>
+      <h2>Six cuts, not a type</h2>
+      <p>Not another letter.</p>
+      <p>Traits. Taste. Bond. Values. Conflict. Context. Each arm is its own picture. Empty stays quiet. Filled gets sharp.</p>
+    </div>
+    <div class="block">
+      <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="300" fill="#070B14"/>
+  <g fill="none" stroke="#A78BFA" stroke-width="1.5">
+    <line x1="80" y1="220" x2="80" y2="90"/>
+    <path d="M200 220 L200 130 L170 100 M200 130 L230 95" />
+    <path d="M320 220 L320 80 L290 50 M320 80 L350 55 M320 120 L355 95 M320 120 L285 90" stroke="#67E8F9"/>
+  </g>
+</svg>
+      <h2>It grows when you tell it</h2>
+      <p>The more you say, the more it can say back.</p>
+      <p>Skip what you want. The flake goes lopsided on purpose. That’s honesty, not a broken quiz.</p>
+    </div>
+    <div class="block">
+      <svg viewBox="0 0 400 300" width="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <rect width="400" height="300" fill="#070B14"/>
+  <g transform="translate(130 150)" fill="none" stroke="#A78BFA" stroke-width="1.4">
+    <line y1="-50" y2="-12"/><line transform="rotate(60)" y1="-50" y2="-12"/><line transform="rotate(120)" y1="-50" y2="-12"/><line transform="rotate(180)" y1="-50" y2="-12"/><line transform="rotate(240)" y1="-50" y2="-12"/><line transform="rotate(300)" y1="-50" y2="-12"/>
+    <circle r="5"/>
+  </g>
+  <g transform="translate(270 150)" fill="none" stroke="#67E8F9" stroke-width="1.4">
+    <line y1="-50" y2="-12"/><line transform="rotate(60)" y1="-50" y2="-12"/><line transform="rotate(120)" y1="-50" y2="-12"/><line transform="rotate(180)" y1="-50" y2="-12"/><line transform="rotate(240)" y1="-50" y2="-12"/><line transform="rotate(300)" y1="-50" y2="-12"/>
+    <circle r="5"/>
+  </g>
+  <circle cx="200" cy="150" r="3" fill="#F8FAFC"/>
+</svg>
+      <h2>Built to be used</h2>
+      <p>Know yourself. Then be known.</p>
+      <p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p>
+    </div>
   </section>
   <p class="cue">Start with one arm.</p>
-  <div class="bottom"><button type="button" class="btn" id="build-2">Get started</button></div>
+  <div class="bottom">
+    <button type="button" class="btn" id="build-2">Get started</button>
+  </div>
 </main>
 <script>
 (function(){
@@ -113,7 +237,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var b1=document.getElementById("build"), b2=document.getElementById("build-2");
   if(b1) b1.onclick=showMe;
   if(b2) b2.onclick=showMe;
-  var LINES=["Know yourself. Then be known.","See yourself clearly enough to be met.","The closer you get to you, the closer you can get to anyone.","First an honest picture. Then a real room.","You cannot be found if you cannot be named.","Depth with yourself. Then depth with someone else."];
+  var LINES=["Know yourself. Then be known.","See yourself clearly enough to be met.","The closer you get to you, the closer you can get to anyone.","First an honest picture. Then a real room.","You can’t be found if you can’t be named.","Depth with yourself. Then depth with someone else."];
   var el=document.getElementById("line"), i=0;
   function nextLine(){
     el.style.opacity="0";
@@ -130,14 +254,35 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
   var playing=false;
+  var ctx=null, srcNode=null, gainNode=null;
+  var GAIN=2.2;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
     btn.setAttribute("aria-pressed",on?"true":"false");
   }
+  function hookGain(){
+    if(srcNode){
+      if(ctx && ctx.state==="suspended") ctx.resume();
+      return;
+    }
+    try{
+      var AC=window.AudioContext||window.webkitAudioContext;
+      if(!AC) return;
+      ctx=new AC();
+      srcNode=ctx.createMediaElementSource(audio);
+      gainNode=ctx.createGain();
+      gainNode.gain.value=GAIN;
+      srcNode.connect(gainNode);
+      gainNode.connect(ctx.destination);
+      if(ctx.state==="suspended") ctx.resume();
+    }catch(e){}
+  }
   function startPlay(){
-    wantOn=true; audio.muted=false;
+    wantOn=true;
+    audio.muted=false;
     try{ audio.volume=1; }catch(e){}
+    hookGain();
     var p=audio.play();
     function ok(){ playing=true; setBtn(true); }
     if(p&&p.then) p.then(ok).catch(function(){ playing=false; if(wantOn) setBtn(true); });
@@ -146,24 +291,32 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   function stopPlay(){
     playing=false; wantOn=false;
     localStorage.setItem(SOUND_KEY,"off");
-    setBtn(false); audio.pause();
+    setBtn(false);
+    audio.pause();
+    if(ctx && ctx.state==="running") ctx.suspend();
   }
   btn.addEventListener("pointerdown",function(e){
-    e.preventDefault(); e.stopPropagation();
+    e.preventDefault();
+    e.stopPropagation();
     if(wantOn && playing && !audio.paused) stopPlay();
     else { localStorage.removeItem(SOUND_KEY); startPlay(); }
   });
+  btn.addEventListener("click",function(e){ e.preventDefault(); e.stopPropagation(); });
   setBtn(wantOn);
   if(wantOn) startPlay();
-  window.addEventListener("pointerdown", function(e){
+  function unlock(e){
     if(!wantOn) return;
     if(btn.contains(e.target)) return;
+    hookGain();
     if(audio.paused || !playing) startPlay();
-  }, {passive:true});
+  }
+  window.addEventListener("pointerdown", unlock, {passive:true});
+  window.addEventListener("touchstart", unlock, {passive:true});
+  window.addEventListener("keydown", function(){ if(wantOn && (audio.paused||!playing)) startPlay(); });
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
-  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.08+Math.random()*.22,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
+  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.15+Math.random()*.55,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
   function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}); }
   function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
   resize(); frame(); addEventListener("resize",resize);
