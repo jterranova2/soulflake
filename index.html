@@ -32,18 +32,18 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
 .mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
 .hero-flake .core{display:none}
-.hero-flake .spin-bands{animation:spin 64s linear infinite;transform-origin:200px 200px}
-.hero-flake .spin-crystal{animation:spin-rev 96s linear infinite;transform-origin:200px 200px}
-.hero-flake .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 5.5s ease forwards}
-.hero-flake .bloom{opacity:0;animation:bloom 7s ease forwards}
-.hero-flake .g0{animation:hold 22s ease-in-out infinite}
-.hero-flake .g1{animation:rise1 22s ease-in-out infinite}
-.hero-flake .g2{animation:rise2 22s ease-in-out infinite}
-.hero-flake .g3{animation:rise3 22s ease-in-out infinite}
-.hero-flake .g4{animation:rise4 22s ease-in-out infinite}
-.hero-flake .g5{animation:rise5 22s ease-in-out infinite}
-.hero-flake .shimmer{animation:shimmer 4.8s ease-in-out infinite}
-.hero-flake .hub{animation:hub 3.6s ease-in-out infinite}
+.hero-flake .spin-bands{animation:spin 51.2s linear infinite;transform-origin:200px 200px}
+.hero-flake .spin-crystal{animation:spin-rev 76.8s linear infinite;transform-origin:200px 200px}
+.hero-flake .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 4.4s ease forwards}
+.hero-flake .bloom{opacity:0;animation:bloom 5.6s ease forwards}
+.hero-flake .g0{animation:hold 17.6s ease-in-out infinite}
+.hero-flake .g1{animation:rise1 17.6s ease-in-out infinite}
+.hero-flake .g2{animation:rise2 17.6s ease-in-out infinite}
+.hero-flake .g3{animation:rise3 17.6s ease-in-out infinite}
+.hero-flake .g4{animation:rise4 17.6s ease-in-out infinite}
+.hero-flake .g5{animation:rise5 17.6s ease-in-out infinite}
+.hero-flake .shimmer{animation:shimmer 3.84s ease-in-out infinite}
+.hero-flake .hub{animation:hub 2.88s ease-in-out infinite}
 @keyframes core{50%{opacity:.55}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes spin-rev{to{transform:rotate(-360deg)}}
@@ -343,7 +343,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
-  function spawn(y,moon){ var m=!!moon||Math.random()>.91; return {x:Math.random()*w,y:y?Math.random()*h:-12,r:m?2.2+Math.random()*3.2:.6+Math.random()*1.8,vy:m?.03+Math.random()*.08:.08+Math.random()*.22,vx:-.12+Math.random()*.24,a:m?.08+Math.random()*.18:.15+Math.random()*.45,tw:Math.random()*6.28,tws:m?.004+Math.random()*.01:.01+Math.random()*.02,cyan:!m&&Math.random()>.82,moon:m}; }
+  function spawn(y,moon){ var m=!!moon||Math.random()>.91; return {x:Math.random()*w,y:y?Math.random()*h:-12,r:m?2.2+Math.random()*3.2:.6+Math.random()*1.8,vy:m?.038+Math.random()*.10:.10+Math.random()*.275,vx:-.12+Math.random()*.24,a:m?.08+Math.random()*.18:.15+Math.random()*.45,tw:Math.random()*6.28,tws:m?.004+Math.random()*.01:.01+Math.random()*.02,cyan:!m&&Math.random()>.82,moon:m}; }
   function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}).concat(Array.from({length:8},function(){return spawn(true,true);})); }
   function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
   resize(); frame(); addEventListener("resize",resize);
