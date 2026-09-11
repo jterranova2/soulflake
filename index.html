@@ -80,9 +80,6 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
 .flake-stage{position:relative;width:min(288px,74.4vw);margin:0 auto 1.4rem}
 .flake-stage .mark{width:100%;margin:0}
-.breath{position:absolute;left:50%;top:46%;width:18%;height:38%;transform:translate(-50%,-80%);pointer-events:none;background:radial-gradient(ellipse at 50% 90%, rgba(248,250,252,.22), transparent 70%);filter:blur(8px);opacity:.35;animation:breath 9s ease-in-out infinite}
-@keyframes breath{0%,100%{transform:translate(-50%,-70%) scaleY(.7);opacity:.12}50%{transform:translate(-50%,-95%) scaleY(1.15);opacity:.4}}
-@media (prefers-reduced-motion:reduce){.breath{animation:none;display:none}}
 @media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}.rays b{animation:none}}
 </style>
 </head>
@@ -98,7 +95,6 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 <main class="wrap">
   <section class="hero">
     <div class="flake-stage">
-    <div class="breath"></div>
     <svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake ceiling motion">
   <defs>
     <radialGradient id="core" cx="50%" cy="50%" r="50%">
