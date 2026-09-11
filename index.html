@@ -11,7 +11,14 @@
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
-.glow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(ellipse 55% 40% at 72% 18%,rgba(167,139,250,.16),transparent 58%),radial-gradient(ellipse 45% 35% at 18% 78%,rgba(26,21,64,.55),transparent 55%),var(--midnight)}
+.glow{display:none}
+.rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
+.rays{background:radial-gradient(ellipse 28% 55% at 50% -6%, rgba(103,232,249,.12), transparent 70%);mix-blend-mode:screen}
+.rays b{left:50%;top:-18%;width:18vw;height:130%;background:linear-gradient(180deg, rgba(103,232,249,.165), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(16px);transform-origin:50% 0;opacity:.41}
+.rays b:nth-child(1){transform:translateX(-50%) rotate(-9deg);animation:shimmerRay 7.5s ease-in-out infinite}
+.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:14vw;opacity:.3;animation:shimmerRay 9s ease-in-out infinite .8s}
+.rays b:nth-child(3){transform:translateX(-50%) rotate(8deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
+@keyframes shimmerRay{0%,100%{opacity:.41}50%{opacity:.21}}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0}
@@ -23,8 +30,8 @@ h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
 .rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;transition:opacity 1.5s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
-.mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent;filter:drop-shadow(0 0 36px rgba(167,139,250,.4))}
-.hero-flake .core{animation:core 8s ease-in-out infinite}
+.mark{width:min(288px,74.4vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
+.hero-flake .core{display:none}
 .hero-flake .spin-bands{animation:spin 64s linear infinite;transform-origin:200px 200px}
 .hero-flake .spin-crystal{animation:spin-rev 96s linear infinite;transform-origin:200px 200px}
 .hero-flake .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 5.5s ease forwards}
@@ -65,12 +72,12 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.18rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
 .bottom{text-align:center;padding:0 0 4.2rem}
-@media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}}
+@media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}.rays b{animation:none}}
 </style>
 </head>
 <body>
 <canvas id="snow" aria-hidden="true"></canvas>
-<div class="glow"></div>
+<div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
 <audio id="ambient" loop autoplay playsinline preload="auto" src="assets/audio/AUDIO-welcome.mp3"></audio>
 <div class="wrap top">
   <span class="wordmark">Soul<span class="flake">flake</span></span>
@@ -316,7 +323,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var c=document.getElementById("snow"), g=c.getContext("2d");
   if(!g||matchMedia("(prefers-reduced-motion: reduce)").matches) return;
   var w=0,h=0,flakes=[];
-  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.15+Math.random()*.55,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
+  function spawn(y){ return {x:Math.random()*w,y:y?Math.random()*h:-8,r:.6+Math.random()*1.8,vy:.08+Math.random()*.22,vx:-.15+Math.random()*.3,a:.15+Math.random()*.45,tw:Math.random()*6.28,tws:.01+Math.random()*.02,cyan:Math.random()>.82}; }
   function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(80,Math.floor(w*h/18000))},function(){return spawn(true);}); }
   function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
   resize(); frame(); addEventListener("resize",resize);
