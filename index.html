@@ -32,36 +32,31 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
 .mark{width:min(415px,96vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
-.hero-flake .core{display:none}
+.hero-flake .core{opacity:0;animation:stage-core 24s ease-in-out infinite}
 .hero-flake .spin-bands{animation:spin 51.2s linear infinite;transform-origin:200px 200px}
 .hero-flake .spin-crystal{animation:spin-rev 76.8s linear infinite;transform-origin:200px 200px}
-.hero-flake .draw{stroke-dasharray:420;stroke-dashoffset:420;animation:draw 4.4s ease forwards}
-.hero-flake .bloom{opacity:0;animation:bloom 5.6s ease forwards}
-.hero-flake .g0{animation:hold 17.6s ease-in-out infinite}
-.hero-flake .g1{animation:rise1 17.6s ease-in-out infinite}
-.hero-flake .g2{animation:rise2 17.6s ease-in-out infinite}
-.hero-flake .g3{animation:rise3 17.6s ease-in-out infinite}
-.hero-flake .g4{animation:rise4 17.6s ease-in-out infinite}
-.hero-flake .g5{animation:rise5 17.6s ease-in-out infinite}
+.hero-flake .g0{opacity:0;animation:stage-g0 24s ease-in-out infinite}
+.hero-flake .g1{opacity:0;animation:stage-g1 24s ease-in-out infinite}
+.hero-flake .g2{opacity:0;animation:stage-g2 24s ease-in-out infinite}
+.hero-flake .g3{opacity:0;animation:stage-g3 24s ease-in-out infinite}
+.hero-flake .g4{opacity:0;animation:stage-g4 24s ease-in-out infinite}
+.hero-flake .g5{opacity:0;animation:stage-g5 24s ease-in-out infinite}
 .hero-flake .shimmer{animation:shimmer 3.84s ease-in-out infinite}
 .hero-flake .hub{animation:hub 2.88s ease-in-out infinite}
-@keyframes core{50%{opacity:.55}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes spin-rev{to{transform:rotate(-360deg)}}
-@keyframes draw{to{stroke-dashoffset:0}}
-@keyframes bloom{0%{opacity:0}35%{opacity:1}100%{opacity:1}}
-@keyframes hold{0%,100%{opacity:.3}12%,80%{opacity:1}}
-@keyframes rise1{0%,8%{opacity:0}16%,76%{opacity:1}88%,100%{opacity:0}}
-@keyframes rise2{0%,16%{opacity:0}24%,70%{opacity:1}84%,100%{opacity:0}}
-@keyframes rise3{0%,24%{opacity:0}32%,66%{opacity:1}80%,100%{opacity:0}}
-@keyframes rise4{0%,32%{opacity:0}40%,62%{opacity:1}76%,100%{opacity:0}}
-@keyframes rise5{0%,42%{opacity:0}50%,60%{opacity:1}72%,100%{opacity:0}}
+@keyframes stage-core{0%,8%{opacity:0}14%,88%{opacity:.7}96%,100%{opacity:0}}
+@keyframes stage-g0{0%,16%{opacity:0}22%,86%{opacity:1}94%,100%{opacity:0}}
+@keyframes stage-g1{0%,28%{opacity:0}34%,82%{opacity:1}90%,100%{opacity:0}}
+@keyframes stage-g2{0%,38%{opacity:0}44%,78%{opacity:1}86%,100%{opacity:0}}
+@keyframes stage-g3{0%,48%{opacity:0}54%,74%{opacity:1}82%,100%{opacity:0}}
+@keyframes stage-g4{0%,58%{opacity:0}64%,70%{opacity:1}78%,100%{opacity:0}}
+@keyframes stage-g5{0%,66%{opacity:0}72%,76%{opacity:1}84%,100%{opacity:0}}
 @keyframes shimmer{0%,100%{opacity:.35}50%{opacity:1}}
 @keyframes hub{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
 @media (prefers-reduced-motion:reduce){
-  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .draw,.hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .shimmer,.hero-flake .hub,.hero-flake .core{animation:none}
-  .hero-flake .draw{stroke-dashoffset:0}
-  .hero-flake .bloom,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5{opacity:1}
+  .hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .shimmer,.hero-flake .hub,.hero-flake .core{animation:none}
+  .hero-flake .core,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5{opacity:1}
 }
 .hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5,
 .hero-flake.me .spin-bands{display:none}
