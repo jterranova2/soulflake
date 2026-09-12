@@ -1,19 +1,19 @@
 # Soulflake-Build-v0
 
-Live file. 2026-09-10 night. Layer 0 Welcome plus a thin Get started stub. Rooms caught up.
+Live file. 2026-09-11 night. Layer 0 Welcome magazine brochure plus a thin Get started stub. Rooms caught up.
 
-## What changed since 09-09
+## What changed since 09-10
 
 Root homepage is still Welcome. `Soulflake.html` is the same Welcome.
 
 One word: Soul frost, flake cyan.
-Hero: live six-color dendrite SVG, 20% larger, spin + grow.
+Hero: live six-color dendrite SVG, `min(415px, 96vw)`, last working loop starting at the hub.
 One button: Get started, weight 500. Click shows My flake at g0 frost spines. No questions yet.
-Six rotating lines from the room brief (7s, then 11.5s).
-Four pitch blocks in CEO order as inline SVGs. Commercial JPEGs and frames 80–83 files are out.
-Sound: `AUDIO-welcome.mp3`, on by default, gain 2.2, persist off.
-Atmosphere kept: rays, fog, vignette, breath, ground frost, slower snow.
-Atmosphere killed: ice ring, glint sweep, halo, Frost Waltz.
+Six attributed rotating lines. First: Know thyself, and then be known.
+Four zigzag pitch cards. First card is The center, not The hole. Commercial JPEGs still out.
+Sound: `index-Frozen-Star.mp3`, on by default, gain 2.2 once, persist off.
+Atmosphere kept: tight moonlight shafts, ground frost, snow.
+Atmosphere killed on 09-11: fog, vignette oval, breath glow, slop marquee, grow-then-peel flake, old welcome mixes.
 No export. No Insights. No Finds. Never Me. Never Others.
 
 ## Link

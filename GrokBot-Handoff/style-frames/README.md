@@ -14,13 +14,15 @@ Ice Lab. No stock. No Insights. No Finds. Never Me or Others on a frame title.
 
 Do not ship 70–74 into Soulflake.html from a Welcome-only pass.
 
-## 80–83 — Welcome pitch (referenced live, files missing)
+## 80–83 — Welcome pitch (retired as live files)
 
-| File | Block |
-|---|---|
-| `80-welcome-hole.jpg` | The hole |
-| `81-welcome-sixcuts.jpg` | Six cuts, not a type |
-| `82-welcome-grows.jpg` | It grows when you tell it |
-| `83-welcome-together.jpg` | Built to be used |
+Live Welcome uses inline SVGs in zigzag magazine cards. Do not put 80–83 JPEGs back on `index.html`.
 
-`index.html` looks for these at site root. `Soulflake.html` looks here. A text stub for 80 was removed. Real JPEGs still need to land.
+| File | Was | Live block now |
+|---|---|---|
+| `80-welcome-hole.jpg` | The hole | **The center** — hub drawing, “Every flake starts here.” |
+| `81-welcome-sixcuts.jpg` | Six cuts, not a type | same title, inline SVG |
+| `82-welcome-grows.jpg` | It grows when you tell it | same title, inline SVG |
+| `83-welcome-together.jpg` | Built to be used | same title, inline SVG |
+
+Keep the old JPEG names only as history. The 09-11 first card is The center + hero hub, not The hole.
