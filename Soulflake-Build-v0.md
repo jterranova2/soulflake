@@ -1,6 +1,6 @@
 # Soulflake-Build-v0
 
-Live file. 2026-09-11 night. Layer 0 Welcome magazine brochure plus a thin Get started stub. Rooms caught up.
+Live file. Last code change 2026-09-11 night. Rooms re-checked 2026-09-12 night — still the Layer 0 Welcome magazine brochure plus a thin Get started stub. No new html on 09-12.
 
 ## What changed since 09-10
 

@@ -1,9 +1,11 @@
-# Soulflake rooms — catch-up through 2026-09-11 night
+# Soulflake rooms — catch-up through 2026-09-12 night
 
 Shared brief for every room. Two layers:
 
 1. **Live now** — what is actually in `index.html` / `Soulflake.html` tonight.
 2. **Said in chat, not landed** — keep these so the next carve does not thin them again.
+
+Checked 2026-09-12 night PDT against `main` at `4770ead`. No Soulflake commits after the 09-11-night room catch-up. Live page and room files still match that canon. No new product copy from a 09-12 chat thread was available to this pass, so nothing extra was invented into the rooms.
 
 Live: https://jterranova2.github.io/soulflake/  
 Custom domain: https://soulflake.justinterranova.com  
@@ -75,6 +77,8 @@ Restore on the next carve. Do not treat Layer 0 Welcome + the g0 stub as the who
 Tried on 09-10 and discarded: commercial JPEGs `IMG-commercial-1-4`, ice ring, glint sweep, halo, Web Audio mute-at-zero, Frost Waltz as the Welcome bed.
 
 Tried on 09-11 and discarded: fog, vignette oval, breath glow, slop (unattributed) marquee, grow-by-stages-then-peel flake motion, `AUDIO-welcome.mp3` / `welcome-8.mp3` as the bed.
+
+09-12 night: no new Welcome / arm / chrome landings. Drive copy of the Taste Matrix and `SOULFLAKE CONCEPT.xlsx` were opened earlier in the UTC day; they did not change the chip list already kept in `rooms/taste.md`. A separate private repo `Home-and-Family` was created; that is not a Soulflake room.
 
 Justin sample flake is **dev / export only**, never a default user on a phone:
 

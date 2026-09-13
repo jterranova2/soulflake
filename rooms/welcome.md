@@ -42,3 +42,7 @@
 
 - Get started does not name a profile, does not ask a question, does not grow an arm past frost.
 - Arm-zoom frames 70–74 still missing.
+
+## Checked 09-12 night
+
+Live `index.html` still matches this file. No new Welcome commits on 09-12. Do not treat a quiet day as permission to thin the 09-11 brochure, quotes, Frozen Star bed, or last-working flake loop.
