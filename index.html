@@ -5,155 +5,67 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Soulflake</title>
 <meta name="theme-color" content="#070B14" />
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="Soulflake">
 <meta property="og:title" content="Soulflake">
 <meta property="og:description" content="Know thyself, and then be known.">
-<meta property="og:url" content="https://soulflake.justinterranova.com/">
 <meta property="og:image" content="https://soulflake.justinterranova.com/assets/share-og.png">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Soulflake">
-<meta name="twitter:description" content="Know thyself, and then be known.">
-<meta name="twitter:image" content="https://soulflake.justinterranova.com/assets/share-og.png">
 <link rel="icon" type="image/png" href="assets/favicon.png" />
-<link rel="apple-touch-icon" href="assets/favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
-*{box-sizing:border-box}html{margin:0;background:var(--midnight)}body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;overflow-x:clip;overflow-y:auto;overscroll-behavior-y:contain}
+*{box-sizing:border-box}html,body{margin:0;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
-.glow{display:none}
-.rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
-.rays{background:none;transition:opacity .7s ease}
-.rays.away{opacity:0}
-.rays b{left:50%;top:-12%;width:7vw;height:88%;background:linear-gradient(180deg, rgba(248,250,252,.22), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(7px);transform-origin:50% 0;opacity:.38}
-.rays b:nth-child(1){transform:translateX(-50%) rotate(-8deg);animation:shimmerRay 7.5s ease-in-out infinite}
-.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:5vw;opacity:.28;animation:shimmerRay 9s ease-in-out infinite .8s}
-.rays b:nth-child(3){transform:translateX(-50%) rotate(8deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
-@keyframes shimmerRay{0%,100%{opacity:.34}50%{opacity:.16}}
-#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.rays{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% -10%, rgba(248,250,252,.18), transparent 46%)}
+.ground{position:fixed;left:0;right:0;bottom:0;height:18vh;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(248,250,252,.07))}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;gap:.7rem}
-.wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC;background:none;border:0;padding:0;font-family:inherit}.wordmark .flake{color:#67E8F9}
+.wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
 .nav{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;justify-content:flex-end}
-.nav button.go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem;padding:.2rem .35rem}
+.nav .go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem}
 body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--frost)}
-.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10);opacity:.72;transition:color .4s,background .4s,box-shadow .4s,border-color .4s,opacity .4s}
-.ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7);opacity:1;box-shadow:0 0 16px rgba(167,139,250,.55)}
+.ambient{min-height:44px;border-radius:999px;padding:.45rem .85rem;font-size:.8rem;color:rgba(148,163,184,.55);background:rgba(26,21,64,.28);border:1px solid rgba(248,250,252,.10)}
+.ambient.on{color:#F8FAFC;background:rgba(167,139,250,.22);border-color:rgba(167,139,250,.7)}
 .hero{text-align:center;padding:.8rem 0 2.2rem}
-h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.6rem,8vw,4.2rem);letter-spacing:-.03em;margin:0 0 1.1rem;line-height:1.06}
-h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.9rem,5vw,2.5rem);margin:0 0 .7rem}
-.rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;opacity:0;transition:opacity 1.8s linear}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
-.mark{width:min(415px,96vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
-.hero-flake .flake{opacity:0;animation:intro 1.6s ease-out forwards}
-.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out infinite;animation-delay:1.6s;animation-fill-mode:both}
-.hero-flake .spin-bands{animation:spin-cw 70s linear infinite}
-.hero-flake .spin-crystal{animation:spin-ccw 56s linear infinite}
-.hero-flake .nucleus{transform:scale(.45)}
-.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5{opacity:1;animation-fill-mode:both}
-.hero-flake .seat{animation:seat 8s ease-in-out 1.6s infinite}
-.hero-flake .g0{animation:wave0 3.8s ease-in-out 1.6s infinite}
-.hero-flake .g1{animation:wave1 5.1s ease-in-out 1.6s infinite}
-.hero-flake .g2{animation:wave2 6.4s ease-in-out 1.6s infinite}
-.hero-flake .g3{animation:wave3 4.4s ease-in-out 2.4s infinite}
-.hero-flake .g4{animation:wave4 7.2s ease-in-out 3s infinite}
-.hero-flake .g5{animation:wave5 3.2s ease-in-out 3.7s infinite}
-.hero-flake .rg0{animation:ring0 4.2s ease-in-out 1.6s infinite}
-.hero-flake .rg1{animation:ring1 6s ease-in-out 2s infinite}
-.hero-flake .rg2{animation:ring2 3.6s ease-in-out 2.6s infinite}
-.hero-flake .rg3{animation:ring3 7s ease-in-out 1.8s infinite}
-.hero-flake .rg4{animation:ring4 5.4s ease-in-out 3.2s infinite}
-.hero-flake .rg5{animation:ring5 3s ease-in-out 2.3s infinite}
-@keyframes intro{from{opacity:0}to{opacity:1}}
-@keyframes spin-cw{to{transform:rotate(360deg)}}
-@keyframes spin-ccw{to{transform:rotate(-360deg)}}
-@keyframes wash{0%,100%{opacity:.08;transform:scale(.78)}50%{opacity:.85;transform:scale(1.14)}}
-@keyframes seat{0%,100%{opacity:.45}50%{opacity:.7}}
-@keyframes wave0{0%,100%{opacity:.72}50%{opacity:1}}
-@keyframes wave1{0%,100%{opacity:.78}50%{opacity:1}}
-@keyframes wave2{0%,100%{opacity:1}50%{opacity:.8}}
-@keyframes wave3{0%,100%{opacity:.74}50%{opacity:1}}
-@keyframes wave4{0%,100%{opacity:.8}50%{opacity:1}}
-@keyframes wave5{0%,100%{opacity:.7}50%{opacity:1}}
-@keyframes ring0{0%,100%{opacity:.55}50%{opacity:.95}}
-@keyframes ring1{0%,100%{opacity:.9}50%{opacity:.6}}
-@keyframes ring2{0%,100%{opacity:.65}50%{opacity:1}}
-@keyframes ring3{0%,100%{opacity:.85}50%{opacity:.58}}
-@keyframes ring4{0%,100%{opacity:.6}50%{opacity:1}}
-@keyframes ring5{0%,100%{opacity:1}50%{opacity:.7}}
-.hero-flake .n1,.hero-flake .n2,.hero-flake .n3,.hero-flake .n4{transform-origin:0 0}
-.hero-flake .n1{animation:flutter1 5.6s ease-in-out 1.6s infinite}
-.hero-flake .n2{animation:flutter2 5.6s ease-in-out 1.95s infinite}
-.hero-flake .n3{animation:flutter3 5.6s ease-in-out 2.3s infinite}
-.hero-flake .n4{animation:flutter4 5.6s ease-in-out 2.65s infinite}
-@keyframes flutter1{0%,100%{transform:scale(1);opacity:.88}50%{transform:scale(.96);opacity:1}}
-@keyframes flutter2{0%,100%{transform:scale(1);opacity:.82}50%{transform:scale(1.04);opacity:1}}
-@keyframes flutter3{0%,100%{transform:scale(1);opacity:.86}50%{transform:scale(.95);opacity:1}}
-@keyframes flutter4{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.05);opacity:1}}
-.hero-flake .eye{transform-origin:0 0;animation:blink 22s ease-in-out 1.6s infinite}
-@keyframes blink{0%,93%,100%{transform:scaleY(1)}94.1%,94.4%{transform:scaleY(.06)}94.9%,95.2%{transform:scaleY(1)}95.6%,95.9%{transform:scaleY(.06)}}
-@media (prefers-reduced-motion:reduce){.hero-flake .flake,.hero-flake .n1,.hero-flake .n2,.hero-flake .n3,.hero-flake .n4,.hero-flake .eye,.hero-flake .core,.hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5{animation:none}.hero-flake .flake,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5,.hero-flake .seat{opacity:1}.hero-flake .core{opacity:.45}}
-.flake-stage{transition:transform 1.5s ease}
-body.me .flake-stage{transform:scale(1.16)}
-.hero-flake.me .spin-bands,
-.hero-flake.me .g0,.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5,
-.hero-flake.me .seat{display:none}
-.hero-flake.me .spin-crystal{animation:none}
-.hero-flake.me .flake{opacity:1;animation:none}
-.hero-flake.me .nucleus{transform:scale(1.08);transition:transform 1.5s ease}
-.hero-flake.me .n1,.hero-flake.me .n2,.hero-flake.me .n3,.hero-flake.me .n4{opacity:0;transition:opacity .9s ease}
-body.me[data-seat="1"] .hero-flake .n4{opacity:1}
-body.me[data-seat="2"] .hero-flake .n4,body.me[data-seat="2"] .hero-flake .n3{opacity:1}
-body.me[data-seat="3"] .hero-flake .n4,body.me[data-seat="3"] .hero-flake .n3,body.me[data-seat="3"] .hero-flake .n2{opacity:1}
-body.me[data-seat="4"] .hero-flake .n4,body.me[data-seat="4"] .hero-flake .n3,body.me[data-seat="4"] .hero-flake .n2,body.me[data-seat="4"] .hero-flake .n1{opacity:1}
-body.me .pitch,body.me .bottom,body.me .rotate,body.me .vision,body.me #build{display:none}
+h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.4rem,8vw,4rem);margin:0 0 1rem}
+h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.4rem,4vw,1.85rem);margin:0 0 .45rem}
+.rotate{min-height:3.4rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
+.mark{width:min(380px,92vw);height:auto;aspect-ratio:1/1;display:block;margin:0 auto 1.2rem;background:transparent}
+body.me .pitch,body.me .bottom,body.me .rotate,body.me .vision,body.me #build,body.me .hero-full{display:none}
+body.me .hero-seed{display:block}
+.hero-seed{display:none;width:min(220px,60vw);margin:0 auto 1.2rem}
 .name-ask{display:none;max-width:22rem;margin:1.1rem auto 0;text-align:center}
 body.me .name-ask{display:block}
 body.me.seated .name-ask{display:none}
-body.me .you{display:none;margin:.35rem 0 0;color:var(--graphite);font-size:1.05rem}
+body.me .you{display:none;margin:.35rem 0 0;color:var(--graphite)}
 body.me.seated .you{display:block}
-.name-ask p.hint{margin:.35rem 0 .9rem;color:var(--graphite);font-size:.95rem}
-.name-ask input{width:100%;min-height:52px;border-radius:14px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font:inherit;font-size:1.1rem;text-align:center;padding:.7rem 1rem}
-.name-ask input:focus{outline:none;border-color:rgba(167,139,250,.7)}
+.name-ask p.hint{margin:.35rem 0 .9rem;color:var(--graphite)}
+.name-ask input{width:100%;min-height:52px;border-radius:14px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font:inherit;font-size:1.1rem;text-align:center}
 .name-ask .row{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:.85rem}
-.name-ask .ghost{min-height:52px;border-radius:999px;padding:.7rem 1.2rem;border:1px solid rgba(248,250,252,.16);background:transparent;color:var(--frost);font:inherit;font-size:1rem}
-.name-ask .picks{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin:.2rem 0 .4rem}
+.name-ask .ghost{min-height:52px;border-radius:999px;padding:.7rem 1.2rem;border:1px solid rgba(248,250,252,.16);background:transparent;color:var(--frost);font:inherit}
+.name-ask .picks{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
 .name-ask .picks button{min-height:46px;border-radius:999px;padding:.55rem 1rem;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font:inherit}
-.pitch{padding:.4rem 0 1.2rem;max-width:none;width:100%;position:relative}
-.slide-row{display:flex;align-items:center;gap:1.15rem}
-.slide-btn{flex:0 0 2.4rem;height:2.4rem;border-radius:999px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font-size:1.35rem;line-height:1;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.slide-btn:hover{border-color:rgba(167,139,250,.55);background:rgba(167,139,250,.18)}
-.slides{flex:1;min-width:0;padding:0 .35rem}
-.block{margin:0;display:none;align-items:center;gap:1.1rem}
+.pitch{padding:.4rem 0 1.2rem}
+.slide-row{display:flex;align-items:center;gap:1rem}
+.slide-btn{flex:0 0 2.2rem;height:2.2rem;border-radius:999px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost)}
+.slides{flex:1;min-width:0}
+.block{margin:0;display:none;align-items:center;gap:1rem}
 .block.on{display:flex;flex-direction:row-reverse}
-.block img,.block svg{width:42%;flex:0 0 42%;height:auto;border-radius:0;margin:0;display:block;background:transparent}
-.block .copy{flex:1;min-width:0;text-align:left}
-.block .copy h2{margin:0 0 .45rem;font-size:clamp(1.35rem,4.2vw,1.85rem)}
-.block .copy p{margin:.35rem 0 0}
-.block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.05rem}
+.block img{width:42%;flex:0 0 42%;height:auto;background:transparent}
+.block .copy{flex:1}
+.block p{color:var(--graphite);line-height:1.6;margin:.35rem 0 0}
 .dots{display:flex;justify-content:center;gap:.45rem;margin:.85rem 0 0}
 .dots button{width:.55rem;height:.55rem;padding:0;border-radius:999px;border:0;background:rgba(148,163,184,.35)}
 .dots button.on{background:var(--frost)}
-.vision{max-width:36rem;margin:2.6rem auto 1.2rem}
-.vision p{color:var(--graphite);line-height:1.65;font-size:1.06rem;margin:.72rem 0}
-.vision .fancy{font-family:"Instrument Serif",Georgia,serif;font-weight:400;text-align:center;color:var(--frost);font-size:clamp(1.35rem,3.6vw,1.85rem);line-height:1.28}
-.cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
+.vision{max-width:36rem;margin:2.4rem auto 1.2rem}
+.vision p{color:var(--graphite);line-height:1.65;margin:.7rem 0}
+.vision .fancy{font-family:"Instrument Serif",Georgia,serif;text-align:center;color:var(--frost);font-size:clamp(1.3rem,3.6vw,1.8rem)}
 .bottom{text-align:center;padding:0 0 2.4rem}
-@media (max-width:640px){.block.on{flex-direction:column;align-items:stretch}.block img,.block svg{width:100%;flex:none}.slide-btn{flex:0 0 2rem;height:2rem;font-size:1.15rem}}
-.ground{position:fixed;left:0;right:0;bottom:0;height:22vh;pointer-events:none;z-index:2;background:linear-gradient(180deg, transparent, rgba(248,250,252,.03) 40%, rgba(248,250,252,.07));box-shadow:inset 0 -40px 60px rgba(248,250,252,.04)}
-.ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
-.flake-stage{position:relative;width:min(415px,96vw);margin:0 auto 1.4rem}
-.flake-stage .mark{width:100%;margin:0}
-@media (prefers-reduced-motion:reduce){#snow{display:none}.rotate{transition:none}.rays b{animation:none}}
+@media (max-width:640px){.block.on{flex-direction:column}.block img{width:100%;flex:none}}
 </style>
 </head>
 <body>
-<canvas id="snow" aria-hidden="true"></canvas>
-<div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
-<div class="ground" aria-hidden="true"></div>
+<div class="rays"></div>
+<div class="ground"></div>
 <audio id="ambient" loop playsinline preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
@@ -165,5 +77,135 @@ body.me.seated .you{display:block}
 </div>
 <main class="wrap">
   <section class="hero">
-    <div class="flake-stage">
-    <svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake">
+    <img class="mark hero-full" src="assets/welcome-flake.svg" alt="Soulflake"/>
+    <img class="hero-seed" src="assets/commercial-center.svg" alt="The center"/>
+    <h1>Meet your Soulflake</h1>
+    <p class="rotate" id="line">Know thyself, and then be known.</p>
+    <button type="button" class="btn" id="build">Get started</button>
+    <p class="you" id="you"></p>
+    <div class="name-ask" id="ask">
+      <p id="ask-q">What should we call you?</p>
+      <p class="hint" id="ask-hint">A nickname is fine.</p>
+      <div id="ask-fields"></div>
+      <div class="row">
+        <button type="button" class="ghost" id="ask-skip">Skip</button>
+        <button type="button" class="btn" id="ask-ok">That’s me</button>
+      </div>
+    </div>
+  </section>
+  <section class="pitch">
+    <div class="slide-row">
+      <button type="button" class="slide-btn" id="slide-prev">&#8249;</button>
+      <div class="slides">
+        <div class="block on"><img src="assets/commercial-center.svg" alt=""><div class="copy"><h2>The center</h2><p>Every flake starts here.</p><p>Six directions. No answers yet.</p></div></div>
+        <div class="block"><img src="assets/commercial-six.svg" alt=""><div class="copy"><h2>Six cuts, not a type</h2><p>Traits. Taste. Bond. Values. Conflict. Context.</p></div></div>
+        <div class="block"><img src="assets/commercial-grows.svg" alt=""><div class="copy"><h2>It grows when you tell it</h2><p>Skip what you want. Lopsided is honest.</p></div></div>
+        <div class="block"><img src="assets/commercial-together.svg" alt=""><div class="copy"><h2>Built to be used</h2><p>No score. Glue, grind, repair.</p></div></div>
+      </div>
+      <button type="button" class="slide-btn" id="slide-next">&#8250;</button>
+    </div>
+    <div class="dots" id="slide-dots"></div>
+  </section>
+  <section class="vision">
+    <p class="fancy">People are more reachable than they have ever been. And more unknown.</p>
+    <p>Soulflake is a living file. Six cuts of one person. Empty stays quiet. Filled gets sharp.</p>
+    <p class="fancy">Know thyself, and then be known.</p>
+  </section>
+  <div class="bottom"><button type="button" class="btn" id="build-2">Get started</button></div>
+</main>
+<script>
+(function(){
+  var START_KEY="soulflake.started", SEAT_KEY="soulflake.seat";
+  var KEYS=["soulflake.name","soulflake.gender","soulflake.age","soulflake.place"];
+  var FROST=["Frost","Quiet","North","Vale","Ember","Hollow"];
+  function frostHandle(){ return FROST[Math.floor(Math.random()*FROST.length)]+" "+(10+Math.floor(Math.random()*89)); }
+  function seatLevel(){ var n=parseInt(localStorage.getItem(SEAT_KEY)||"0",10); return isNaN(n)?0:Math.max(0,Math.min(4,n)); }
+  function setSeat(n){
+    localStorage.setItem(SEAT_KEY,String(n));
+    document.body.classList.toggle("seated", n>=4);
+    var you=document.getElementById("you");
+    var name=localStorage.getItem(KEYS[0])||"";
+    if(you) you.textContent=n>=4?(name?name+" \u00b7 seat lit":"Seat lit"):name;
+  }
+  function showWelcome(){
+    document.body.classList.remove("me");
+    document.querySelector(".hero h1").textContent="Meet your Soulflake";
+    if(location.hash!=="#welcome") location.hash="welcome";
+  }
+  function showMe(){
+    document.body.classList.add("me");
+    localStorage.setItem(START_KEY,"1");
+    document.querySelector(".hero h1").textContent="My flake";
+    setSeat(seatLevel());
+    renderAsk();
+    if(location.hash!=="#me") location.hash="me";
+  }
+  var STEPS=[
+    {q:"What should we call you?",hint:"A nickname is fine.",ph:"Your name or nickname",kind:"text",ok:"That’s me",skipVal:frostHandle},
+    {q:"How do you show up?",hint:"Skip if you do not want this on the file.",kind:"picks",picks:["Woman","Man","Another way"]},
+    {q:"How old are you?",hint:"A number. Skip is fine.",ph:"Age",kind:"age"},
+    {q:"Where are you these days?",hint:"A city is enough. Skip is fine.",ph:"City",kind:"text"}
+  ];
+  function renderAsk(){
+    var step=seatLevel(), box=document.getElementById("ask");
+    if(step>=4){ box.style.display="none"; return; }
+    box.style.display="";
+    var spec=STEPS[step];
+    document.getElementById("ask-q").textContent=spec.q;
+    document.getElementById("ask-hint").textContent=spec.hint;
+    var fields=document.getElementById("ask-fields"), ok=document.getElementById("ask-ok");
+    fields.innerHTML="";
+    if(spec.kind==="picks"){
+      var wrap=document.createElement("div"); wrap.className="picks";
+      spec.picks.forEach(function(label){ var b=document.createElement("button"); b.type="button"; b.textContent=label; b.onclick=function(){ commit(label); }; wrap.appendChild(b); });
+      fields.appendChild(wrap); ok.style.display="none";
+    }else{
+      var inp=document.createElement("input"); inp.id="ask-in"; inp.type=spec.kind==="age"?"number":"text";
+      if(spec.kind==="age"){ inp.min="13"; inp.max="120"; } else inp.maxLength=32;
+      inp.placeholder=spec.ph||""; fields.appendChild(inp); ok.style.display=""; ok.textContent=spec.ok||"Save";
+      inp.onkeydown=function(e){ if(e.key==="Enter"){ e.preventDefault(); takeInput(spec); } };
+    }
+  }
+  function takeInput(spec){
+    var inp=document.getElementById("ask-in");
+    var v=(inp && inp.value || "").replace(/^\s+|\s+$/g,"");
+    if(spec.kind==="age"){ if(!v){ commit("skipped"); return; } var n=parseInt(v,10); if(isNaN(n)||n<13||n>120) return; commit(String(n)); return; }
+    if(!v && spec.skipVal) v=spec.skipVal();
+    commit(v||"skipped");
+  }
+  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); renderAsk(); }
+  document.getElementById("build").onclick=showMe;
+  document.getElementById("build-2").onclick=showMe;
+  document.getElementById("go-welcome").onclick=showWelcome;
+  document.querySelectorAll(".nav [data-go]").forEach(function(b){ b.onclick=function(){ this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
+  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome") showWelcome(); });
+  document.getElementById("ask-ok").onclick=function(){ takeInput(STEPS[seatLevel()]||{}); };
+  document.getElementById("ask-skip").onclick=function(){ var spec=STEPS[seatLevel()]; if(spec) commit(spec.skipVal?spec.skipVal():"skipped"); };
+  if(location.hash==="#welcome") showWelcome();
+  else if(location.hash==="#me" || localStorage.getItem(START_KEY)==="1") showMe();
+  (function(){
+    var cards=document.querySelectorAll(".slides .block"), dotsBox=document.getElementById("slide-dots"), i=0;
+    for(var d=0;d<cards.length;d++){ var b=document.createElement("button"); b.type="button"; (function(n){ b.onclick=function(){ go(n); }; })(d); dotsBox.appendChild(b); }
+    var dots=dotsBox.querySelectorAll("button");
+    function go(n){ i=(n+cards.length)%cards.length; for(var k=0;k<cards.length;k++){ cards[k].classList.toggle("on",k===i); dots[k].classList.toggle("on",k===i); } }
+    document.getElementById("slide-prev").onclick=function(){ go(i-1); };
+    document.getElementById("slide-next").onclick=function(){ go(i+1); };
+    go(0);
+  })();
+  var LINES=["Know thyself, and then be known.","The unexamined life is not worth living. -- Socrates","He who knows others is wise; he who knows himself is enlightened. -- Lao Tzu"];
+  var el=document.getElementById("line"), li=0, FADE=1800, HOLD=7000, GAP=1400;
+  function showLine(){ el.style.opacity="1"; } function hideLine(){ el.style.opacity="0"; }
+  setTimeout(showLine, 1600);
+  function nextLine(){ hideLine(); setTimeout(function(){ li=(li+1)%LINES.length; el.textContent=LINES[li]; setTimeout(showLine, GAP); }, FADE); setTimeout(nextLine, HOLD+FADE+GAP+FADE); }
+  setTimeout(nextLine, 1600+FADE+HOLD);
+  var audio=document.getElementById("ambient"), btn=document.getElementById("sound"), SOUND_KEY="soulflake.sound";
+  var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
+  function setBtn(on){ btn.textContent=on?"Sound on":"Sound off"; btn.classList.toggle("on",on); }
+  function startPlay(){ wantOn=true; audio.muted=false; audio.play().catch(function(){}); setBtn(true); }
+  function stopPlay(){ wantOn=false; localStorage.setItem(SOUND_KEY,"off"); audio.pause(); audio.muted=true; setBtn(false); }
+  btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn && !audio.paused) stopPlay(); else { localStorage.removeItem(SOUND_KEY); startPlay(); } });
+  setBtn(wantOn); if(wantOn) startPlay(); else { audio.pause(); audio.muted=true; }
+})();
+</script>
+</body>
+</html>
