@@ -57,6 +57,10 @@ body.me .name-ask{display:block}
 body.me.seated .name-ask{display:none}
 .you{display:none;margin:.35rem 0 0;color:var(--graphite)}
 body.me.seated .you{display:block}
+.file-row{display:none;justify-content:center;gap:.55rem;flex-wrap:wrap;margin:1.1rem 0 0}
+body.me .file-row{display:flex}
+.file-row .ghost{min-height:44px;border-radius:999px;padding:.55rem 1rem;border:1px solid rgba(248,250,252,.16);background:transparent;color:var(--frost);font:inherit}
+.file-row .ghost[disabled]{opacity:.35;color:var(--graphite);cursor:not-allowed}
 .name-ask p.hint{margin:.35rem 0 .9rem;color:var(--graphite)}
 .name-ask input{width:100%;min-height:52px;border-radius:14px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font:inherit;font-size:1.1rem;text-align:center}
 .name-ask .row{display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap;margin-top:.85rem}
@@ -105,6 +109,11 @@ body.me.seated .you{display:block}
     <p class="rotate" id="line">Know thyself, and then be known.</p>
     <button type="button" class="btn" id="build">Get started</button>
     <p class="you" id="you"></p>
+    <div class="file-row" id="file-row">
+      <button type="button" class="ghost" id="reset">Reset</button>
+      <button type="button" class="ghost" id="export" disabled>Export</button>
+      <button type="button" class="ghost" id="import" disabled>Import</button>
+    </div>
     <div class="name-ask" id="ask">
       <p id="ask-q">What should we call you?</p>
       <p class="hint" id="ask-hint">A nickname is fine.</p>
@@ -194,6 +203,12 @@ body.me.seated .you{display:block}
   function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); renderAsk(); }
   document.getElementById("build").onclick=showMe;
   document.getElementById("build-2").onclick=showMe;
+  document.getElementById("reset").onclick=function(){
+    [START_KEY,SEAT_KEY].concat(KEYS).forEach(function(k){ localStorage.removeItem(k); });
+    document.body.classList.remove("seated");
+    var you=document.getElementById("you"); if(you) you.textContent="";
+    showWelcome();
+  };
   document.getElementById("go-welcome").onclick=showWelcome;
   document.querySelectorAll(".nav [data-go]").forEach(function(b){ b.onclick=function(){ this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
   window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome") showWelcome(); });
