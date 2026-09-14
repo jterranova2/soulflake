@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;overscroll-behavior:none}
 button{font-family:inherit;cursor:pointer}
 .glow{display:none}
 .rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
@@ -85,7 +85,7 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .hero-flake.me .spin-bands,.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5{display:none}
 .hero-flake.me .spin-crystal{animation:none}
 .hero-flake.me .flake{opacity:1;animation:none}
-body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
+body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate,body.me .vision{display:none}
 .pitch{padding:.4rem 0 2.4rem}
 .block{margin:2.2rem 0;max-width:36rem;display:flex;align-items:center;gap:1.1rem}
 .block:nth-child(even){flex-direction:row-reverse}
@@ -94,8 +94,12 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .block .copy h2{margin:0 0 .45rem;font-size:clamp(1.35rem,4.2vw,1.85rem)}
 .block .copy p{margin:.35rem 0 0}
 .block p{color:var(--graphite);line-height:1.6;margin:.45rem 0 0;font-size:1.05rem}
+.vision{max-width:36rem;margin:2.6rem auto 1.2rem}
+.vision p{color:var(--graphite);line-height:1.65;font-size:1.06rem;margin:.72rem 0}
+.vision .lead{color:var(--frost);font-size:1.16rem}
 .cue{text-align:center;color:var(--frost);font-size:1.18rem;margin:1.4rem 0 1.6rem}
-.bottom{text-align:center;padding:0 0 4.2rem}
+.bottom{text-align:center;padding:0 0 2.4rem}
+@media (max-width:640px){.block{flex-direction:column;align-items:stretch}.block:nth-child(even){flex-direction:column}.block img,.block svg{width:100%;flex:none}}
 .ground{position:fixed;left:0;right:0;bottom:0;height:22vh;pointer-events:none;z-index:2;background:linear-gradient(180deg, transparent, rgba(248,250,252,.03) 40%, rgba(248,250,252,.07));box-shadow:inset 0 -40px 60px rgba(248,250,252,.04)}
 .ground:after{content:"";position:absolute;inset:auto 0 0 0;height:18px;background-image:repeating-linear-gradient(90deg, transparent 0 11px, rgba(248,250,252,.08) 11px 12px, transparent 12px 23px);opacity:.35;mask-image:linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent)}
 .flake-stage{position:relative;width:min(415px,96vw);margin:0 auto 1.4rem}
@@ -263,6 +267,18 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
       <p>A night. A fight. A friend. Later you can set your flake next to theirs. No score. Glue, grind, repair.</p>
       </div>
     </div>
+  </section>
+  <section class="vision" aria-label="Why Soulflake">
+    <p class="lead">People are more reachable than they have ever been. And more unknown.</p>
+    <p>We swipe. We type. We collect letters about ourselves. Four characters. A number. A sign. Then we walk into a room still guessing. Guessing who we are on a hard day. Guessing who can sit across from us and not drain the week. Guessing which stranger would actually like the same night.</p>
+    <p>Soulflake is the instrument for that guess.</p>
+    <p>Not another test that crowns you a type. A living file. Six cuts of one person. How you are built. What you love. How you attach. What you will not trade. How you fight. The life you are actually in. Empty stays quiet. Filled gets sharp. Lopsided is honest. The more truth you put in, the more the crystal can give back. And the more it can do with someone else.</p>
+    <p>First you meet yourself. A picture so specific it startles you, and clear enough to act on. The good day. The ordinary day. The loaded day. Same person. Receipts behind the sentences.</p>
+    <p>Then you set your flake next to someone you already love. No percentage. Where you rhyme. Where you rub. What to do when it goes badly. The friend, the partner, the collaborator. Seen, not scored.</p>
+    <p>Then the door opens outward. Not a feed. Not a marketplace of faces. Friends first. Circles. A short list of people in this city who would actually enjoy the same kind of time. Taste plus how they are, not a bio and a hope. Tables. Walks. Shows. Nights that match the lists. Romance if it grows out of that.</p>
+    <p>The big apps connected attention. They did not connect fit.</p>
+    <p>Soulflake is the antidote. Know yourself. Steer your relationships. Find your people. Gather them. A file you refuse to leave. Not because we trapped you. Because your truth, your friends, and your calendar live there.</p>
+    <p class="lead">Meet your Soulflake. Know thyself, and then be known.</p>
   </section>
   <p class="cue">Start with one arm.</p>
   <div class="bottom">
