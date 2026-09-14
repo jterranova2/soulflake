@@ -32,23 +32,28 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .rotate{min-height:3.8rem;max-width:32rem;margin:0 auto 1.7rem;color:var(--graphite);font-size:1.22rem;line-height:1.45;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.95rem 1.7rem;font-weight:500;font-size:1.2rem;border:0;background:var(--violet);color:var(--midnight);box-shadow:0 0 22px rgba(167,139,250,.35)}
 .mark{width:min(415px,96vw);height:auto;aspect-ratio:1/1;object-fit:contain;display:block;margin:0 auto 1.4rem;background:transparent}
-.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out infinite}
+.hero-flake .flake{opacity:0;animation:intro 1.6s ease-out forwards}
+.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out infinite;animation-delay:1.6s;animation-fill-mode:both}
 .hero-flake .spin-bands{animation:spin-cw 70s linear infinite}
 .hero-flake .spin-crystal{animation:spin-ccw 56s linear infinite}
 .hero-flake .nucleus{transform:scale(.45)}
-.hero-flake .seat{animation:seat 8s ease-in-out infinite}
-.hero-flake .g0{animation:wave0 3.8s ease-in-out infinite}
-.hero-flake .g1{animation:wave1 5.1s ease-in-out infinite}
-.hero-flake .g2{animation:wave2 6.4s ease-in-out infinite}
-.hero-flake .g3{animation:wave3 4.4s ease-in-out infinite .8s}
-.hero-flake .g4{animation:wave4 7.2s ease-in-out infinite 1.4s}
-.hero-flake .g5{animation:wave5 3.2s ease-in-out infinite 2.1s}
-.hero-flake .rg0{animation:ring0 4.2s ease-in-out infinite}
-.hero-flake .rg1{animation:ring1 6s ease-in-out infinite .4s}
-.hero-flake .rg2{animation:ring2 3.6s ease-in-out infinite 1s}
-.hero-flake .rg3{animation:ring3 7s ease-in-out infinite .2s}
-.hero-flake .rg4{animation:ring4 5.4s ease-in-out infinite 1.6s}
-.hero-flake .rg5{animation:ring5 3s ease-in-out infinite .7s}
+.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg2,.hero-flake .rg4{opacity:0}
+.hero-flake .g2,.hero-flake .rg1,.hero-flake .rg3,.hero-flake .rg5{opacity:1}
+.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5{animation-fill-mode:both}
+.hero-flake .seat{animation:seat 8s ease-in-out 1.6s infinite}
+.hero-flake .g0{animation:wave0 3.8s ease-in-out 1.6s infinite}
+.hero-flake .g1{animation:wave1 5.1s ease-in-out 1.6s infinite}
+.hero-flake .g2{animation:wave2 6.4s ease-in-out 1.6s infinite}
+.hero-flake .g3{animation:wave3 4.4s ease-in-out 2.4s infinite}
+.hero-flake .g4{animation:wave4 7.2s ease-in-out 3s infinite}
+.hero-flake .g5{animation:wave5 3.2s ease-in-out 3.7s infinite}
+.hero-flake .rg0{animation:ring0 4.2s ease-in-out 1.6s infinite}
+.hero-flake .rg1{animation:ring1 6s ease-in-out 2s infinite}
+.hero-flake .rg2{animation:ring2 3.6s ease-in-out 2.6s infinite}
+.hero-flake .rg3{animation:ring3 7s ease-in-out 1.8s infinite}
+.hero-flake .rg4{animation:ring4 5.4s ease-in-out 3.2s infinite}
+.hero-flake .rg5{animation:ring5 3s ease-in-out 2.3s infinite}
+@keyframes intro{from{opacity:0}to{opacity:1}}
 @keyframes spin-cw{to{transform:rotate(360deg)}}
 @keyframes spin-ccw{to{transform:rotate(-360deg)}}
 @keyframes wash{0%,100%{opacity:.08;transform:scale(.78)}50%{opacity:.85;transform:scale(1.14)}}
@@ -66,19 +71,20 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 @keyframes ring4{0%,100%{opacity:0}50%{opacity:1}}
 @keyframes ring5{0%,100%{opacity:1}30%{opacity:0}62%{opacity:.35}}
 .hero-flake .n1,.hero-flake .n2,.hero-flake .n3,.hero-flake .n4{transform-origin:0 0}
-.hero-flake .n1{animation:flutter1 5.6s ease-in-out infinite}
-.hero-flake .n2{animation:flutter2 5.6s ease-in-out infinite .35s}
-.hero-flake .n3{animation:flutter3 5.6s ease-in-out infinite .7s}
-.hero-flake .n4{animation:flutter4 5.6s ease-in-out infinite 1.05s}
+.hero-flake .n1{animation:flutter1 5.6s ease-in-out 1.6s infinite}
+.hero-flake .n2{animation:flutter2 5.6s ease-in-out 1.95s infinite}
+.hero-flake .n3{animation:flutter3 5.6s ease-in-out 2.3s infinite}
+.hero-flake .n4{animation:flutter4 5.6s ease-in-out 2.65s infinite}
 @keyframes flutter1{0%,100%{transform:scale(1);opacity:.88}50%{transform:scale(.96);opacity:1}}
 @keyframes flutter2{0%,100%{transform:scale(1);opacity:.82}50%{transform:scale(1.04);opacity:1}}
 @keyframes flutter3{0%,100%{transform:scale(1);opacity:.86}50%{transform:scale(.95);opacity:1}}
 @keyframes flutter4{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.05);opacity:1}}
-.hero-flake .eye{transform-origin:0 0;animation:blink 22s ease-in-out infinite}
+.hero-flake .eye{transform-origin:0 0;animation:blink 22s ease-in-out 1.6s infinite}
 @keyframes blink{0%,93%,100%{transform:scaleY(1)}94.1%,94.4%{transform:scaleY(.06)}94.9%,95.2%{transform:scaleY(1)}95.6%,95.9%{transform:scaleY(.06)}}
-@media (prefers-reduced-motion:reduce){.hero-flake .n1,.hero-flake .n2,.hero-flake .n3,.hero-flake .n4,.hero-flake .eye,.hero-flake .core,.hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5{animation:none}.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5,.hero-flake .seat{opacity:1}.hero-flake .core{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.hero-flake .flake,.hero-flake .n1,.hero-flake .n2,.hero-flake .n3,.hero-flake .n4,.hero-flake .eye,.hero-flake .core,.hero-flake .spin-bands,.hero-flake .spin-crystal,.hero-flake .seat,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5{animation:none}.hero-flake .flake,.hero-flake .g0,.hero-flake .g1,.hero-flake .g2,.hero-flake .g3,.hero-flake .g4,.hero-flake .g5,.hero-flake .rg0,.hero-flake .rg1,.hero-flake .rg2,.hero-flake .rg3,.hero-flake .rg4,.hero-flake .rg5,.hero-flake .seat{opacity:1}.hero-flake .core{opacity:.45}}
 .hero-flake.me .spin-bands,.hero-flake.me .g1,.hero-flake.me .g2,.hero-flake.me .g3,.hero-flake.me .g4,.hero-flake.me .g5{display:none}
 .hero-flake.me .spin-crystal{animation:none}
+.hero-flake.me .flake{opacity:1;animation:none}
 body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
 .pitch{padding:.4rem 0 2.4rem}
 .block{margin:2.2rem 0;max-width:36rem;display:flex;align-items:center;gap:1.1rem}
