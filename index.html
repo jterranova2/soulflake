@@ -31,8 +31,10 @@ button{font-family:inherit;cursor:pointer}
 .nav .go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem}
 body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--frost)}
 .tools{justify-self:end;display:flex;align-items:center;gap:.25rem;position:relative}
-.icon-btn{width:48px;height:48px;border:0;border-radius:999px;background:rgba(248,250,252,.06);color:rgba(248,250,252,.78);font-size:1.35rem;line-height:1}
-.icon-btn.on{color:var(--frost);background:rgba(248,250,252,.12)}.icon-btn.off{color:rgba(148,163,184,.9);position:relative}.icon-btn.off:after{content:"";position:absolute;left:18%;right:18%;top:50%;height:2px;background:#F8FAFC;transform:rotate(-32deg);border-radius:2px}
+.icon-btn{width:52px;height:52px;border:0;border-radius:0;background:transparent;color:var(--frost);font-size:1.7rem;line-height:1;padding:0}
+#more{font-size:2.05rem;letter-spacing:.02em}
+.icon-btn.on{color:var(--frost);opacity:1}
+.icon-btn.off{color:var(--graphite);opacity:.55}
 .menu{display:none;position:absolute;right:0;top:calc(100% + .35rem);min-width:10.5rem;padding:.35rem;border-radius:12px;background:rgba(7,11,20,.92);border:1px solid rgba(248,250,252,.12)}
 .menu.open{display:block}
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--frost);font:inherit;font-size:.92rem;padding:.55rem .7rem;border-radius:8px}
@@ -271,7 +273,7 @@ body.me .file-row{display:flex}
   setTimeout(nextLine, 1600+FADE+HOLD);
   var audio=document.getElementById("ambient"), btn=document.getElementById("sound"), SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
-  function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.setAttribute("aria-pressed", on?"true":"false"); btn.textContent="\u266A"; }
+  function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.textContent="\u266A"; }
   function startPlay(){ wantOn=true; audio.muted=false; audio.play().catch(function(){}); setBtn(true); }
   function stopPlay(){ wantOn=false; localStorage.setItem(SOUND_KEY,"off"); audio.pause(); audio.muted=true; setBtn(false); }
   btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn && !audio.paused) stopPlay(); else { localStorage.removeItem(SOUND_KEY); startPlay(); } });
