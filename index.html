@@ -23,8 +23,9 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shimmerRay{0%,100%{opacity:.34}50%{opacity:.16}}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .ground{position:fixed;left:0;right:0;bottom:0;height:18vh;pointer-events:none;z-index:2;background:linear-gradient(180deg,transparent,rgba(248,250,252,.07))}
+.bar{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
-.top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;gap:.7rem}
+.top{display:flex;align-items:center;justify-content:space-between;padding:.85rem 0;gap:.7rem}
 .wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
 .nav{display:flex;align-items:center;gap:.55rem;flex-wrap:wrap;justify-content:flex-end}
 .nav .go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem}
@@ -54,7 +55,7 @@ body.me .hero-seed{display:block}
 .name-ask{display:none;max-width:22rem;margin:1.1rem auto 0;text-align:center}
 body.me .name-ask{display:block}
 body.me.seated .name-ask{display:none}
-body.me .you{display:none;margin:.35rem 0 0;color:var(--graphite)}
+.you{display:none;margin:.35rem 0 0;color:var(--graphite)}
 body.me.seated .you{display:block}
 .name-ask p.hint{margin:.35rem 0 .9rem;color:var(--graphite)}
 .name-ask input{width:100%;min-height:52px;border-radius:14px;border:1px solid rgba(248,250,252,.16);background:rgba(26,21,64,.35);color:var(--frost);font:inherit;font-size:1.1rem;text-align:center}
@@ -86,6 +87,7 @@ body.me.seated .you{display:block}
 <div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
 <div class="ground"></div>
 <audio id="ambient" loop playsinline preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
+<header class="bar">
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
   <div class="nav">
@@ -94,6 +96,7 @@ body.me.seated .you{display:block}
     <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
   </div>
 </div>
+</header>
 <main class="wrap">
   <section class="hero">
     <div class="hero-stage hero-full" id="hero-stage"></div>
