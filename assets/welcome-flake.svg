@@ -1,0 +1,110 @@
+<svg class="hero-flake mark" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake">
+<defs>
+    <radialGradient id="s-core" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#67E8F9" stop-opacity=".45"/>
+      <stop offset="55%" stop-color="#A78BFA" stop-opacity=".14"/>
+      <stop offset="100%" stop-color="#070B14" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="s-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="1.4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="n-glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <polygon id="s-star" points="0,-100 22,-38 86.6,-50 38,-10 86.6,50 22,38 0,100 -22,38 -86.6,50 -38,-10 -86.6,-50 -22,-38"/>
+    <polygon id="s-hex" points="0,-100 86.6,-50 86.6,50 0,100 -86.6,50 -86.6,-50"/>
+    <polygon id="s-seat" points="0,-11.25 9.74,-5.625 9.74,5.625 0,11.25 -9.74,5.625 -9.74,-5.625"/>
+    <g id="s-plate">
+      <polygon points="-5.5,0 0,-9 5.5,0 0,9" fill="none" stroke="currentColor" stroke-width=".7"/>
+      <polygon points="-2.4,0 0,-4 2.4,0 0,4" fill="none" stroke="currentColor" stroke-width=".35" opacity=".8"/>
+    </g>
+    <g id="arm-g0" fill="none"><line y1="-11.25" y2="-66" stroke="currentColor" stroke-width="1.2"/></g>
+    <g id="arm-g1" fill="none">
+      <line y1="-66" y2="-110" stroke="currentColor" stroke-width="1.2"/>
+      <g transform="translate(0 -44)"><use href="#s-plate"/></g>
+      <g transform="translate(0 -66)"><use href="#s-plate"/></g>
+    </g>
+    <g id="arm-g2" fill="none" stroke="currentColor" stroke-width=".8">
+      <line y1="-110" y2="-132" stroke="currentColor" stroke-width="1.2"/>
+      <g transform="translate(0 -88)"><use href="#s-plate"/></g>
+      <g transform="translate(0 -44)"><line transform="rotate(-60)" y2="-24"/><line transform="rotate(60)" y2="-24"/></g>
+      <g transform="translate(0 -66)"><line transform="rotate(-60)" y2="-30"/><line transform="rotate(60)" y2="-30"/></g>
+    </g>
+    <g id="arm-g3" fill="none" stroke="currentColor" stroke-width=".8">
+      <line y1="-132" y2="-154" stroke="currentColor" stroke-width="1.2"/>
+      <g transform="translate(0 -110)"><use href="#s-plate"/></g>
+      <g transform="translate(0 -88)"><line transform="rotate(-60)" y2="-28"/><line transform="rotate(60)" y2="-28"/></g>
+      <g transform="translate(0 -44) rotate(-60) translate(0 -14)"><use href="#s-plate" transform="scale(.55)"/></g>
+      <g transform="translate(0 -44) rotate(60) translate(0 -14)"><use href="#s-plate" transform="scale(.55)"/></g>
+    </g>
+    <g id="arm-g4" fill="none" stroke="currentColor" stroke-width=".8">
+      <line y1="-154" y2="-176" stroke="currentColor" stroke-width="1.2"/>
+      <g transform="translate(0 -132)"><use href="#s-plate"/></g>
+      <g transform="translate(0 -154)"><use href="#s-plate" transform="scale(.78)"/></g>
+      <g transform="translate(0 -110)"><line transform="rotate(-60)" y2="-22"/><line transform="rotate(60)" y2="-22"/></g>
+      <g transform="translate(0 -132)"><line transform="rotate(-60)" y2="-16"/><line transform="rotate(60)" y2="-16"/></g>
+      <g transform="translate(0 -66) rotate(-60) translate(0 -18)"><use href="#s-plate" transform="scale(.62)"/></g>
+      <g transform="translate(0 -66) rotate(60) translate(0 -18)"><use href="#s-plate" transform="scale(.62)"/></g>
+    </g>
+    <g id="arm-g5" fill="none" stroke="currentColor" stroke-width=".8">
+      <g transform="translate(0 -154)"><line transform="rotate(-60)" y2="-10"/><line transform="rotate(60)" y2="-10"/></g>
+      <g transform="translate(0 -88) rotate(-60) translate(0 -16)"><use href="#s-plate" transform="scale(.55)"/></g>
+      <g transform="translate(0 -88) rotate(60) translate(0 -16)"><use href="#s-plate" transform="scale(.55)"/></g>
+      <g transform="translate(0 -110) rotate(-60) translate(0 -12)"><use href="#s-plate" transform="scale(.48)"/></g>
+      <g transform="translate(0 -110) rotate(60) translate(0 -12)"><use href="#s-plate" transform="scale(.48)"/></g>
+      <g transform="translate(0 -132) rotate(-60) translate(0 -9)"><use href="#s-plate" transform="scale(.4)"/></g>
+      <g transform="translate(0 -132) rotate(60) translate(0 -9)"><use href="#s-plate" transform="scale(.4)"/></g>
+    </g>
+    <g id="one-arm">
+      <use class="g0" href="#arm-g0"/>
+      <use class="g1" href="#arm-g1"/>
+      <use class="g2" href="#arm-g2"/>
+      <use class="g3" href="#arm-g3"/>
+      <use class="g4" href="#arm-g4"/>
+      <use class="g5" href="#arm-g5"/>
+    </g>
+  </defs>
+  <g class="flake">
+    <g transform="translate(200 200)">
+      <circle class="core" r="118" fill="url(#s-core)"/>
+      <g class="spin-bands" fill="none" stroke-linejoin="miter" filter="url(#s-glow)">
+        <g class="rg0"><use href="#s-hex" transform="scale(.16)" stroke="#94A3B8" stroke-width="1"/><use href="#s-star" transform="scale(.13)" stroke="#94A3B8" stroke-width=".55"/></g>
+        <g class="rg1"><use href="#s-hex" transform="scale(.32)" stroke="#A78BFA" stroke-width=".9"/><use href="#s-star" transform="scale(.26)" stroke="#A78BFA" stroke-width=".5"/></g>
+        <g class="rg2"><use href="#s-hex" transform="scale(.50)" stroke="#8AA3D0" stroke-width=".8"/><use href="#s-star" transform="scale(.41)" stroke="#8AA3D0" stroke-width=".45"/></g>
+        <g class="rg3"><use href="#s-hex" transform="scale(.68)" stroke="#A38FDD" stroke-width=".7"/><use href="#s-star" transform="scale(.56)" stroke="#A38FDD" stroke-width=".4"/></g>
+        <g class="rg4"><use href="#s-hex" transform="scale(.86)" stroke="#7EC8D4" stroke-width=".65"/><use href="#s-star" transform="scale(.70)" stroke="#7EC8D4" stroke-width=".38"/></g>
+        <g class="rg5"><use href="#s-hex" transform="scale(1.04)" stroke="#C4B4B0" stroke-width=".55"/><use href="#s-star" transform="scale(.96)" stroke="#C4B4B0" stroke-width=".32"/></g>
+      </g>
+      <g class="spin-crystal" fill="none" filter="url(#s-glow)">
+        <g class="seat"><use href="#s-seat" fill="#070B14" stroke="#7EC8D4" stroke-width=".7"/></g>
+        <g color="#7EC8D4"><use href="#one-arm"/></g>
+        <g color="#9BB8C4" transform="rotate(60)"><use href="#one-arm"/></g>
+        <g color="#8AA3D0" transform="rotate(120)"><use href="#one-arm"/></g>
+        <g color="#C4B4B0" transform="rotate(180)"><use href="#one-arm"/></g>
+        <g color="#A38FDD" transform="rotate(240)"><use href="#one-arm"/></g>
+        <g color="#7A9AA8" transform="rotate(300)"><use href="#one-arm"/></g>
+        <g class="nucleus" fill="none" stroke-linejoin="miter" filter="url(#n-glow)">
+          <polygon class="n1" points="0,-32 27.71,-16 27.71,16 0,32 -27.71,16 -27.71,-16" fill="#182930" stroke="#86E0EC" stroke-width="1.4"/>
+          <polygon class="n2" points="0,-25 21.65,-12.5 21.65,12.5 0,25 -21.65,12.5 -21.65,-12.5" fill="#1E363E" stroke="#A38FDD" stroke-width=".45"/>
+          <polygon class="n3" points="0,-18 15.59,-9 15.59,9 0,18 -15.59,9 -15.59,-9" fill="#29474F" stroke="#86E0EC" stroke-width=".4"/>
+          <polygon class="n4" points="0,-11 9.53,-5.5 9.53,5.5 0,11 -9.53,5.5 -9.53,-5.5" fill="#396670" stroke="#F9FAFB" stroke-width=".5"/>
+          <g fill="#1E363E" stroke="#86E0EC" stroke-width="1">
+            <polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/>
+            <g transform="rotate(60)"><polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/></g>
+            <g transform="rotate(120)"><polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/></g>
+            <g transform="rotate(180)"><polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/></g>
+            <g transform="rotate(240)"><polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/></g>
+            <g transform="rotate(300)"><polygon points="0,-32 -2.6,-36.8 0,-41.5 2.6,-36.8"/></g>
+          </g>
+          <g class="eye">
+            <circle r="4" fill="#86E0EC" opacity=".5"/>
+            <circle r="2" fill="#F9FAFB"/>
+            <circle r="0.55" fill="#070B14"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
