@@ -1,5 +1,4 @@
 <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Commercial — one arm grown, five frost">
-  <rect width="800" height="400" fill="#070B14"/>
   <defs>
     <filter id="n-glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="2" result="b"/>
@@ -45,7 +44,7 @@
       <g transform="translate(0 -132) rotate(60) translate(0 -9)"><use href="#s-plate" transform="scale(.4)"/></g>
     </g>
   </defs>
-  <g transform="translate(400 200)">
+  <g transform="translate(400 228) scale(1.12)">
     <g fill="none" filter="url(#s-glow)">
       <g color="#7EC8D4"><use href="#thick-arm"/></g>
       <g color="#9BB8C4" opacity=".38" transform="rotate(60)"><use href="#shaft"/></g>
