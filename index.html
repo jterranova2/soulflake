@@ -9,7 +9,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
-*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;overflow-x:hidden;overscroll-behavior:none}
+*{box-sizing:border-box}html{margin:0;background:var(--midnight)}body{margin:0;min-height:100%;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif;overflow-x:clip;overflow-y:auto;overscroll-behavior-y:contain}
 button{font-family:inherit;cursor:pointer}
 .glow{display:none}
 .rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
