@@ -1,5 +1,4 @@
 <svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Commercial — six empty shafts">
-  <rect width="800" height="400" fill="#070B14"/>
   <defs>
     <filter id="n-glow" x="-80%" y="-80%" width="260%" height="260%">
       <feGaussianBlur stdDeviation="2" result="b"/>
@@ -14,7 +13,7 @@
       <line y1="-11.25" y2="-66" stroke="currentColor" stroke-width="1.2"/>
     </g>
   </defs>
-  <g transform="translate(400 200)">
+  <g transform="translate(400 200) scale(2.55)">
     <g fill="none" filter="url(#s-glow)">
       <g color="#7EC8D4"><use href="#shaft"/></g>
       <g color="#9BB8C4" transform="rotate(60)"><use href="#shaft"/></g>
