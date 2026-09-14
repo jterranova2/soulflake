@@ -342,6 +342,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   var playing=false;
   var ctx=null, srcNode=null, gainNode=null;
   var GAIN=2.2;
+  var SOUND_FADE=1.4;
   function setBtn(on){
     btn.textContent=on?"Sound on":"Sound off";
     btn.classList.toggle("on",on);
@@ -358,29 +359,46 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
       ctx=new AC();
       srcNode=ctx.createMediaElementSource(audio);
       gainNode=ctx.createGain();
-      gainNode.gain.value=GAIN;
+      gainNode.gain.value=0;
       srcNode.connect(gainNode);
       gainNode.connect(ctx.destination);
       if(ctx.state==="suspended") ctx.resume();
     }catch(e){}
+  }
+  function rampGain(to){
+    if(gainNode && ctx){
+      var g=gainNode.gain;
+      var now=ctx.currentTime;
+      g.cancelScheduledValues(now);
+      g.setValueAtTime(Math.max(0.0001, g.value||0.0001), now);
+      g.linearRampToValueAtTime(Math.max(0.0001, to), now+SOUND_FADE);
+      return;
+    }
+    try{ audio.volume=to>0?1:0; }catch(e){}
   }
   function startPlay(){
     wantOn=true;
     audio.muted=false;
     try{ audio.volume=1; }catch(e){}
     hookGain();
+    rampGain(GAIN);
     var p=audio.play();
     function ok(){ playing=true; setBtn(true); }
     if(p&&p.then) p.then(ok).catch(function(){ playing=false; if(wantOn) setBtn(true); });
     else ok();
   }
   function stopPlay(){
-    playing=false; wantOn=false;
+    wantOn=false;
     localStorage.setItem(SOUND_KEY,"off");
     setBtn(false);
-    audio.pause();
-    audio.muted=true;
-    if(ctx && ctx.state==="running") ctx.suspend();
+    hookGain();
+    rampGain(0);
+    setTimeout(function(){
+      if(wantOn) return;
+      playing=false;
+      audio.pause();
+      audio.muted=true;
+    }, SOUND_FADE*1000+80);
   }
   btn.addEventListener("pointerdown",function(e){
     e.preventDefault();
