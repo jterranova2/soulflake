@@ -26,7 +26,7 @@ button{font-family:inherit;cursor:pointer}
 .bar{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:.7rem 0;gap:.5rem}
-.wordmark{justify-self:start;font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
+.wordmark{justify-self:start;font-weight:700;font-size:1.25rem;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
 .nav{display:flex;align-items:center;gap:.7rem}
 .nav .go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem}
 body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--frost)}
@@ -38,9 +38,9 @@ body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--f
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--frost);font:inherit;font-size:.92rem;padding:.55rem .7rem;border-radius:8px}
 .menu button[disabled]{color:var(--graphite);opacity:.45}
 .hero{text-align:center;padding:.8rem 0 2.2rem}
-h1{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(2.4rem,8vw,4rem);margin:0 0 1rem}
-h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(1.4rem,4vw,1.85rem);margin:0 0 .45rem}
-.rotate{min-height:3.4rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(2.4rem,8vw,4rem);margin:0 0 1rem}
+h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4vw,1.85rem);margin:0 0 .45rem}
+.rotate{min-height:3.2rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
 .hero-stage{width:min(415px,96vw);margin:0 auto 1.2rem}
 .hero-stage svg{width:100%;height:auto;display:block}
@@ -85,7 +85,7 @@ body.me .file-row{display:flex}
 .dots button.on{background:var(--frost)}
 .vision{max-width:36rem;margin:2.4rem auto 1.2rem}
 .vision p{color:var(--graphite);line-height:1.65;margin:.7rem 0}
-.vision .fancy{font-family:"Instrument Serif",Georgia,serif;text-align:center;color:var(--frost);font-size:clamp(1.3rem,3.6vw,1.8rem)}
+.vision .fancy{font-family:"Instrument Serif",serif;text-align:center;color:var(--frost);font-size:clamp(1.3rem,3.6vw,1.8rem)}
 .bottom{text-align:center;padding:0 0 2.4rem}
 @media (max-width:640px){.block.on{flex-direction:column}.block img{width:100%;flex:none}}
 </style>
@@ -94,7 +94,7 @@ body.me .file-row{display:flex}
 <canvas id="snow" aria-hidden="true"></canvas>
 <div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
 <div class="ground"></div>
-<audio id="ambient" loop playsinline preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
+<audio id="ambient" loop preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
 <header class="bar">
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
@@ -150,15 +150,13 @@ body.me .file-row{display:flex}
     </div>
     <div class="dots" id="slide-dots"></div>
   </section>
-  <section class="vision" aria-label="Why Soulflake"></section>
+  <section class="vision"></section>
   <div class="bottom"><button type="button" class="btn" id="build-2">Get started</button></div>
 </main>
 <script>
 (function(){
   var START_KEY="soulflake.started", SEAT_KEY="soulflake.seat";
   var KEYS=["soulflake.name","soulflake.gender","soulflake.age","soulflake.place"];
-  var FROST=["Frost","Quiet","North","Vale","Ember","Hollow"];
-  function frostHandle(){ return FROST[Math.floor(Math.random()*FROST.length)]+" "+(10+Math.floor(Math.random()*89)); }
   function seatLevel(){ var n=parseInt(localStorage.getItem(SEAT_KEY)||"0",10); return isNaN(n)?0:Math.max(0,Math.min(4,n)); }
   function setSeat(n){
     localStorage.setItem(SEAT_KEY,String(n));
@@ -170,8 +168,16 @@ body.me .file-row{display:flex}
   function applyTitle(){
     var name=localStorage.getItem(KEYS[0])||"";
     var h=document.querySelector(".hero h1");
-    if(!document.body.classList.contains("me")) { if(h) h.textContent="Meet your Soulflake"; return; }
-    if(h) h.textContent=name||"My flake";
+    if(!document.body.classList.contains("me")){if(h)h.textContent="Meet your Soulflake";return;}
+    if(h) h.textContent=name?("Hello "+name):"My flake";
+  }
+  function applyNucleus(){
+    var img=document.querySelector(".hero-seed");
+    if(!img) return;
+    var n=seatLevel();
+    if(n<1){ img.style.visibility="hidden"; return; }
+    img.style.visibility="visible";
+    img.src="assets/nucleus-"+Math.max(1,Math.min(4,n))+".svg";
   }
   function showWelcome(){
     document.body.classList.remove("me");
@@ -182,6 +188,7 @@ body.me .file-row{display:flex}
     document.body.classList.add("me");
     localStorage.setItem(START_KEY,"1");
     applyTitle();
+    applyNucleus();
     setSeat(seatLevel());
     renderAsk();
     if(location.hash!=="#me") location.hash="me";
@@ -221,7 +228,7 @@ body.me .file-row{display:flex}
     if(!v){ if(spec.skipVal) v=spec.skipVal(); else return; }
     commit(v);
   }
-  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); renderAsk(); }
+  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); applyNucleus(); renderAsk(); }
   document.getElementById("build").onclick=showMe;
   document.getElementById("build-2").onclick=showMe;
   document.getElementById("reset").onclick=function(){
