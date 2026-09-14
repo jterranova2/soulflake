@@ -14,8 +14,15 @@
 :root{--midnight:#070B14;--violet:#A78BFA;--frost:#F8FAFC;--graphite:#94A3B8}
 *{box-sizing:border-box}html,body{margin:0;background:var(--midnight);color:var(--frost);font-family:Inter,system-ui,sans-serif}
 button{font-family:inherit;cursor:pointer}
-.rays{position:fixed;inset:0;pointer-events:none;background:radial-gradient(ellipse at 50% -10%, rgba(248,250,252,.18), transparent 46%)}
-.ground{position:fixed;left:0;right:0;bottom:0;height:18vh;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(248,250,252,.07))}
+.rays,.rays b{position:fixed;inset:0;pointer-events:none;z-index:0}
+.rays{background:none}
+.rays b{left:50%;top:-12%;width:7vw;height:88%;background:linear-gradient(180deg, rgba(248,250,252,.22), rgba(103,232,249,.04) 42%, transparent 78%);filter:blur(7px);transform-origin:50% 0;opacity:.38}
+.rays b:nth-child(1){transform:translateX(-50%) rotate(-8deg);animation:shimmerRay 7.5s ease-in-out infinite}
+.rays b:nth-child(2){transform:translateX(-50%) rotate(0deg);width:5vw;opacity:.28;animation:shimmerRay 9s ease-in-out infinite .8s}
+.rays b:nth-child(3){transform:translateX(-50%) rotate(8deg);animation:shimmerRay 8.2s ease-in-out infinite 1.6s}
+@keyframes shimmerRay{0%,100%{opacity:.34}50%{opacity:.16}}
+#snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
+.ground{position:fixed;left:0;right:0;bottom:0;height:18vh;pointer-events:none;z-index:2;background:linear-gradient(180deg,transparent,rgba(248,250,252,.07))}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
 .top{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 0;gap:.7rem}
 .wordmark{font-weight:700;font-size:1.25rem;letter-spacing:-.01em;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
@@ -30,8 +37,17 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .rotate{min-height:3.4rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
 .mark{width:min(380px,92vw);height:auto;aspect-ratio:1/1;display:block;margin:0 auto 1.2rem;background:transparent}
-.hero-full{animation:flakeSpin 80s linear infinite}
-@keyframes flakeSpin{to{transform:rotate(360deg)}}
+.hero-stage{width:min(415px,96vw);margin:0 auto 1.2rem}
+.hero-stage svg{width:100%;height:auto;display:block}
+.hero-flake .flake{animation:intro 1.6s ease-out forwards}
+.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out 1.6s infinite}
+.hero-flake .spin-bands{transform-origin:0 0;animation:spin-cw 70s linear infinite}
+.hero-flake .spin-crystal{transform-origin:0 0;animation:spin-ccw 56s linear infinite}
+.hero-flake .nucleus{transform:scale(.45);transform-origin:0 0}
+@keyframes intro{from{opacity:0}to{opacity:1}}
+@keyframes spin-cw{to{transform:rotate(360deg)}}
+@keyframes spin-ccw{to{transform:rotate(-360deg)}}
+@keyframes wash{0%,100%{opacity:.08;transform:scale(.78)}50%{opacity:.85;transform:scale(1.14)}}
 body.me .pitch,body.me .bottom,body.me .rotate,body.me .vision,body.me #build,body.me .hero-full{display:none}
 body.me .hero-seed{display:block}
 .hero-seed{display:none;width:min(220px,60vw);margin:0 auto 1.2rem}
@@ -66,20 +82,21 @@ body.me.seated .you{display:block}
 </style>
 </head>
 <body>
-<div class="rays"></div>
+<canvas id="snow" aria-hidden="true"></canvas>
+<div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
 <div class="ground"></div>
 <audio id="ambient" loop playsinline preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
   <div class="nav">
-    <button type="button" class="go" data-go="welcome">About</button>
+    <button type="button" class="go" data-go="welcome">Welcome</button>
     <button type="button" class="go" data-go="me">My flake</button>
     <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
   </div>
 </div>
 <main class="wrap">
   <section class="hero">
-    <img class="mark hero-full" src="assets/welcome-flake.svg" alt="Soulflake"/>
+    <div class="hero-stage hero-full" id="hero-stage"></div>
     <img class="hero-seed" src="assets/commercial-center.svg" alt="The center"/>
     <h1>Meet your Soulflake</h1>
     <p class="rotate" id="line">Know thyself, and then be known.</p>
@@ -132,7 +149,7 @@ body.me.seated .you{display:block}
   function showWelcome(){
     document.body.classList.remove("me");
     document.querySelector(".hero h1").textContent="Meet your Soulflake";
-    if(location.hash!=="#about" && location.hash!=="#welcome") location.hash="about";
+    if(location.hash!=="#welcome") location.hash="welcome";
   }
   function showMe(){
     document.body.classList.add("me");
@@ -180,10 +197,13 @@ body.me.seated .you{display:block}
   document.getElementById("build-2").onclick=showMe;
   document.getElementById("go-welcome").onclick=showWelcome;
   document.querySelectorAll(".nav [data-go]").forEach(function(b){ b.onclick=function(){ this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
-  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome"||location.hash==="#about") showWelcome(); });
+  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome") showWelcome(); });
   document.getElementById("ask-ok").onclick=function(){ takeInput(STEPS[seatLevel()]||{}); };
   document.getElementById("ask-skip").onclick=function(){ var spec=STEPS[seatLevel()]; if(spec) commit(spec.skipVal?spec.skipVal():"skipped"); };
-  if(location.hash==="#welcome"||location.hash==="#about") showWelcome();
+  fetch("assets/welcome-flake.svg").then(function(r){return r.text();}).then(function(t){
+    var box=document.getElementById("hero-stage"); if(box) box.innerHTML=t;
+  }).catch(function(){});
+  if(location.hash==="#welcome") showWelcome();
   else if(location.hash==="#me" || localStorage.getItem(START_KEY)==="1") showMe();
   (function(){
     var cards=document.querySelectorAll(".slides .block"), dotsBox=document.getElementById("slide-dots"), i=0;
@@ -207,6 +227,16 @@ body.me.seated .you{display:block}
   function stopPlay(){ wantOn=false; localStorage.setItem(SOUND_KEY,"off"); audio.pause(); audio.muted=true; setBtn(false); }
   btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn && !audio.paused) stopPlay(); else { localStorage.removeItem(SOUND_KEY); startPlay(); } });
   setBtn(wantOn); if(wantOn) startPlay(); else { audio.pause(); audio.muted=true; }
+  var c=document.getElementById("snow"); if(c){
+    var g=c.getContext("2d");
+    if(g && !matchMedia("(prefers-reduced-motion: reduce)").matches){
+      var w=0,h=0,flakes=[];
+      function spawn(y,moon){ var m=!!moon||Math.random()>.88; return {x:Math.random()*w,y:y?Math.random()*h:-12,r:m?2.4+Math.random()*3.4:.7+Math.random()*2.1,vy:m?.35+Math.random()*.7:.9+Math.random()*1.8,vx:-.35+Math.random()*.7,a:m?.10+Math.random()*.22:.22+Math.random()*.5,tw:Math.random()*6.28,tws:m?.008+Math.random()*.02:.02+Math.random()*.04,cyan:!m&&Math.random()>.82}; }
+      function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(90,Math.floor(w*h/16000))},function(){return spawn(true);}).concat(Array.from({length:8},function(){return spawn(true,true);})); }
+      function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
+      resize(); frame(); addEventListener("resize",resize);
+    }
+  }
 })();
 </script>
 </body>
