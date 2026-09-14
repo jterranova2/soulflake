@@ -99,14 +99,14 @@ body.me .file-row{display:flex}
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
   <div class="nav">
-    <button type="button" class="go" data-go="welcome">Welcome</button>
+    <button type="button" class="go" data-go="welcome">About</button>
     <button type="button" class="go" data-go="me">My flake</button>
   </div>
   <div class="tools">
     <button type="button" class="icon-btn" id="sound" aria-label="Sound" aria-pressed="false">&#9834;</button>
     <button type="button" class="icon-btn" id="more" aria-label="Menu">&#8942;</button>
     <div class="menu" id="menu">
-      <button type="button" data-go="welcome">Welcome</button>
+      <button type="button" data-go="welcome">About</button>
       <button type="button" data-go="me">My flake</button>
       <button type="button" disabled>Export</button>
       <button type="button" disabled>Import</button>
@@ -170,7 +170,7 @@ body.me .file-row{display:flex}
   function showWelcome(){
     document.body.classList.remove("me");
     document.querySelector(".hero h1").textContent="Meet your Soulflake";
-    if(location.hash!=="#welcome") location.hash="welcome";
+    if(location.hash!=="#about") location.hash="about";
   }
   function showMe(){
     document.body.classList.add("me");
@@ -226,7 +226,7 @@ body.me .file-row{display:flex}
   document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ document.getElementById("menu").classList.remove("open"); this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
   document.getElementById("more").onclick=function(e){ e.stopPropagation(); document.getElementById("menu").classList.toggle("open"); };
   document.addEventListener("click", function(){ document.getElementById("menu").classList.remove("open"); });
-  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome") showWelcome(); });
+  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#about"||location.hash==="#welcome") showWelcome(); });
   document.getElementById("ask-ok").onclick=function(){ takeInput(STEPS[seatLevel()]||{}); };
   document.getElementById("ask-skip").onclick=function(){ var spec=STEPS[seatLevel()]; if(spec) commit(spec.skipVal?spec.skipVal():"skipped"); };
   fetch("assets/welcome-flake.svg").then(function(r){return r.text();}).then(function(t){
@@ -235,7 +235,7 @@ body.me .file-row{display:flex}
   fetch("assets/welcome-vision.html").then(function(r){return r.text();}).then(function(t){
     var box=document.querySelector(".vision"); if(box) box.innerHTML=t;
   }).catch(function(){});
-  if(location.hash==="#welcome") showWelcome();
+  if(location.hash==="#about"||location.hash==="#welcome") showWelcome();
   else if(location.hash==="#me" || localStorage.getItem(START_KEY)==="1") showMe();
   (function(){
     var cards=document.querySelectorAll(".slides .block"), dotsBox=document.getElementById("slide-dots"), i=0;
