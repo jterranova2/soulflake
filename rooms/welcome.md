@@ -1,12 +1,16 @@
 # Room: Welcome
 
-**Live files:** `index.html` (root) and `Soulflake.html` (same page tonight)
+**Live files:** `index.html` (root). `Soulflake.html` is a stale older Welcome and is not canon tonight.
 **Job:** First visit. Mood, not a file desk. Layer 0 magazine brochure, plus the thin Get started stub.
 
 ## Must be true
 
 - Wordmark Soul frost, flake cyan. Meet your Soulflake.
-- Hero is the live six-color dendrite SVG (arm-g0…g5, spin-bands + reverse spin-crystal). Not `Soulflake-Welcome-Crystal.jpg`. Size `min(415px, 96vw)`.
+- Hero is the **trippy-1 combined flake** SVG. Size `min(415px, 96vw)`. Not `Soulflake-Welcome-Crystal.jpg`. Not the 09-11 arm-g0…g5 last-working-loop dendrite.
+  - Rings `r0`–`r5`: hex + star, opposite spins, 140 / 110 / 88 / 72 / 58 / 46s.
+  - Ghost plate-arms on the 30° offset, opacity `.18`, CW 64s.
+  - `spin-crystal`: six plate-arms + nucleus, CCW 96s.
+  - Core wash 7s, flake swell 11s, nucleus heart 5.5s, dash crawl 18s.
 - Six attributed rotating lines. First fade-in 1.8s. Hold 7s, fade 1.8s, gap 1.4s. Wait full fade-out before swap.
   - Know thyself, and then be known.
   - The unexamined life is not worth living. -- Socrates
@@ -24,8 +28,7 @@
 - No Export. No Import. No name/password dock. No nav. Never Me. Never Others.
 - Sound: `assets/audio/index-Frozen-Star.mp3` only. On unless `soulflake.sound` is `off`. Gain 2.2, hooked once. First-gesture unlock. Off stays off across refresh. Button glows when on.
 - Atmosphere that stays: three tight moonlight shafts that fade on commercial scroll, ground frost, snow.
-- Atmosphere that does not come back: fog, vignette oval, breath glow, ice ring, glint sweep, halo, Frost Waltz file, AUDIO-welcome.mp3, welcome-8.mp3, commercial pitch JPEGs, unattributed slop marquee, grow-then-peel flake.
-- Flake motion: last working loop. Starts at the hub. Lace does not flash first. Do not put the grow-by-stages-then-peel pass back.
+- Atmosphere that does not come back: fog, vignette oval, breath glow, ice ring, glint sweep, halo, Frost Waltz file, AUDIO-welcome.mp3, welcome-8.mp3, commercial pitch JPEGs, unattributed slop marquee, grow-then-peel flake, the emptied “loading flake” stub from the first 09-13 ship pass.
 
 ## Landed 09-11 that the 09-10 brief missed
 
@@ -36,13 +39,21 @@
 - Frozen Star bed. Old welcome mixes deleted.
 - Sound-off persists. No stacked gain on refresh.
 - Rays tightened to shafts. Fog, vignette, breath glow removed. Rays leave when you scroll the pitch.
-- Grow-then-peel flake was tried and reverted to the last working loop, starting at the hub.
+- Grow-then-peel flake was tried and reverted.
+
+## Landed 09-13
+
+- Hero drawing replaced with trippy-1 combined flake (rings + ghost offset arms + plate-crystal + nucleus).
+- Get started no longer “g0 frost spines only.” It hides ghost + concentric rings and freezes the crystal.
+- First 09-13 ship commit blanked `index.html`; restore commit put Welcome back. That blank is not a product beat.
+- `Soulflake.html` was not updated in the same pass.
 
 ## Not landed
 
-- Get started does not name a profile, does not ask a question, does not grow an arm past frost.
+- Get started does not name a profile, does not ask a question, does not grow an arm past the empty crystal.
 - Arm-zoom frames 70–74 still missing.
+- `Soulflake.html` still the old hole / crystal-JPEG / Frost Waltz page.
 
-## Checked 09-12 night
+## Checked 09-13 night
 
-Live `index.html` still matches this file. No new Welcome commits on 09-12. Do not treat a quiet day as permission to thin the 09-11 brochure, quotes, Frozen Star bed, or last-working flake loop.
+Live `index.html` is Welcome + trippy-1. Do not put the 09-11 last-working-loop dendrite back unless a later chat says so. Do not treat a quiet chat as permission to thin the brochure, quotes, or Frozen Star bed.

@@ -1,43 +1,47 @@
-# Soulflake rooms — catch-up through 2026-09-12 night
+# Soulflake rooms — catch-up through 2026-09-13 night
 
 Shared brief for every room. Two layers:
 
-1. **Live now** — what is actually in `index.html` / `Soulflake.html` tonight.
+1. **Live now** — what is actually in `index.html` tonight.
 2. **Said in chat, not landed** — keep these so the next carve does not thin them again.
 
-Checked 2026-09-12 night PDT against `main` at `4770ead`. No Soulflake commits after the 09-11-night room catch-up. Live page and room files still match that canon. No new product copy from a 09-12 chat thread was available to this pass, so nothing extra was invented into the rooms.
+Checked 2026-09-13 night PDT against `main` at `278609ff`. After a quiet 09-12, three Welcome commits landed late 09-13: a first pass stripped `index.html` down to a stub, then Welcome was restored and the **trippy-1 combined flake** was shipped as the hero. No 09-13 chat transcript was available to this agent beyond the catch-up request, so nothing from a missing thread was invented.
 
 Live: https://jterranova2.github.io/soulflake/  
 Custom domain: https://soulflake.justinterranova.com  
 Repo: https://github.com/jterranova2/soulflake  
 Drive: https://drive.google.com/drive/folders/1SJDEMUCLDrHchtkjCOQQYOP7fKDKEsZN
 
-## Live now (canon as of 2026-09-11 night PDT)
+## Live now (canon as of 2026-09-13 night PDT)
 
-Layer 0 Welcome, rebuilt as a magazine brochure. Root homepage is Welcome. `Soulflake.html` is the same Welcome page. One mood, one word, one button — until Get started flips the same page into a frost My flake.
+Layer 0 Welcome, still a magazine brochure. **Root `index.html` is the live page.** `Soulflake.html` is a leftover older Welcome (crystal JPEG, The hole, Frost Waltz path, unattributed rotate lines) and is **not** in lockstep with `index.html` tonight. Do not copy `Soulflake.html` forward.
 
-1. Midnight / violet / frost. Snowfall (50% faster than the 09-10 night page). Wordmark **Soul** frost `#F8FAFC`, **flake** cyan `#67E8F9`. Hero is a live six-color dendrite SVG, not a crystal JPEG. Size `min(415px, 96vw)` (about +44% on top of the 09-09 mark; two +20% passes on 09-11).
-2. Headline: **Meet your Soulflake**.
-3. Six rotating attributed lines. First line fades in after 1.8s. Hold 7s, fade 1.8s, gap 1.4s, then swap. Wait full fade-out before the next line.
+1. Midnight / violet / frost. Snowfall. Wordmark **Soul** frost `#F8FAFC`, **flake** cyan `#67E8F9`. Hero size still `min(415px, 96vw)`.
+2. Hero is the **trippy-1 combined flake** SVG, not the 09-11 arm-g0…g5 last-working-loop dendrite, and not `Soulflake-Welcome-Crystal.jpg`.
+   - Concentric hex + star rings `r0`–`r5` spin opposite ways at 140 / 110 / 88 / 72 / 58 / 46s.
+   - Ghost plate-arms sit on the 30° offset, opacity `.18`, spin CW 64s.
+   - `spin-crystal` is six plate-arms + a layered nucleus, spin CCW 96s.
+   - Core wash 7s, whole-flake swell 11s, nucleus heart 5.5s, dashed rings crawl 18s.
+   - `prefers-reduced-motion` kills those animations, rays shimmer, and snow.
+3. Headline: **Meet your Soulflake**.
+4. Six rotating attributed lines. First line fades in after 1.8s. Hold 7s, fade 1.8s, gap 1.4s, then swap. Wait full fade-out before the next line.
    - Know thyself, and then be known.
    - The unexamined life is not worth living. -- Socrates
    - He who knows others is wise; he who knows himself is enlightened. -- Lao Tzu
    - We don't see things as they are, we see them as we are. -- Anais Nin
    - The privilege of a lifetime is to become who you truly are. -- Jung
    - If I am not for myself, who will be for me? -- Hillel
-4. Button copy is **Get started**, weight 500. Hero + bottom. Click runs `showMe()`: `body.me` + `.hero-flake.me`, headline becomes **My flake**, pitch / cue / rotate / bottom hide, bands g1–g5 drop, only g0 frost spines stay. No questions, no profiles, no arm zoom yet.
-5. Scroll pitch is a zigzag magazine brochure. Hero flake stays put. Cards walk past it, even/odd sides flip. Moonbeam rays fade out once the hero is less than 35% on screen. Four blocks, CEO order, inline SVGs:
+5. Button copy is **Get started**, weight 500. Hero + bottom. Click runs `showMe()`: `body.me` + `.hero-flake.me`, headline becomes **My flake**, pitch / cue / rotate / bottom hide. On the new drawing that hides ghost + `r0`–`r5` and freezes `spin-crystal`. The six plate-arms and nucleus stay. No questions, no profiles, no arm zoom yet.
+6. Scroll pitch is still the zigzag magazine brochure. Hero flake stays put. Cards walk past it, even/odd sides flip. Moonbeam rays fade out once the hero is less than 35% on screen. Four blocks, CEO order, inline SVGs:
    - The center — Every flake starts here. Six directions. No answers yet. Until you tap the middle and tell it one true thing, there is nothing to match, compare, or act on.
    - Six cuts, not a type — Not another letter. Traits. Taste. Bond. Values. Conflict. Context.
    - It grows when you tell it — The more you say, the more it can say back. Lopsided on purpose.
    - Built to be used — Know yourself. Then be known. No score. Glue, grind, repair.
    Cue: Start with one arm.
-6. Sound: `assets/audio/index-Frozen-Star.mp3` only. `AUDIO-welcome.mp3` and `welcome-8.mp3` deleted. On by default unless `soulflake.sound` is `off`. Element volume 1. Gain node **2.2**. Hook gain once — no stacked nodes across refresh. First-gesture unlock if autoplay is blocked. Off stays off across refresh. Button glows when on.
-7. Atmosphere that stayed: three tight moonlight shafts (no dome wash), ground frost, snow. Atmosphere tried on 09-11 and killed: fog, vignette oval wash, breath glow behind the flake, ice ring, glint sweep, halo, magazine-without-zigzag, grow-then-peel flake (reverted to the last working loop).
-8. Hero flake motion: starts at the hub so lace does not flash first. g0 holds; g1–g5 rise and peel on a 17.6s loop. spin-bands 51.2s, spin-crystal reverse 76.8s, draw-on then bloom. `prefers-reduced-motion` kills motion, rays shimmer, snow.
-9. Arm hues on the drawing: cyan `#67E8F9`, violet `#A78BFA`, blue `#93C5FD`, graphite `#94A3B8`, lavender `#C4B5FD`, frost `#E2E8F0`. Bond / Values sit in the violet–lavender pair.
-10. **No nav.** Never print **Me** or **Others** on the page. Insights and Finds are off the site. No Export / Import dock. No Sign in.
-11. Not a medical, clinical, or hiring tool.
+7. Sound: `assets/audio/index-Frozen-Star.mp3` only. On by default unless `soulflake.sound` is `off`. Element volume 1. Gain node **2.2**. Hook gain once — no stacked nodes across refresh. First-gesture unlock if autoplay is blocked. Off stays off across refresh. Button glows when on.
+8. Atmosphere that stayed: three tight moonlight shafts (no dome wash), ground frost, snow.
+9. **No nav.** Never print **Me** or **Others** on the page. Insights and Finds are off the site. No Export / Import dock. No Sign in.
+10. Not a medical, clinical, or hiring tool.
 
 ## Public names (unchanged)
 
@@ -56,11 +60,11 @@ Internal file names (`rooms/home.md`, `rooms/others.md`) stay so old links do no
 `frost` → `branching` → `forming` → `fine`  
 Level from how many answers exist on that arm, not from a score. No percents on the flake.
 
-My flake camera (designed 09-09, not live tonight): tap an arm, slow zoom into that sector on the same page. Center or Back zooms out. Empty stays frost. Tonight Get started only shows g0 frost spines.
+My flake camera (designed 09-09, not live tonight): tap an arm, slow zoom into that sector on the same page. Center or Back zooms out. Empty stays frost. Tonight Get started only strips the spinning rings / ghost off the trippy-1 drawing.
 
 ## Said in chat / builder snapshot, still missing from live
 
-Restore on the next carve. Do not treat Layer 0 Welcome + the g0 stub as the whole product.
+Restore on the next carve. Do not treat Layer 0 Welcome + the Get started stub as the whole product.
 
 - My flake itself (named on-device profiles, six arms, one question at a time)
 - Taste grouped: Music / Film / Talk-night
@@ -71,14 +75,17 @@ Restore on the next carve. Do not treat Layer 0 Welcome + the g0 stub as the who
 - Export / Import (carry a flake, no account) — not a Welcome dock
 - Together (compare later, no compatibility %)
 - Report as a real Insights interior (three cuts of the same answers)
-- Get started wired past the g0 stub into a real first question
+- Get started wired past the stub into a real first question
 - Real JPEGs for frames 80–83 are no longer required; inline SVGs are the pitch. Arm-zoom frames 70–74 still not drawn.
+- `Soulflake.html` brought back into lockstep with `index.html` (it is stale tonight)
 
 Tried on 09-10 and discarded: commercial JPEGs `IMG-commercial-1-4`, ice ring, glint sweep, halo, Web Audio mute-at-zero, Frost Waltz as the Welcome bed.
 
 Tried on 09-11 and discarded: fog, vignette oval, breath glow, slop (unattributed) marquee, grow-by-stages-then-peel flake motion, `AUDIO-welcome.mp3` / `welcome-8.mp3` as the bed.
 
-09-12 night: no new Welcome / arm / chrome landings. Drive copy of the Taste Matrix and `SOULFLAKE CONCEPT.xlsx` were opened earlier in the UTC day; they did not change the chip list already kept in `rooms/taste.md`. A separate private repo `Home-and-Family` was created; that is not a Soulflake room.
+09-12 night: no new Welcome / arm / chrome landings.
+
+09-13 night: first “ship trippy-1” commit briefly emptied `index.html` to a loading stub; immediately restored. Do not treat that stub as a direction. The landed hero is the combined rings + ghost + plate-crystal drawing.
 
 Justin sample flake is **dev / export only**, never a default user on a phone:
 
