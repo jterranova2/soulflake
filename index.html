@@ -117,7 +117,7 @@ body.me .file-row{display:flex}
 <main class="wrap">
   <section class="hero">
     <div class="hero-stage hero-full" id="hero-stage"></div>
-    <img class="hero-seed" src="assets/my-flake-seed.svg" alt="The center"/>
+    <img class="hero-seed" src="assets/nucleus-1.svg" alt="The center"/>
     <h1>Meet your Soulflake</h1>
     <p class="rotate" id="line">Know thyself, and then be known.</p>
     <button type="button" class="btn" id="build">Get started</button>
@@ -167,21 +167,27 @@ body.me .file-row{display:flex}
     var name=localStorage.getItem(KEYS[0])||"";
     if(you) you.textContent=n>=4?(name?name+" \u00b7 seat lit":"Seat lit"):name;
   }
+  function applyTitle(){
+    var name=localStorage.getItem(KEYS[0])||"";
+    var h=document.querySelector(".hero h1");
+    if(!document.body.classList.contains("me")) { if(h) h.textContent="Meet your Soulflake"; return; }
+    if(h) h.textContent=name||"My flake";
+  }
   function showWelcome(){
     document.body.classList.remove("me");
-    document.querySelector(".hero h1").textContent="Meet your Soulflake";
+    applyTitle();
     if(location.hash!=="#about") location.hash="about";
   }
   function showMe(){
     document.body.classList.add("me");
     localStorage.setItem(START_KEY,"1");
-    document.querySelector(".hero h1").textContent="My flake";
+    applyTitle();
     setSeat(seatLevel());
     renderAsk();
     if(location.hash!=="#me") location.hash="me";
   }
   var STEPS=[
-    {q:"What should we call you?",hint:"A nickname is fine.",ph:"Your name or nickname",kind:"text",ok:"That’s me",skipVal:frostHandle},
+    {q:"What should we call you?",hint:"A nickname is fine.",ph:"Your name or nickname",kind:"text",ok:"That’s me"},
     {q:"How do you show up?",hint:"Skip if you do not want this on the file.",kind:"picks",picks:["Woman","Man","Another way"]},
     {q:"How old are you?",hint:"A number. Skip is fine.",ph:"Age",kind:"age"},
     {q:"Where are you these days?",hint:"A city is enough. Skip is fine.",ph:"City",kind:"text"}
@@ -191,6 +197,8 @@ body.me .file-row{display:flex}
     if(step>=4){ box.style.display="none"; return; }
     box.style.display="";
     var spec=STEPS[step];
+    var skip=document.getElementById("ask-skip");
+    if(skip) skip.style.display=step===0?"none":"";
     document.getElementById("ask-q").textContent=spec.q;
     document.getElementById("ask-hint").textContent=spec.hint;
     var fields=document.getElementById("ask-fields"), ok=document.getElementById("ask-ok");
@@ -210,10 +218,10 @@ body.me .file-row{display:flex}
     var inp=document.getElementById("ask-in");
     var v=(inp && inp.value || "").replace(/^\s+|\s+$/g,"");
     if(spec.kind==="age"){ if(!v){ commit("skipped"); return; } var n=parseInt(v,10); if(isNaN(n)||n<13||n>120) return; commit(String(n)); return; }
-    if(!v && spec.skipVal) v=spec.skipVal();
-    commit(v||"skipped");
+    if(!v){ if(spec.skipVal) v=spec.skipVal(); else return; }
+    commit(v);
   }
-  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); renderAsk(); }
+  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); renderAsk(); }
   document.getElementById("build").onclick=showMe;
   document.getElementById("build-2").onclick=showMe;
   document.getElementById("reset").onclick=function(){
