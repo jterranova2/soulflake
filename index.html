@@ -23,22 +23,22 @@ button{font-family:inherit;cursor:pointer}
 @keyframes shimmerRay{0%,100%{opacity:.34}50%{opacity:.16}}
 #snow{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:1}
 .ground{position:fixed;left:0;right:0;bottom:0;height:18vh;pointer-events:none;z-index:2;background:linear-gradient(180deg,transparent,rgba(248,250,252,.07))}
-.bar{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.bar{position:sticky;top:0;z-index:20;background:rgba(7,11,20,.5);backdrop-filter:blur(12px)}
 .wrap{position:relative;z-index:2;width:min(40rem,calc(100% - 2rem));margin:0 auto}
-.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:.7rem 0;gap:.5rem}
+.top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:.65rem 0;gap:.5rem}
 .wordmark{justify-self:start;font-weight:700;font-size:1.25rem;color:#F8FAFC;background:none;border:0;padding:0}.wordmark .flake{color:#67E8F9}
 .nav{display:flex;align-items:center;gap:.7rem}
 .nav .go{min-height:36px;border:0;background:transparent;color:var(--graphite);font:inherit;font-size:.92rem}
 body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--frost)}
 .tools{justify-self:end;display:flex;align-items:center;gap:.25rem;position:relative}
-.icon-btn{width:40px;height:40px;border:0;border-radius:999px;background:transparent;color:rgba(148,163,184,.7);font-size:1.15rem;line-height:1}
-.icon-btn.on{color:var(--frost)}
+.icon-btn{width:48px;height:48px;border:0;border-radius:999px;background:rgba(248,250,252,.06);color:rgba(248,250,252,.78);font-size:1.35rem;line-height:1}
+.icon-btn.on{color:var(--frost);background:rgba(248,250,252,.12)}.icon-btn.off{color:rgba(148,163,184,.9);position:relative}.icon-btn.off:after{content:"";position:absolute;left:18%;right:18%;top:50%;height:2px;background:#F8FAFC;transform:rotate(-32deg);border-radius:2px}
 .menu{display:none;position:absolute;right:0;top:calc(100% + .35rem);min-width:10.5rem;padding:.35rem;border-radius:12px;background:rgba(7,11,20,.92);border:1px solid rgba(248,250,252,.12)}
 .menu.open{display:block}
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--frost);font:inherit;font-size:.92rem;padding:.55rem .7rem;border-radius:8px}
 .menu button[disabled]{color:var(--graphite);opacity:.45}
 .hero{text-align:center;padding:.8rem 0 2.2rem}
-h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(2.4rem,8vw,4rem);margin:0 0 1rem}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(2.2rem,7vw,3.6rem);margin:0 0 1rem}
 h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4vw,1.85rem);margin:0 0 .45rem}
 .rotate{min-height:3.2rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
@@ -91,10 +91,10 @@ body.me .file-row{display:flex}
 </style>
 </head>
 <body>
-<canvas id="snow" aria-hidden="true"></canvas>
-<div class="rays" aria-hidden="true"><b></b><b></b><b></b></div>
+<canvas id="snow"></canvas>
+<div class="rays"><b></b><b></b><b></b></div>
 <div class="ground"></div>
-<audio id="ambient" loop preload="auto" src="assets/audio/index-Frozen-Star.mp3"></audio>
+<audio id="ambient" loop src="assets/audio/index-Frozen-Star.mp3"></audio>
 <header class="bar">
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
@@ -103,11 +103,12 @@ body.me .file-row{display:flex}
     <button type="button" class="go" data-go="me">My flake</button>
   </div>
   <div class="tools">
-    <button type="button" class="icon-btn" id="sound" aria-label="Sound" aria-pressed="false">&#9834;</button>
-    <button type="button" class="icon-btn" id="more" aria-label="Menu">&#8942;</button>
+    <button type="button" class="icon-btn" id="sound">♪</button>
+    <button type="button" class="icon-btn" id="more">&#8942;</button>
     <div class="menu" id="menu">
       <button type="button" data-go="welcome">About</button>
       <button type="button" data-go="me">My flake</button>
+      <button type="button" id="menu-reset">Reset</button>
       <button type="button" disabled>Export</button>
       <button type="button" disabled>Import</button>
     </div>
@@ -119,17 +120,16 @@ body.me .file-row{display:flex}
     <div class="hero-stage hero-full" id="hero-stage"></div>
     <img class="hero-seed" src="assets/nucleus-1.svg" alt="The center"/>
     <h1>Meet your Soulflake</h1>
-    <p class="rotate" id="line">Know thyself, and then be known.</p>
+    <p class="rotate" id="line">Know thyself, then be known.</p>
     <button type="button" class="btn" id="build">Get started</button>
     <p class="you" id="you"></p>
     <div class="file-row" id="file-row">
-      <button type="button" class="ghost" id="reset">Reset</button>
       <button type="button" class="ghost" id="export" disabled>Export</button>
       <button type="button" class="ghost" id="import" disabled>Import</button>
     </div>
     <div class="name-ask" id="ask">
       <p id="ask-q">What should we call you?</p>
-      <p class="hint" id="ask-hint">A nickname is fine.</p>
+      <p class="hint" id="ask-hint">Name the flake.</p>
       <div id="ask-fields"></div>
       <div class="row">
         <button type="button" class="ghost" id="ask-skip">Skip</button>
@@ -194,10 +194,10 @@ body.me .file-row{display:flex}
     if(location.hash!=="#me") location.hash="me";
   }
   var STEPS=[
-    {q:"What should we call you?",hint:"A nickname is fine.",ph:"Your name or nickname",kind:"text",ok:"That’s me"},
-    {q:"How do you show up?",hint:"Skip if you do not want this on the file.",kind:"picks",picks:["Woman","Man","Another way"]},
-    {q:"How old are you?",hint:"A number. Skip is fine.",ph:"Age",kind:"age"},
-    {q:"Where are you these days?",hint:"A city is enough. Skip is fine.",ph:"City",kind:"text"}
+    {q:"What should we call you?",hint:"Name the flake.",ph:"Your name",kind:"text",ok:"That’s me"},
+    {q:"How do you show up?",hint:"Skip if you want.",kind:"picks",picks:["Woman","Man","Another way"]},
+    {q:"How old are you?",hint:"Skip is fine.",ph:"Age",kind:"age"},
+    {q:"Where are you these days?",hint:"City. Skip is fine.",ph:"City",kind:"text"}
   ];
   function renderAsk(){
     var step=seatLevel(), box=document.getElementById("ask");
@@ -231,12 +231,14 @@ body.me .file-row{display:flex}
   function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); applyNucleus(); renderAsk(); }
   document.getElementById("build").onclick=showMe;
   document.getElementById("build-2").onclick=showMe;
-  document.getElementById("reset").onclick=function(){
+  function doReset(){ document.getElementById("menu").classList.remove("open");
     [START_KEY,SEAT_KEY].concat(KEYS).forEach(function(k){ localStorage.removeItem(k); });
     document.body.classList.remove("seated");
     var you=document.getElementById("you"); if(you) you.textContent="";
     showWelcome();
   };
+  var rb=document.getElementById("reset"); if(rb) rb.onclick=doReset;
+  var mr=document.getElementById("menu-reset"); if(mr) mr.onclick=doReset;
   document.getElementById("go-welcome").onclick=showWelcome;
   document.querySelectorAll("[data-go]").forEach(function(b){ b.onclick=function(){ document.getElementById("menu").classList.remove("open"); this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
   document.getElementById("more").onclick=function(e){ e.stopPropagation(); document.getElementById("menu").classList.toggle("open"); };
@@ -261,7 +263,7 @@ body.me .file-row{display:flex}
     document.getElementById("slide-next").onclick=function(){ go(i+1); };
     go(0);
   })();
-  var LINES=["Know thyself, and then be known.","The unexamined life is not worth living. -- Socrates","He who knows others is wise; he who knows himself is enlightened. -- Lao Tzu","We don't see things as they are, we see them as we are. -- Anais Nin","The privilege of a lifetime is to become who you truly are. -- Jung","If I am not for myself, who will be for me? -- Hillel"];
+  var LINES=["Know thyself, then be known.","The unexamined life is not worth living.","Become who you truly are. -- Jung","If I am not for myself, who will be? -- Hillel"];
   var el=document.getElementById("line"), li=0, FADE=1800, HOLD=7000, GAP=1400;
   function showLine(){ el.style.opacity="1"; } function hideLine(){ el.style.opacity="0"; }
   setTimeout(showLine, 1600);
@@ -269,7 +271,7 @@ body.me .file-row{display:flex}
   setTimeout(nextLine, 1600+FADE+HOLD);
   var audio=document.getElementById("ambient"), btn=document.getElementById("sound"), SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
-  function setBtn(on){ btn.classList.toggle("on",on); btn.setAttribute("aria-pressed", on?"true":"false"); }
+  function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.setAttribute("aria-pressed", on?"true":"false"); btn.textContent="\u266A"; }
   function startPlay(){ wantOn=true; audio.muted=false; audio.play().catch(function(){}); setBtn(true); }
   function stopPlay(){ wantOn=false; localStorage.setItem(SOUND_KEY,"off"); audio.pause(); audio.muted=true; setBtn(false); }
   btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn && !audio.paused) stopPlay(); else { localStorage.removeItem(SOUND_KEY); startPlay(); } });
@@ -279,7 +281,7 @@ body.me .file-row{display:flex}
     if(g && !matchMedia("(prefers-reduced-motion: reduce)").matches){
       var w=0,h=0,flakes=[];
       function spawn(y,moon){ var m=!!moon||Math.random()>.88; return {x:Math.random()*w,y:y?Math.random()*h:-12,r:m?2.4+Math.random()*3.4:.7+Math.random()*2.1,vy:m?.35+Math.random()*.7:.9+Math.random()*1.8,vx:-.35+Math.random()*.7,a:m?.10+Math.random()*.22:.22+Math.random()*.5,tw:Math.random()*6.28,tws:m?.008+Math.random()*.02:.02+Math.random()*.04,cyan:!m&&Math.random()>.82}; }
-      function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(90,Math.floor(w*h/16000))},function(){return spawn(true);}).concat(Array.from({length:8},function(){return spawn(true,true);})); }
+      function resize(){ w=c.width=innerWidth; h=c.height=innerHeight; flakes=Array.from({length:Math.min(70,Math.floor(w*h/18000))},function(){return spawn(true);}); }
       function frame(){ g.clearRect(0,0,w,h); for(var i=0;i<flakes.length;i++){ var f=flakes[i]; f.tw+=f.tws; f.x+=f.vx+Math.sin(f.tw)*.15; f.y+=f.vy; if(f.y>h+6||f.x<-10||f.x>w+10) Object.assign(f,spawn(false)); var a=f.a*(.65+.35*Math.sin(f.tw)); g.beginPath(); g.fillStyle=f.cyan?"rgba(103,232,249,"+(a*.55)+")":"rgba(248,250,252,"+a+")"; g.arc(f.x,f.y,f.r,0,Math.PI*2); g.fill(); } requestAnimationFrame(frame); }
       resize(); frame(); addEventListener("resize",resize);
     }
