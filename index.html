@@ -30,6 +30,8 @@ h2{font-family:"Instrument Serif",Georgia,serif;font-weight:400;font-size:clamp(
 .rotate{min-height:3.4rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
 .mark{width:min(380px,92vw);height:auto;aspect-ratio:1/1;display:block;margin:0 auto 1.2rem;background:transparent}
+.hero-full{animation:flakeSpin 80s linear infinite}
+@keyframes flakeSpin{to{transform:rotate(360deg)}}
 body.me .pitch,body.me .bottom,body.me .rotate,body.me .vision,body.me #build,body.me .hero-full{display:none}
 body.me .hero-seed{display:block}
 .hero-seed{display:none;width:min(220px,60vw);margin:0 auto 1.2rem}
@@ -70,7 +72,7 @@ body.me.seated .you{display:block}
 <div class="wrap top">
   <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
   <div class="nav">
-    <button type="button" class="go" data-go="welcome">Welcome</button>
+    <button type="button" class="go" data-go="welcome">About</button>
     <button type="button" class="go" data-go="me">My flake</button>
     <button type="button" class="ambient" id="sound" aria-pressed="false">Sound off</button>
   </div>
@@ -130,7 +132,7 @@ body.me.seated .you{display:block}
   function showWelcome(){
     document.body.classList.remove("me");
     document.querySelector(".hero h1").textContent="Meet your Soulflake";
-    if(location.hash!=="#welcome") location.hash="welcome";
+    if(location.hash!=="#about" && location.hash!=="#welcome") location.hash="about";
   }
   function showMe(){
     document.body.classList.add("me");
@@ -178,10 +180,10 @@ body.me.seated .you{display:block}
   document.getElementById("build-2").onclick=showMe;
   document.getElementById("go-welcome").onclick=showWelcome;
   document.querySelectorAll(".nav [data-go]").forEach(function(b){ b.onclick=function(){ this.getAttribute("data-go")==="me"?showMe():showWelcome(); }; });
-  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome") showWelcome(); });
+  window.addEventListener("hashchange", function(){ if(location.hash==="#me") showMe(); else if(location.hash==="#welcome"||location.hash==="#about") showWelcome(); });
   document.getElementById("ask-ok").onclick=function(){ takeInput(STEPS[seatLevel()]||{}); };
   document.getElementById("ask-skip").onclick=function(){ var spec=STEPS[seatLevel()]; if(spec) commit(spec.skipVal?spec.skipVal():"skipped"); };
-  if(location.hash==="#welcome") showWelcome();
+  if(location.hash==="#welcome"||location.hash==="#about") showWelcome();
   else if(location.hash==="#me" || localStorage.getItem(START_KEY)==="1") showMe();
   (function(){
     var cards=document.querySelectorAll(".slides .block"), dotsBox=document.getElementById("slide-dots"), i=0;
