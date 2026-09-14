@@ -350,6 +350,7 @@ body.me .pitch,body.me .cue,body.me .bottom,body.me .rotate{display:none}
   function startPlay(){
     wantOn=true;
     audio.muted=false;
+    try{ audio.currentTime=0; }catch(e){}
     try{ audio.volume=1; }catch(e){}
     hookGain();
     rampGain(GAIN);
