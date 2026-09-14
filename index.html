@@ -125,11 +125,7 @@ body.me.seated .you{display:block}
     </div>
     <div class="dots" id="slide-dots"></div>
   </section>
-  <section class="vision">
-    <p class="fancy">People are more reachable than they have ever been. And more unknown.</p>
-    <p>Soulflake is a living file. Six cuts of one person. Empty stays quiet. Filled gets sharp.</p>
-    <p class="fancy">Know thyself, and then be known.</p>
-  </section>
+  <section class="vision" aria-label="Why Soulflake"></section>
   <div class="bottom"><button type="button" class="btn" id="build-2">Get started</button></div>
 </main>
 <script>
@@ -203,6 +199,9 @@ body.me.seated .you{display:block}
   fetch("assets/welcome-flake.svg").then(function(r){return r.text();}).then(function(t){
     var box=document.getElementById("hero-stage"); if(box) box.innerHTML=t;
   }).catch(function(){});
+  fetch("assets/welcome-vision.html").then(function(r){return r.text();}).then(function(t){
+    var box=document.querySelector(".vision"); if(box) box.innerHTML=t;
+  }).catch(function(){});
   if(location.hash==="#welcome") showWelcome();
   else if(location.hash==="#me" || localStorage.getItem(START_KEY)==="1") showMe();
   (function(){
@@ -214,7 +213,7 @@ body.me.seated .you{display:block}
     document.getElementById("slide-next").onclick=function(){ go(i+1); };
     go(0);
   })();
-  var LINES=["Know thyself, and then be known.","The unexamined life is not worth living. -- Socrates","He who knows others is wise; he who knows himself is enlightened. -- Lao Tzu"];
+  var LINES=["Know thyself, and then be known.","The unexamined life is not worth living. -- Socrates","He who knows others is wise; he who knows himself is enlightened. -- Lao Tzu","We don't see things as they are, we see them as we are. -- Anais Nin","The privilege of a lifetime is to become who you truly are. -- Jung","If I am not for myself, who will be for me? -- Hillel"];
   var el=document.getElementById("line"), li=0, FADE=1800, HOLD=7000, GAP=1400;
   function showLine(){ el.style.opacity="1"; } function hideLine(){ el.style.opacity="0"; }
   setTimeout(showLine, 1600);
