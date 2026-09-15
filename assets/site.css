@@ -33,10 +33,10 @@ h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:.7rem 1.35rem;font-weight:500;font-size:1.05rem;border:0;background:var(--violet);color:var(--midnight)}
 .hero-stage{width:min(300px,78vw);margin:0 auto .8rem}
 .hero-stage svg{width:100%;height:auto;display:block}
-.hero-flake .flake{animation:intro 1.6s ease-out forwards}
-.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out 1.6s infinite}
-.hero-flake .spin-bands{transform-origin:0 0;animation:spin-cw 70s linear infinite}
-.hero-flake .spin-crystal{transform-origin:0 0;animation:spin-ccw 56s linear infinite}
+.hero-flake .flake{opacity:1}
+.hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out infinite;animation-delay:-3.5s}
+.hero-flake .spin-bands{transform-origin:0 0;animation:spin-cw 70s linear infinite;animation-delay:-12s}
+.hero-flake .spin-crystal{transform-origin:0 0;animation:spin-ccw 56s linear infinite;animation-delay:-9s}
 .hero-flake .nucleus{transform:scale(.45);transform-origin:0 0}
 @keyframes intro{from{opacity:0}to{opacity:1}}
 @keyframes spin-cw{to{transform:rotate(360deg)}}
