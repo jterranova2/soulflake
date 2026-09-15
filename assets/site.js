@@ -22,16 +22,16 @@
     var img=document.querySelector(".hero-seed");
     if(!img) return;
     var n=seatLevel();
-    if(n<1){ img.style.visibility="hidden"; return; }
+    var file=["nucleus-beat-1","nucleus-beat-2","nucleus-beat-5","nucleus-beat-8","nucleus-beat-8"][n];
     img.style.visibility="visible";
-    img.src="assets/nucleus-"+Math.max(1,Math.min(4,n))+".svg";
+    img.src="assets/"+file+".svg";
   }
 
   var STEPS=[
     {q:"What should we call you?",hint:"Name the flake.",ph:"Your name",kind:"text",ok:"That’s me"},
     {q:"How do you show up?",hint:"Skip if you want.",kind:"picks",picks:["Woman","Man","Another way"]},
     {q:"How old are you?",hint:"Skip is fine.",ph:"Age",kind:"age"},
-    {q:"Where are you these days?",hint:"City. Skip is fine.",ph:"City",kind:"text"}
+    {q:"Where are you these days?",hint:"City and country. Skip is fine.",ph:"City, country",kind:"text"}
   ];
   function renderAsk(){
     var step=seatLevel(), box=document.getElementById("ask");
@@ -40,7 +40,7 @@
     box.style.display="";
     var spec=STEPS[step];
     var skip=document.getElementById("ask-skip");
-    if(skip) skip.style.display=step===0?"none":"";
+    if(skip) skip.style.display="";
     document.getElementById("ask-q").textContent=spec.q;
     document.getElementById("ask-hint").textContent=spec.hint;
     var fields=document.getElementById("ask-fields"), ok=document.getElementById("ask-ok");
