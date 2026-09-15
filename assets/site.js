@@ -24,8 +24,9 @@
     var mark=document.getElementById("me-mark");
     if(!box || !img) return;
     var n=seatLevel();
-    var typed=(previewName||"").replace(/^\s+|\s+$/g,"");
-    var showEye=n>=1 || (n===0 && typed.length>0);
+    var stored=localStorage.getItem(KEYS[0])||"";
+    var typed=(previewName!=null?previewName:stored).replace(/^\s+|\s+$/g,"");
+    var showEye=n>=1 || typed.length>0;
     if(!showEye){
       box.className="hero-stage me-stage z0";
       img.hidden=true;
@@ -77,7 +78,7 @@
     if(!v) return;
     commit(v);
   }
-  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); applyNucleus(); renderAsk(); }
+  function commit(val){ var step=seatLevel(); if(step>=4) return; localStorage.setItem(KEYS[step], val); setSeat(step+1); applyTitle(); renderAsk(); applyNucleus(); }
 
   function bindWelcome(){
     var a=document.getElementById("build"); if(a) a.onclick=showMe;
@@ -109,7 +110,7 @@
     }
   }
   function bindMe(){
-    applyTitle(); applyNucleus(); setSeat(seatLevel()); renderAsk();
+    applyTitle(); setSeat(seatLevel()); renderAsk(); applyNucleus();
     var ok=document.getElementById("ask-ok"); if(ok) ok.onclick=function(){ takeInput(STEPS[seatLevel()]||{}); };
     var skip=document.getElementById("ask-skip"); if(skip) skip.onclick=function(){ var spec=STEPS[seatLevel()]; if(spec) commit("skipped"); };
   }

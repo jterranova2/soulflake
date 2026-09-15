@@ -40,6 +40,8 @@ h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4
 .me-stage.z5 img{transform:scale(6.2)}
 .me-stage.z8 img{transform:scale(4.8)}
 .ask-mark{font-family:"Instrument Serif",serif;font-size:7rem;line-height:1;color:rgba(248,250,252,.72)}
+.me-stage.z0 img{display:none}
+.me-stage:not(.z0) .ask-mark{display:none}
 .hero-flake .flake{opacity:1}
 .hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out infinite;animation-delay:-3.5s}
 .hero-flake .spin-bands{transform-origin:0 0;animation:spin-cw 70s linear infinite;animation-delay:-12s}
