@@ -26,12 +26,12 @@ body:not(.me) .nav [data-go="welcome"],body.me .nav [data-go="me"]{color:var(--f
 .menu.open{display:block}
 .menu button{display:block;width:100%;text-align:left;border:0;background:transparent;color:var(--frost);font:inherit;font-size:.92rem;padding:.55rem .7rem;border-radius:8px}
 .menu button[disabled]{color:var(--graphite);opacity:.45}
-.hero{text-align:center;padding:.8rem 0 2.2rem}
-h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(2.2rem,7vw,3.6rem);margin:0 0 1rem}
+.hero{text-align:center;padding:.45rem 0 1.2rem}
+h1{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.7rem,5vw,2.4rem);margin:0 0 .7rem}
 h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4vw,1.85rem);margin:0 0 .45rem}
-.rotate{min-height:3.2rem;max-width:32rem;margin:0 auto 1.4rem;color:var(--graphite);font-size:1.15rem;opacity:0;transition:opacity 1.8s linear}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:56px;border-radius:999px;padding:.9rem 1.6rem;font-weight:500;font-size:1.15rem;border:0;background:var(--violet);color:var(--midnight)}
-.hero-stage{width:min(415px,96vw);margin:0 auto 1.2rem}
+.rotate{min-height:2.4rem;max-width:32rem;margin:0 auto 1rem;color:var(--graphite);font-size:1.05rem;opacity:0;transition:opacity 1.8s linear}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;border-radius:999px;padding:.7rem 1.35rem;font-weight:500;font-size:1.05rem;border:0;background:var(--violet);color:var(--midnight)}
+.hero-stage{width:min(300px,78vw);margin:0 auto .8rem}
 .hero-stage svg{width:100%;height:auto;display:block}
 .hero-flake .flake{animation:intro 1.6s ease-out forwards}
 .hero-flake .core{transform-origin:0 0;animation:wash 7s ease-in-out 1.6s infinite}
@@ -42,7 +42,7 @@ h2{font-family:"Instrument Serif",serif;font-weight:400;font-size:clamp(1.4rem,4
 @keyframes spin-cw{to{transform:rotate(360deg)}}
 @keyframes spin-ccw{to{transform:rotate(-360deg)}}
 @keyframes wash{0%,100%{opacity:.08;transform:scale(.78)}50%{opacity:.85;transform:scale(1.14)}}
-.hero-seed{display:block;width:min(415px,96vw);height:auto;aspect-ratio:1/1;margin:0 auto 1.2rem}
+.hero-seed{display:block;width:min(168px,42vw);height:auto;aspect-ratio:1/1;margin:0 auto .7rem}
 .name-ask{max-width:22rem;margin:1.1rem auto 0;text-align:center}
 body.seated .name-ask{display:none}
 .you{display:none;margin:.35rem 0 0;color:var(--graphite)}
