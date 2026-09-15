@@ -20,18 +20,13 @@
   }
   function applyNucleus(){
     var box=document.getElementById("me-stage");
-    if(!box) return;
+    var img=document.getElementById("me-nucleus");
+    if(!box || !img) return;
     var n=seatLevel();
     var file=["nucleus-beat-1","nucleus-beat-2","nucleus-beat-5","nucleus-beat-8","nucleus-beat-8"][n];
-    var crop=["186 186 28 28","180 180 40 40","170 170 60 60","166 166 68 68","166 166 68 68"][n];
-    fetch("assets/"+file+".svg").then(function(r){return r.text();}).then(function(t){
-      box.innerHTML=t;
-      var svg=box.querySelector("svg");
-      if(!svg) return;
-      svg.removeAttribute("width");
-      svg.removeAttribute("height");
-      svg.setAttribute("viewBox", crop);
-    });
+    var zoom=["z1","z2","z5","z8","z8"][n];
+    box.className="hero-stage me-stage "+zoom;
+    img.src="assets/"+file+".svg";
   }
 
   var STEPS=[
