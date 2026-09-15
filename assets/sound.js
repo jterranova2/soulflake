@@ -4,7 +4,7 @@
   if(!audio || !btn) return;
   var SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
-  var fadeTimer=null, TARGET=1, FADE_MS=4000, live=false;
+  var fadeTimer=null, TARGET=1, FADE_MS=3000, live=false;
   function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.textContent="\u266A"; }
   function clearFade(){ if(fadeTimer){ clearInterval(fadeTimer); fadeTimer=null; } }
   function fadeTo(goal, done){
