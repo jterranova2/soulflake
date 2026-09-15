@@ -18,13 +18,24 @@
     if(!document.body.classList.contains("me")){ if(h) h.textContent="Meet your Soulflake"; return; }
     if(h) h.textContent=name?("Hello "+name):"My flake";
   }
-  function applyNucleus(){
+  function applyNucleus(previewName){
     var box=document.getElementById("me-stage");
     var img=document.getElementById("me-nucleus");
+    var mark=document.getElementById("me-mark");
     if(!box || !img) return;
     var n=seatLevel();
-    var file=["nucleus-beat-1","nucleus-beat-2","nucleus-beat-5","nucleus-beat-8","nucleus-beat-8"][n];
-    var zoom=["z1","z2","z5","z8","z8"][n];
+    var typed=(previewName||"").replace(/^\s+|\s+$/g,"");
+    var showEye=n>=1 || (n===0 && typed.length>0);
+    if(!showEye){
+      box.className="hero-stage me-stage z0";
+      img.hidden=true;
+      if(mark) mark.hidden=false;
+      return;
+    }
+    if(mark) mark.hidden=true;
+    img.hidden=false;
+    var file=["nucleus-beat-1","nucleus-beat-1","nucleus-beat-2","nucleus-beat-5","nucleus-beat-8"][n]||"nucleus-beat-8";
+    var zoom=["z1","z1","z2","z5","z8"][n]||"z8";
     box.className="hero-stage me-stage "+zoom;
     img.src="assets/"+file+".svg";
   }
@@ -56,6 +67,7 @@
       if(spec.kind==="age"){ inp.min="13"; inp.max="120"; } else inp.maxLength=32;
       inp.placeholder=spec.ph||""; fields.appendChild(inp); if(ok){ ok.style.display=""; ok.textContent=spec.ok||"Save"; }
       inp.onkeydown=function(e){ if(e.key==="Enter"){ e.preventDefault(); takeInput(spec); } };
+      if(step===0){ inp.oninput=function(){ applyNucleus(inp.value); }; }
     }
   }
   function takeInput(spec){
