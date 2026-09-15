@@ -143,11 +143,36 @@
 
   var audio=document.getElementById("ambient"), btn=document.getElementById("sound"), SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
+  var fadeTimer=null, TARGET=1, FADE_MS=4000;
   function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.textContent="\u266A"; }
-  function startPlay(){ wantOn=true; audio.muted=false; audio.play().catch(function(){}); setBtn(true); }
-  function stopPlay(){ wantOn=false; localStorage.setItem(SOUND_KEY,"off"); audio.pause(); audio.muted=true; setBtn(false); }
-  btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn && !audio.paused) stopPlay(); else { localStorage.removeItem(SOUND_KEY); startPlay(); } });
-  setBtn(wantOn); if(wantOn) startPlay(); else { audio.pause(); audio.muted=true; }
+  function clearFade(){ if(fadeTimer){ clearInterval(fadeTimer); fadeTimer=null; } }
+  function fadeTo(goal, done){
+    clearFade();
+    var start=audio.volume, t0=Date.now();
+    fadeTimer=setInterval(function(){
+      var p=Math.min(1,(Date.now()-t0)/FADE_MS);
+      audio.volume=start+(goal-start)*p;
+      if(p>=1){ clearFade(); audio.volume=goal; if(done) done(); }
+    }, 50);
+  }
+  function startPlay(){
+    wantOn=true;
+    localStorage.removeItem(SOUND_KEY);
+    audio.muted=false;
+    audio.currentTime=0;
+    audio.volume=0;
+    audio.play().catch(function(){});
+    fadeTo(TARGET);
+    setBtn(true);
+  }
+  function stopPlay(){
+    wantOn=false;
+    localStorage.setItem(SOUND_KEY,"off");
+    setBtn(false);
+    fadeTo(0, function(){ audio.pause(); audio.currentTime=0; audio.muted=true; });
+  }
+  btn.addEventListener("pointerdown", function(e){ e.preventDefault(); if(wantOn) stopPlay(); else startPlay(); });
+  setBtn(wantOn); if(wantOn) startPlay(); else { audio.pause(); audio.muted=true; audio.volume=0; audio.currentTime=0; }
 
   var c=document.getElementById("snow"); if(c){
     var g=c.getContext("2d");
