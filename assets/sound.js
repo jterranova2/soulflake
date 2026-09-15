@@ -4,14 +4,15 @@
   if(!audio || !btn) return;
   var SOUND_KEY="soulflake.sound";
   var wantOn=localStorage.getItem(SOUND_KEY)!=="off";
-  var fadeTimer=null, TARGET=1, FADE_MS=3000, live=false;
+  var fadeTimer=null, TARGET=1, FADE_IN=3000, FADE_OUT=2000, live=false;
   function setBtn(on){ btn.classList.toggle("on",on); btn.classList.toggle("off",!on); btn.textContent="\u266A"; }
   function clearFade(){ if(fadeTimer){ clearInterval(fadeTimer); fadeTimer=null; } }
   function fadeTo(goal, done){
     clearFade();
     var start=audio.volume, t0=Date.now();
+    var ms=goal>start?FADE_IN:FADE_OUT;
     fadeTimer=setInterval(function(){
-      var p=Math.min(1,(Date.now()-t0)/FADE_MS);
+      var p=Math.min(1,(Date.now()-t0)/ms);
       audio.volume=Math.max(0,Math.min(1,start+(goal-start)*p));
       if(p>=1){ clearFade(); audio.volume=goal; if(done) done(); }
     }, 40);
