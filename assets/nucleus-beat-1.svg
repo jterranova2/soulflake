@@ -1,0 +1,9 @@
+<svg viewBox="0 0 400 400" width="400" height="400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake nucleus beat 1 of 8">
+  <!-- Eight-beat option 1: Frost eye. Nucleus plates only. Live scale 0.45. No arms. Midnight. -->
+  <rect width="400" height="400" fill="#070B14"/>
+  <g transform="translate(200 200) scale(0.45)" fill="none" stroke-linejoin="miter">
+    <circle r="4" fill="#86E0EC" opacity=".5"/>
+    <circle r="2" fill="#F8FAFC"/>
+    <circle r="0.55" fill="#070B14"/>
+  </g>
+</svg>
