@@ -1,6 +1,6 @@
 # Room: Insights
 
-**Live tonight:** off the site. Not a tab. Get started does not open this room.
+**Live tonight:** off the site. Not a tab. 09-14 chrome is About / My flake only.
 **Status:** later-room. Shell copy when it last existed: “Not yet. Carve arms first. Not a shop.”
 
 ## Job when carved

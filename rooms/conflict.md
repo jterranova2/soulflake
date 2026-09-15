@@ -1,6 +1,6 @@
 # Room: Conflict
 
-**Live tonight:** arm not shipped. Welcome Get started only shows g0 frost spines.
+**Live tonight:** arm not shipped. 09-14 My flake only runs four seat beats and grows the frost-point nucleus.
 **When carved:** My flake arm `conflict`
 **Lead:** What you do when it heats up. One scene at a time.
 
