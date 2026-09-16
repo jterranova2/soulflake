@@ -1,6 +1,6 @@
 # Room: Finds
 
-**Live tonight:** off the site. Not a tab. 09-14 chrome is About / My flake only.
+**Live tonight:** off the site. Not a tab. 09-15 chrome is About / My flake only.
 **Status:** later-room. Shell copy when it last existed: “Not yet. Later, and only from thick arms.”
 
 Nights, rooms, people — later, and only from thick arms. Not a shop. Not a feed.

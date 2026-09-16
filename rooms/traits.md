@@ -1,6 +1,6 @@
 # Room: Traits
 
-**Live tonight:** arm not shipped. 09-14 My flake only runs four seat beats and grows the frost-point nucleus.
+**Live tonight:** arm not shipped. 09-15 My flake only runs four seat beats and zooms nucleus-beats 1 / 2 / 5 / 8.
 **When carved:** My flake arm `traits`
 **Lead:** How you move. Not a type. One question at a time.
 

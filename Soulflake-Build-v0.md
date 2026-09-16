@@ -1,23 +1,22 @@
 # Soulflake-Build-v0
 
-Live file. Last code change 2026-09-14 night (`dd78e2e` — Bigger bare icons. No plate. No slash.). Rooms re-checked the same night.
+Live file. Last code change 2026-09-15 evening (`85d9c1d` — Add trippy-3 Welcome motion to site.css.). Rooms re-checked the same night.
 
-## What changed since 09-13
+## What changed since 09-14
 
-Root homepage is About + My flake on one `index.html`. `Soulflake.html` is **not** the same page tonight.
+Root `index.html` is the shell. About is `assets/view-welcome.html`. My flake is `assets/view-me.html`. Shared `site.css` + `site.js`. Sound is `assets/sound.js`.
 
-Nav label Welcome became **About**. Center nav About / My flake. Sticky glass header. Sound note + dots menu. Reset. Export / Import gray.
+Header condensed. Icons 40px. Get started tighter. Hero stage `min(300px, 78vw)`.
 
-Hero: fetched `assets/welcome-flake.svg`, `min(415px, 96vw)`.
-One button: Get started. Click opens My flake.
-Four rotating lines. First: Know thyself, then be known.
-Commercial is one slider. Vision file `assets/welcome-vision.html`.
-Share card: `assets/share-og.png`.
-Sound: `index-Frozen-Star.mp3`, on by default, persist off. Bare note, no slash.
+Welcome flake is crystals-10. Motion is trippy-3. Starts mid-cycle. No intro fade.
 
-My flake: name required, then show-up / age / city. Nucleus `nucleus-1`…`nucleus-4`. Hello {name}. Seat lit after four beats. No six arms yet.
+Sound: Frozen Star still the only bed. No autoplay. Tap fades in 3s / out 2s. Restart track on toggle.
 
-09-14 hiccup: share-card and restore loops briefly smashed About. Ignore those stubs.
+My flake: `?` until a name is typed. Nucleus locked to beats 1, 2, 5, 8 with zoom classes z1 / z2 / z5 / z8. Place hint is city and country. Skip is drawn on every beat including name.
+
+Export / Import still gray. `Soulflake.html` still leftover.
+
+09-14 hiccup (share-card smash) still not a direction. 09-15 walked back site.js-owned autoplay and nucleus-1…4 intake frames.
 
 ## Link
 

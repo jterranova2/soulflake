@@ -1,6 +1,6 @@
 # Room: Conflict
 
-**Live tonight:** arm not shipped. 09-14 My flake only runs four seat beats and grows the frost-point nucleus.
+**Live tonight:** arm not shipped. 09-15 My flake only runs four seat beats and zooms nucleus-beats 1 / 2 / 5 / 8.
 **When carved:** My flake arm `conflict`
 **Lead:** What you do when it heats up. One scene at a time.
 
