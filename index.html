@@ -3,42 +3,63 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Soulflake</title>
+<title>Soulflake — A living model of you</title>
+<meta name="description" content="Soulflake is a living model of you — shaped by what you tell it, what changes, and what matters." />
 <meta name="theme-color" content="#070B14" />
 <meta property="og:title" content="Soulflake">
-<meta property="og:description" content="Know thyself, and then be known.">
-<meta property="og:image" content="https://soulflake.justinterranova.com/assets/share-og.png">
+<meta property="og:description" content="A living model of you. Seen, not scored.">
+<meta property="og:image" content="https://soulflake.com/assets/share-og.png">
+<link rel="canonical" href="https://soulflake.com/" />
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="assets/site.css?v=trippy3" />
+<link rel="stylesheet" href="assets/site.css?v=home1" />
 </head>
-<body>
+<body class="home">
 <canvas id="snow"></canvas>
 <div class="rays"><b></b><b></b><b></b></div>
 <div class="ground"></div>
 <audio id="ambient" loop src="assets/audio/index-Frozen-Star.mp3"></audio>
+
 <header class="bar">
-<div class="wrap top">
-  <button type="button" class="wordmark" id="go-welcome">Soul<span class="flake">flake</span></button>
-  <div class="nav">
-    <button type="button" class="go" data-go="welcome">About</button>
-    <button type="button" class="go" data-go="me">My flake</button>
-  </div>
-  <div class="tools">
-    <button type="button" class="icon-btn" id="sound">♪</button>
-    <button type="button" class="icon-btn" id="more">&#8942;</button>
-    <div class="menu" id="menu">
-      <button type="button" data-go="welcome">About</button>
-      <button type="button" data-go="me">My flake</button>
-      <button type="button" id="menu-reset">Reset</button>
-      <button type="button" disabled>Export</button>
-      <button type="button" disabled>Import</button>
+  <div class="wrap top home-top">
+    <a class="wordmark home-wordmark" href="/" aria-label="Soulflake home">Soul<span class="flake">flake</span></a>
+    <div class="tools">
+      <button type="button" class="icon-btn" id="sound" aria-label="Toggle ambient sound">♪</button>
     </div>
   </div>
-</div>
 </header>
-<main class="wrap" id="view"></main>
-<script src="assets/site.js?v=beats5"></script>
+
+<main class="wrap home-main">
+  <section class="hero home-hero" aria-labelledby="hero-title">
+    <div class="eyebrow">A PERSONAL MODEL THAT EVOLVES WITH YOU</div>
+    <div class="hero-stage home-flake" id="hero-stage" aria-hidden="true"></div>
+    <h1 id="hero-title">Meet your Soulflake</h1>
+    <p class="home-lede">Not a personality type. A living model of you.</p>
+    <a class="btn home-cta" href="#early-access">Join early access</a>
+    <p class="micro">Private by design. Yours to question. Yours to change.</p>
+  </section>
+
+  <section class="home-reveal" aria-label="What Soulflake is">
+    <p class="reveal-kicker">YOU AREN'T A TYPE.</p>
+    <h2>You change. Your model should too.</h2>
+    <p>Soulflake builds an evolving picture from what you tell it, what changes, and what matters to you — without reducing you to a score or a label.</p>
+    <div class="principle">Seen, not scored.</div>
+  </section>
+
+  <section class="home-access" id="early-access" aria-labelledby="access-title">
+    <div class="access-mark">✦</div>
+    <h2 id="access-title">The first flake hasn't fallen yet.</h2>
+    <p>Soulflake is being built. Be one of the first to meet yours.</p>
+    <button class="btn home-cta pending-cta" type="button" disabled>Join early access</button>
+    <p class="micro">Early-access signup is being connected.</p>
+  </section>
+</main>
+
+<footer class="home-footer wrap">
+  <span>Soulflake</span><span>© 2026</span>
+</footer>
+
+<script src="assets/home.js?v=home1"></script>
 <script src="assets/sound.js?v=fade6"></script>
 </body>
 </html>
