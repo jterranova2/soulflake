@@ -1,9 +1,0 @@
-<svg viewBox="178 178 44 44" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Soulflake nucleus phase 4">
-  <g transform="translate(200 200) scale(0.60)" fill="none" stroke-linejoin="miter">
-    <polygon points="0,-18 15.59,-9 15.59,9 0,18 -15.59,9 -15.59,-9" fill="#122A34" stroke="#67E8F9" stroke-width="1.15"/>
-    <polygon points="0,-8 6.93,-4 6.93,4 0,8 -6.93,4 -6.93,-4" fill="none" stroke="#F8FAFC" stroke-width=".4" opacity=".7"/>
-    <circle r="2.6" fill="#67E8F9" opacity=".38"/>
-    <circle r="1.4" fill="#F8FAFC"/>
-    <circle r="0.4" fill="#070B14"/>
-  </g>
-</svg>
